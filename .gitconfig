@@ -1,0 +1,22 @@
+[user]
+	name = Michel Albert
+	email = michel@albert.lu
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	branchdfh = auto
+[alias]
+   st = status
+   co = checkout
+   ci = commit
+[core]
+   excludesfile = "/home/malbert/.gitignore_global"
+[push]
+	default = matching
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 700x550+148+11
+	history-view-vpane-position = 466
+	main-window-view = HistoryView
+	file-view-vpane-position = 423

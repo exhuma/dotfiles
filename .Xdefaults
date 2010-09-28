@@ -1,0 +1,12 @@
+URxvt*transparent:false
+URxvt*tintColor:blue
+URxvt*saveLines:12000
+URxvt*foreground:white
+URxvt*background:black
+URxvt*font: xft:Anonymous Pro:pixelsize=16
+URxvt*color4:RoyalBlue
+URxvt*color12:RoyalBlue
+URxvt*scrollBar:true
+URxvt*scrollBar_right:false
+URxvt*scrollstyle:rxvt
+URxvt*geometry:93x70+0+0
