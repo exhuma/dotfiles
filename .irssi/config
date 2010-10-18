@@ -227,5 +227,8 @@ settings = {
     dcc_autoresume = "yes";
     dcc_autoget = "yes";
     dcc_download_path = "~/.irssi/downloads";
+    dcc_autochat_masks = "*!*@*";
   };
+  "fe-common/core" = { autolog = "yes"; };
 };
+logs = { "#gstreamer" = { level = "ALL"; }; };
