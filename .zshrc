@@ -37,7 +37,11 @@ PS1="[${UCOLOR}%m${NC}:${FCOLOR}%1~${NC}]${JOBINFO}%# "
 RPS1="${FCOLOR}%~${NC}"
 
 # source my personal and independent inits
-. ${HOME}/.user_init
+if [ -f ${HOME}/.user_init ]; then
+   source ${HOME}/.user_init
+fi
 
-source ~/.zshrc_statec
+if [ -f ${HOME}/.zshrc_`hostname` ]; then
+   source ${HOME}/.zshrc_`hostname`
+fi
 
