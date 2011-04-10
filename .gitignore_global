@@ -3,3 +3,4 @@
 *.pyc
 *.pyo
 swarmtags.sqlite3
+*.bak
