@@ -36,6 +36,8 @@ FCOLOR="%{${fg[blue]}%}"                      # Folder color
 PS1="[${UCOLOR}%m${NC}:${FCOLOR}%1~${NC}]${JOBINFO}%# "
 RPS1="${FCOLOR}%~${NC}"
 
+export EDITOR=/usr/bin/vim
+
 # source my personal and independent inits
 if [ -f ${HOME}/.user_init ]; then
    source ${HOME}/.user_init
