@@ -2,6 +2,7 @@ import atexit
 import os
 import readline
 import rlcompleter
+import sys
 
 historyPath = os.path.expanduser("~/.pyhistory")
 
@@ -15,4 +16,8 @@ if os.path.exists(historyPath):
 readline.parse_and_bind('tab: complete')
 
 atexit.register(save_history)
-del os, atexit, readline, rlcompleter, save_history, historyPath
+
+sys.ps1 = "python> "
+sys.ps2 = "   ...| "
+
+del os, atexit, readline, rlcompleter, save_history, historyPath, sys
