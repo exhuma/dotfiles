@@ -13,7 +13,8 @@
    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
    sl = log --pretty=format:'%Cgreen%ai%Cblue %h%Creset %s'
 [core]
-   excludesfile = /home/exhuma/.gitignore_global
+   excludesfile = ~/.gitignore_global
+   editor=vim
 [push]
    default = matching
 [giggle]
