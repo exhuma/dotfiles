@@ -1,25 +1,25 @@
 [user]
-   name = Michel Albert
-   email = michel@albert.lu
+    name = Michel Albert
+    email = michel@albert.lu
 [color]
-   diff = auto
-   status = auto
-   branch = auto
-   branchdfh = auto
+    diff = auto
+    status = auto
+    branch = auto
+    branchdfh = auto
 [alias]
-   st = status
-   co = checkout
-   ci = commit
-   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-   sl = log --pretty=format:'%Cgreen%ai%Cblue %h%Creset %s'
+    st = status
+    co = checkout
+    ci = commit
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    sl = log --pretty=format:'%Cgreen%ai%Cblue %h%Creset %s'
 [core]
-   excludesfile = ~/.gitignore_global
-   editor=vim
+    excludesfile = ~/.gitignore_global
+    editor=vim
 [push]
-   default = matching
+    default = matching
 [giggle]
-   main-window-maximized = true
-   main-window-geometry = 700x550+148+11
-   history-view-vpane-position = 466
-   main-window-view = HistoryView
-   file-view-vpane-position = 423
+    main-window-maximized = true
+    main-window-geometry = 700x550+148+11
+    history-view-vpane-position = 466
+    main-window-view = HistoryView
+    file-view-vpane-position = 423
