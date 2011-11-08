@@ -17,9 +17,3 @@
     editor=vim
 [push]
     default = matching
-[giggle]
-    main-window-maximized = true
-    main-window-geometry = 700x550+148+11
-    history-view-vpane-position = 466
-    main-window-view = HistoryView
-    file-view-vpane-position = 423
