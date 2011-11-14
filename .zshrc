@@ -33,7 +33,7 @@ JOBINFO="%1(j.(%j%).)"                        # Empty string if no bg-jobs, othe
 UCOLOR="%(!.%{${fg[red]}%}.%{${fg[green]}%})" # Red if running as root, green if non-root
 NC="%{${fg[default]}%}"                       # Default Color
 FCOLOR="%{${fg[blue]}%}"                      # Folder color
-PS1="[${UCOLOR}%m${NC}:${FCOLOR}%1~${NC}]${JOBINFO}%# "
+PS1='%{${fg[yellow]}%}$(git name-rev --name-only --always HEAD 2>/dev/null || echo "")${NC} [${UCOLOR}%m${NC}:${FCOLOR}%1~${NC}]${JOBINFO}%# '; setopt promptsubst
 RPS1="${FCOLOR}%~${NC}"
 
 export EDITOR=/usr/bin/vim
