@@ -22,13 +22,16 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+
 XTERM_TITLE="\[\e]2;\]\u@\H | \w\a\]"
+GIT_BRANCH="\$(~/dotfiles/bin/gitbranch \"[\[\e[33;2m\]\" \"\[\e[0m\]] \")"
+NUM_JOBS="\[\e[0m\](\j)"
 if [ $(whoami) = "root" ]; then
     UCL="31;1"
-    export PS1="${XTERM_TITLE}[\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H \[\e[34;2m\]\W\[\e[32;2m\] \[\e[0m\](\j) \[\e[${UCL}m\]# \[\e[0m\]"
+    export PS1="${XTERM_TITLE}[\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H \[\e[34;2m\]\W\[\e[32;2m\] ${GIT_BRANCH}${NUM_JOBS} \[\e[${UCL}m\]# \[\e[0m\]"
 else
     UCL="34;1"
-    export PS1="${XTERM_TITLE}[\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H \[\e[34;2m\]\W\[\e[32;2m\] \[\e[0m\](\j) \[\e[${UCL}m\]$ \[\e[0m\]"
+    export PS1="${XTERM_TITLE}[\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H \[\e[34;2m\]\W\[\e[32;2m\] ${GIT_BRANCH}${NUM_JOBS} \[\e[${UCL}m\]$ \[\e[0m\]"
 fi
 
 [ -x /usr/bin/vim ] && export EDITOR=vim
