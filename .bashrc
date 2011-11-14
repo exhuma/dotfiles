@@ -28,11 +28,12 @@ GIT_BRANCH="\$(~/dotfiles/bin/gitbranch \"\[\e[0m\][\[\e[33;2m\]\" \"\[\e[0m\]] 
 NUM_JOBS="\[\e[0m\](\j)"
 if [ $(whoami) = "root" ]; then
     UCL="31;1"
-    export PS1="${XTERM_TITLE}[\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H \[\e[34;2m\]\W\[\e[32;2m\] ${GIT_BRANCH}${NUM_JOBS} \[\e[${UCL}m\]# \[\e[0m\]"
+    export PS1="${XTERM_TITLE}\[\e[${UCL}m\]┌\[\e[0m\] [\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H ${GIT_BRANCH}${NUM_JOBS}\n\[\e[${UCL}m\]└ \[\e[34;2m\]\W\[\e[32;2m\] \[\e[${UCL}m\]# \[\e[0m\]"
 else
     UCL="34;1"
-    export PS1="${XTERM_TITLE}[\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H \[\e[34;2m\]\W\[\e[32;2m\] ${GIT_BRANCH}${NUM_JOBS} \[\e[${UCL}m\]$ \[\e[0m\]"
+    export PS1="${XTERM_TITLE}\[\e[${UCL}m\]┌\[\e[0m\] [\t] \[\e[${UCL}m\]\u\[\e[0m\]@\[\e[32;2m\]\H ${GIT_BRANCH}${NUM_JOBS}\n\[\e[${UCL}m\]└ \[\e[34;2m\]\W\[\e[32;2m\] \[\e[${UCL}m\]$ \[\e[0m\]"
 fi
+
 
 [ -x /usr/bin/vim ] && export EDITOR=vim
 export PATH=/sbin:/usr/sbin:/usr/local/sbin:$PATH
