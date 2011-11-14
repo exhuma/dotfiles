@@ -24,7 +24,7 @@ fi
 
 
 XTERM_TITLE="\[\e]2;\]\u@\H | \w\a\]"
-GIT_BRANCH="\$(~/dotfiles/bin/gitbranch \"[\[\e[33;2m\]\" \"\[\e[0m\]] \")"
+GIT_BRANCH="\$(~/dotfiles/bin/gitbranch \"\[\e[0m\][\[\e[33;2m\]\" \"\[\e[0m\]] \")"
 NUM_JOBS="\[\e[0m\](\j)"
 if [ $(whoami) = "root" ]; then
     UCL="31;1"
