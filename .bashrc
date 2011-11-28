@@ -36,7 +36,7 @@ fi
 
 
 [ -x /usr/bin/vim ] && export EDITOR=vim
-export PATH=/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PYTHONSTARTUP=~/.pystartup
 
 # enable programmable completion features (you don't need to enable
