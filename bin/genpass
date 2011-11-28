@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 
-import os, random, re
-print "".join(filter(lambda x: re.match(r'[a-zA-Z0-9-_.]', x), map(lambda x:
-    random.choice([0, 1]) and x.upper() or x.lower(),
-    os.urandom(256).encode('uu'))))[7:-3]
+import os, random, re, sys
 
+pwd = "".join(filter(lambda x: re.match(r'[a-zA-Z0-9-_.]', x), map(lambda x:
+    random.choice([0, 1]) and x.upper() or x.lower(),
+    os.urandom(256).encode('uu'))))[13:-3]
+
+if len(sys.argv) > 1 and sys.argv[1]:
+    print pwd[0:int(sys.argv[1])]
+else:
+    print pwd
