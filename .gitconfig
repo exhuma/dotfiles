@@ -6,6 +6,7 @@
     status = auto
     branch = auto
     branchdfh = auto
+    grep = auto
 [alias]
     st = status
     co = checkout
