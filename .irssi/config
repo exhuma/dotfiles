@@ -1,6 +1,11 @@
 servers = (
-  { address = "irc.ubuntu.com"; chatnet = "Ubuntu"; port = "6667"; },
-  { address = "irc.stealth.net"; chatnet = "IRCnet"; port = "6668"; },
+  { address = "irc.ubuntu.com"; chatnet = "Ubuntu"; port = "8001"; },
+  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
+  { 
+    address = "irc.open-ircnet.net";
+    chatnet = "IRCnet";
+    port = "6667";
+  },
   { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
   { 
     address = "irc.undernet.org";
@@ -13,6 +18,16 @@ servers = (
     chatnet = "QuakeNet";
     port = "6667";
   },
+  { address = "irc.oftc.net"; chatnet = "OFTC"; port = "6667"; },
+  {
+    address = "irc.gamesurge.net";
+    chatnet = "GameSurge";
+    port = "6667";
+  },
+  { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
+  { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
+  { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
+  { address = "irc.freenet.de"; chatnet = "FreeNET"; port = "6667"; },
   { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
 );
 
@@ -48,12 +63,44 @@ chatnets = {
     max_msgs = "3";
     max_whois = "30";
   };
+  OFTC = { 
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  GameSurge = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  WebChat = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  Rizon = { 
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  LinkNet = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
+  FreeNET = { type = "IRC"; };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
+  { name = "#moin-dev"; chatnet = "FreeNET"; autojoin = "Yes"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; }
 );
 
@@ -103,6 +150,8 @@ aliases = {
   "MANUAL-WINDOWS" = "set use_status_window off;set autocreate_windows off;set autocreate_query_level none;set autoclose_windows off;set reuse_unused_windows on;save";
   EXEMPTLIST = "mode $C +e";
   ATAG = "WINDOW SERVER";
+  UNSET = "set -clear";
+  RESET = "set -default";
 };
 
 statusbar = {
@@ -130,7 +179,7 @@ statusbar = {
     prompt = "{prompt $[.15]itemname}";
     prompt_empty = "{prompt $winname}";
     topic = " $topic";
-    topic_empty = " Irssi v$J - http://irssi.org/help/";
+    topic_empty = " Irssi v$J - http://www.irssi.org";
 
     # all of these treated specially, they're only displayed when needed
     lag = "{sb Lag: $0-}";
@@ -231,4 +280,4 @@ settings = {
   };
   "fe-common/core" = { autolog = "yes"; };
 };
-logs = { "#gstreamer" = { level = "ALL"; }; };
+logs = { };
