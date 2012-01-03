@@ -3,12 +3,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# User specific aliases and functions
-
 HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
+HISTTIMEFORMAT='%F %T '
 shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
