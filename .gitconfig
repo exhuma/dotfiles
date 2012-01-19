@@ -1,20 +1,45 @@
+;
+; User identification
+;
 [user]
     name = Michel Albert
     email = michel@albert.lu
+
+;
+; Automatically colorize console output
+;
 [color]
     diff = auto
     status = auto
     branch = auto
     branchdfh = auto
     grep = auto
+
+;
+; Aliases
+;
 [alias]
+    ; simple shortcuts
     st = status
     co = checkout
     ci = commit
+
+    ; Show abbreviated log with a branch graph
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+    ; Show abbreviated log with timestamps
     sl = log --pretty=format:'%Cgreen%ai%Cblue %h%Creset %s'
+
 [core]
-    excludesfile = ~/.gitignore_global
+    ; my global ignores file
+    excludesfile = ~/.gitignore
+
+    ; Let's use vim as the default editor
     editor=vim
+
+    ; ... and vimdiff as diff tool
+    difftool=vimdiff
+
 [push]
+    ; Try to automatically push the matching branch on the server
     default = matching
