@@ -40,6 +40,3 @@
     ; ... and vimdiff as diff tool
     difftool=vimdiff
 
-[push]
-    ; Try to automatically push the matching branch on the server
-    default = matching
