@@ -56,6 +56,6 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # load host-specific configuration
-if [ -f ${HOME}/.bashrc_`hostname` ]; then
-   source ${HOME}/.bashrc_`hostname`
+if [ -f ${HOME}/.bashrc_`hostname -s` ]; then
+   source ${HOME}/.bashrc_`hostname -s`
 fi
