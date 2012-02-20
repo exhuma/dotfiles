@@ -37,6 +37,8 @@
     ; Let's use vim as the default editor
     editor=vim
 
+
+[diff]
     ; ... and vimdiff as diff tool
-    difftool=vimdiff
+    tool=vimdiff
 
