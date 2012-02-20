@@ -64,4 +64,4 @@ fi
 set -o vi
 bind -m vi-insert "\C-p":dynamic-complete-history
 bind -m vi-insert "\C-n":menu-complete
-bind -m vi-insert "\C-l":clear-screen
+bind -m vi-insert "\C-d":possible-completions
