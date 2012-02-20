@@ -59,3 +59,9 @@ alias l='ls -CF'
 if [ -f ${HOME}/.bashrc_`hostname -s` ]; then
    source ${HOME}/.bashrc_`hostname -s`
 fi
+
+# Enable vim input mode
+set -o vi
+bind -m vi-insert "\C-p":dynamic-complete-history
+bind -m vi-insert "\C-n":menu-complete
+bind -m vi-insert "\C-l":clear-screen
