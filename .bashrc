@@ -60,6 +60,9 @@ if [ -f ${HOME}/.bashrc_`hostname -s` ]; then
    source ${HOME}/.bashrc_`hostname -s`
 fi
 
+# Change default sort order
+export LC_COLLATE=C
+
 # Enable vim input mode
 set -o vi
 bind -m vi-insert "\C-p":dynamic-complete-history
