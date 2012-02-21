@@ -41,7 +41,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 [ -x /usr/bin/vim ] && export EDITOR=vim
-export PATH=~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=~/bin:~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PYTHONSTARTUP=~/.pystartup
 
 # enable programmable completion features (you don't need to enable
