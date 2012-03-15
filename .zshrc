@@ -47,4 +47,3 @@ if [ -f ${HOME}/.zshrc_`hostname` ]; then
    source ${HOME}/.zshrc_`hostname`
 fi
 
-rm ~/tmp/*
