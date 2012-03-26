@@ -1,0 +1,5 @@
+set editing-mode vi
+set keymap vi
+set convert-meta on
+Control-d: possible-completions
+Control-l: clear-screen

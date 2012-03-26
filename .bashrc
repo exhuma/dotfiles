@@ -41,7 +41,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 [ -x /usr/bin/vim ] && export EDITOR=vim
-export PATH=~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=~/bin:~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PYTHONSTARTUP=~/.pystartup
 
 # enable programmable completion features (you don't need to enable
@@ -55,3 +55,17 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias tmux='TERM=xterm-256color tmux'
+
+# load host-specific configuration
+if [ -f ${HOME}/.bashrc_`hostname -s` ]; then
+   source ${HOME}/.bashrc_`hostname -s`
+fi
+
+# Change default sort order
+export LC_COLLATE=C
+
+# Enable vim input mode
+set -o vi
+bind -m vi-insert "\C-p":dynamic-complete-history
+bind -m vi-insert "\C-n":menu-complete
+bind -m vi-insert "\C-d":possible-completions
