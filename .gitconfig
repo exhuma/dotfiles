@@ -20,7 +20,7 @@
 ;
 [alias]
     ; simple shortcuts
-    st = status
+    st = status -s
     co = checkout
     ci = commit
 
@@ -42,3 +42,7 @@
     ; ... and vimdiff as diff tool
     tool=vimdiff
 
+[difftool]
+	prompt = false
+[push]
+	default = tracking
