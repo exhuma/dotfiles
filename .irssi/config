@@ -27,7 +27,7 @@ servers = (
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { 
+  {
     address = "irc.freenode.net";
     chatnet = "FreeNode";
     port = "6667";
@@ -282,6 +282,10 @@ settings = {
     dcc_download_path = "~/.irssi/downloads";
     dcc_autochat_masks = "*!*@*";
   };
-  "fe-common/core" = { autolog = "yes"; };
+  "fe-common/core" = {
+    autolog = "yes";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS NOTICES HILIGHT";
+  };
 };
 logs = { };
