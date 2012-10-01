@@ -44,11 +44,26 @@ fi
 export PATH=~/bin:~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PYTHONSTARTUP=~/.pystartup
 
+#
+# Bash completion for fabric
+#
+function _fab_complete() {
+    local cur
+    if [[ -f "fabfile.py" || -d "fabfile" ]]; then
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        COMPREPLY=( $(compgen -W "$(fab -F short -l)" -- ${cur}) )
+        return 0
+    else
+        return 1
+    fi
+}
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
+    complete -o nospace -F _fab_complete fab
 fi
 
 alias ll='ls -alF'
