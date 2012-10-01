@@ -28,6 +28,7 @@ servers = (
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
   { address = "irc.freenet.de"; chatnet = "FreeNET"; port = "6667"; },
+  { address = "irc.freenode.de"; chatnet = "FreeNode"; port = "6667"; },
   { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
 );
 
@@ -96,6 +97,7 @@ chatnets = {
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
   FreeNET = { type = "IRC"; };
+  FreeNode = { type = "IRC"; };
 };
 
 channels = (
@@ -278,6 +280,10 @@ settings = {
     dcc_download_path = "~/.irssi/downloads";
     dcc_autochat_masks = "*!*@*";
   };
-  "fe-common/core" = { autolog = "yes"; };
+  "fe-common/core" = {
+    autolog = "yes";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS NOTICES HILIGHT";
+  };
 };
 logs = { };
