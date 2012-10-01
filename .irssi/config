@@ -27,7 +27,7 @@ servers = (
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  {
+  { 
     address = "irc.freenode.net";
     chatnet = "FreeNode";
     port = "6667";
@@ -289,3 +289,6 @@ settings = {
   };
 };
 logs = { };
+ignores = ( 
+  { level = "JOINS PARTS QUITS"; channels = ( "#python" ); }
+);
