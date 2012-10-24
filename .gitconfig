@@ -25,7 +25,7 @@
     ci = commit
 
     ; Show abbreviated log with a branch graph
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lg = log --all -n20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
     ; Show abbreviated log with timestamps
     sl = log --pretty=format:'%Cgreen%ai%Cblue %h%Creset %s'
