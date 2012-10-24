@@ -42,7 +42,12 @@
     ; ... and vimdiff as diff tool
     tool=vimdiff
 
+
 [difftool]
-	prompt = false
+    ; don't always ask for confirmation to open the diff tool
+    prompt = false
+
+
 [push]
-	default = tracking
+    ; By default, push to the tracking remote.
+    default = tracking
