@@ -3,6 +3,6 @@
 .*.swp
 *.pyc
 *.pyo
-swarmtags.sqlite3
 *.bak
 .ropeproject
+*.class
