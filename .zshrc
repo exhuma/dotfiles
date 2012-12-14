@@ -47,3 +47,6 @@ export no_proxy=".ipsw.dt.ept.lu localhost"
 export BROWSER=/usr/bin/firefox
 
 bindkey "^R" history-incremental-search-backward
+bindkey $terminfo[khome] vi-beginning-of-line
+bindkey $terminfo[kend] vi-end-of-line
+bindkey "^[[3~" delete-char
