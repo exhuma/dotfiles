@@ -33,18 +33,14 @@ ZSH_THEME="exhuma"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git cp debian lol vi-mode)
+plugins=(git cp debian lol vi-mode perhost)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-alias tmux='TERM=xterm-256color tmux'
+#export PATH=/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+#alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
-export http_proxy='http://bbs-pylon:3128/'
-export https_proxy='http://bbs-pylon:3128/'
-export no_proxy=".ipsw.dt.ept.lu localhost"
-export BROWSER=/usr/bin/firefox
 
 bindkey "^R" history-incremental-search-backward
 bindkey $terminfo[khome] vi-beginning-of-line
