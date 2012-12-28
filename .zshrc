@@ -45,6 +45,7 @@ export http_proxy='http://bbs-pylon:3128/'
 export https_proxy='http://bbs-pylon:3128/'
 export no_proxy=".ipsw.dt.ept.lu localhost"
 export BROWSER=/usr/bin/firefox
+export PYTHONSTARTUP=~/.pystartup
 
 bindkey "^R" history-incremental-search-backward
 bindkey $terminfo[khome] vi-beginning-of-line
