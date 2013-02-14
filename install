@@ -1,0 +1,39 @@
+#!/bin/bash
+# ---------------------------------------------------------------------------
+# Script to install these dotfiles into the current user's home.
+#
+# WARNING: This *will* overwrite existing files!
+# ---------------------------------------------------------------------------
+
+cd
+[ -f .bashrc ] && rm -i .bashrc
+[ -f .bashrc_BBS-goon ] && rm -i .bashrc_BBS-goon
+[ -f .digrc ] && rm -i .digrc
+[ -f .gitconfig ] && rm -i .gitconfig
+[ -f .gitignore ] && rm -i .gitignore
+[ -f .inputrc ] && rm -i .inputrc
+[ -f .pylintrc ] && rm -i .pylintrc
+[ -f .pystartup ] && rm -i .pystartup
+[ -f .tmux.conf ] && rm -i .tmux.conf
+[ -f .Xdefaults ] && rm -i .Xdefaults
+[ -f .zshrc ] && rm -i .zshrc
+[ -f .zshrc_blackdragon ] && rm -i .zshrc_blackdragon
+[ -f .zshrc_lillend ] && rm -i .zshrc_lillend
+[ -d .irssi ] && rm -irf .irssi
+[ -d .oh-my-zsh ] && rm -irf .oh-my-zsh
+ln -vs dotfiles/.irssi
+ln -vs dotfiles/.bashrc
+ln -vs dotfiles/.bashrc_BBS-goon
+ln -vs dotfiles/.digrc
+ln -vs dotfiles/.gitconfig
+ln -vs dotfiles/.gitignore_global .gitignore
+ln -vs dotfiles/.inputrc
+ln -vs dotfiles/.pylintrc
+ln -vs dotfiles/.pystartup
+ln -vs dotfiles/.tmux.conf
+ln -vs dotfiles/.Xdefaults
+ln -vs dotfiles/.zshrc
+ln -vs dotfiles/.zshrc_blackdragon
+ln -vs dotfiles/.zshrc_lillend
+git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
+echo done!

@@ -99,13 +99,12 @@ chatnets = {
   };
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
-  FreeNET = { type = "IRC"; };
   FreeNode = { type = "IRC"; };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "#moin-dev"; chatnet = "FreeNET"; autojoin = "Yes"; },
+  { name = "#moin-dev"; chatnet = "FreeNode"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; }
 );
 
@@ -283,6 +282,14 @@ settings = {
     dcc_download_path = "~/.irssi/downloads";
     dcc_autochat_masks = "*!*@*";
   };
-  "fe-common/core" = { autolog = "yes"; };
+  "fe-common/core" = {
+    autolog = "yes";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS NOTICES HILIGHT";
+  };
 };
 logs = { };
+ignores = (
+  { level = "JOINS PARTS QUITS"; channels = ( "#python" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#ubuntu" ); }
+);

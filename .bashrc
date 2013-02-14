@@ -49,7 +49,7 @@ export PYTHONSTARTUP=~/.pystartup
 #
 function _fab_complete() {
     local cur
-    if [ -f "fabfile.py" ]; then
+    if [[ -f "fabfile.py" || -d "fabfile" ]]; then
         cur="${COMP_WORDS[COMP_CWORD]}"
         COMPREPLY=( $(compgen -W "$(fab -F short -l)" -- ${cur}) )
         return 0
@@ -70,6 +70,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias less='less -S'  # No word-wrap!
+alias pyserv='python -m SimpleHTTPServer 5002' # Serve current folder on port 5002
 alias tmux='TERM=xterm-256color tmux'
 
 # load host-specific configuration

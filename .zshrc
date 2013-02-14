@@ -1,49 +1,50 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt notify
-unsetopt beep
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '~/.zshrc'
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-umask 022
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="exhuma"
 
-autoload -U colors
-colors
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ls='ls --color=auto'
-alias ll='ls -lAF'
-alias l='ls -Fl'
-alias grep='grep --color=auto'
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
 
-# if [ "`id -u`" -eq 0 ]; then
-#    export PS1="$(print '%{\e[1;31m%}%m%{\e[0m%}'):$(print '%{\e[1;34m%}%1~%{\e[0m%}')%# "
-# else
-#    export PS1="$(print '%{\e[1;32m%}%m%{\e[0m%}'):$(print '%{\e[1;34m%}%1~%{\e[0m%}')%# "
-#    #eval '/usr/bin/keychain --eval id_rsa'
-# fi
+# Comment this out to disable bi-weekly auto-update checks
+DISABLE_AUTO_UPDATE="true"
 
-JOBINFO="%1(j.(%j%).)"                        # Empty string if no bg-jobs, otherwise "(n)"
-UCOLOR="%(!.%{${fg[red]}%}.%{${fg[green]}%})" # Red if running as root, green if non-root
-NC="%{${fg[default]}%}"                       # Default Color
-FCOLOR="%{${fg[blue]}%}"                      # Folder color
-PS1='%{${fg[yellow]}%}$(git name-rev --name-only --always HEAD 2>/dev/null || echo "")${NC} [${UCOLOR}%m${NC}:${FCOLOR}%1~${NC}]${JOBINFO}%# '; setopt promptsubst
-RPS1="${FCOLOR}%~${NC}"
+# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
+# export UPDATE_ZSH_DAYS=13
 
-export EDITOR=/usr/bin/vim
+# Uncomment following line if you want to disable colors in ls
+# DISABLE_LS_COLORS="true"
 
-# source my personal and independent inits
-if [ -f ${HOME}/.user_init ]; then
-   source ${HOME}/.user_init
-fi
+# Uncomment following line if you want to disable autosetting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-if [ -f ${HOME}/.zshrc_`hostname` ]; then
-   source ${HOME}/.zshrc_`hostname`
-fi
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
 
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git cp debian lol vi-mode perhost)
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+#export PATH=/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+alias tmux='TERM=xterm-256color tmux'
+alias less='less -S'  # No word-wrap!
+export BROWSER=/usr/bin/firefox
+export PYTHONSTARTUP=~/.pystartup
+
+bindkey "^R" history-incremental-search-backward
+bindkey $terminfo[khome] vi-beginning-of-line
+bindkey $terminfo[kend] vi-end-of-line
+bindkey "^[[3~" delete-char
