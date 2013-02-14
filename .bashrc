@@ -54,6 +54,7 @@ function _fab_complete() {
         COMPREPLY=( $(compgen -W "$(fab -F short -l)" -- ${cur}) )
         return 0
     else
+        # no fabfile.py found. Don't do anything.
         return 1
     fi
 }
