@@ -39,3 +39,5 @@ setup(
 " > setup.py
 
 echo "${SHORT_DESC}" > README.rst
+echo "env" >> .gitignore
+git init && git add . && git commit -a -m "Initial Commit"
