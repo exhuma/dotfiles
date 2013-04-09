@@ -29,7 +29,7 @@
     lga = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
     ; Show abbreviated log with timestamps
-    sl = log --pretty=format:'%Cgreen%ai%Cblue %h%Creset %s'
+    sl = log --pretty=format:'%an - %Cgreen%ai%Cblue %h%Creset %s'
 
 [core]
     ; my global ignores file
