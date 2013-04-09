@@ -51,3 +51,5 @@ bindkey $terminfo[kend] vi-end-of-line
 bindkey "^[[3~" delete-char
 
 unsetopt correct_all
+
+DISABLE_AUTO_TITLE=true
