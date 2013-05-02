@@ -1,2 +1,4 @@
 .vim*
 .ssh
+/.irssi/away.log
+/.ncmpcpp/error.log
