@@ -290,8 +290,9 @@ settings = {
 };
 logs = { };
 ignores = (
+  { level = "JOINS PARTS QUITS"; channels = ( "##linux" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#kontact" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#linux" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#python" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#ubuntu" ); },
-  { level = "JOINS PARTS QUITS"; channels = ( "#linux" ); },
-  { level = "JOINS PARTS QUITS"; channels = ( "##linux" ); }
 );
