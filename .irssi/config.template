@@ -99,7 +99,10 @@ chatnets = {
   };
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
-  FreeNode = { type = "IRC"; };
+  FreeNode = {
+    type = "IRC";
+    autosendcmd = "/^msg nickserv identify {{password}}; wait 2000";
+  };
 };
 
 channels = (

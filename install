@@ -36,4 +36,10 @@ ln -vs dotfiles/.zshrc
 ln -vs dotfiles/.zshrc_blackdragon
 ln -vs dotfiles/.zshrc_lillend
 git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
+
+read -sp "[IRSSI] FreeNode Password: " IRSSI_PASSWORD
+cat dotfiles/.irssi/config.template | \
+    sed -e "s/{{password}}/${IRSSI_PASSWORD}/" \
+    > .irssi/config
+
 echo done!
