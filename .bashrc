@@ -67,6 +67,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     complete -o nospace -F _fab_complete fab
 fi
 
+export TERM=xterm-256color
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
