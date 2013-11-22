@@ -297,8 +297,12 @@ ignores = (
   { level = "JOINS PARTS QUITS"; channels = ( "#flask" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#kontact" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#linux" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#mumble" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#pocoo" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#pocoo" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#python" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#sqlalchemy" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#ubuntu" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#vim" ); }
+  { mask = "pocoo"; level = "JOINS PARTS QUITS"; },
 );
