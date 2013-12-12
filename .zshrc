@@ -39,6 +39,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 #export PATH=/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export PATH=~/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 export BROWSER=/usr/bin/firefox
