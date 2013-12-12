@@ -55,6 +55,7 @@ bindkey -M vicmd "^k" up-history
 bindkey -M viins "^k" up-history
 bindkey -M vicmd "^j" down-history
 bindkey -M viins "^j" down-history
+bindkey -M viins "^q" push-line
 
 unsetopt correct_all
 
