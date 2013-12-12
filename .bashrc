@@ -43,6 +43,7 @@ fi
 [ -x /usr/bin/vim ] && export EDITOR=vim
 export PATH=~/bin:~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PYTHONSTARTUP=~/.pystartup
+export GPGKEY=1CA23E80
 
 #
 # Bash completion for fabric
