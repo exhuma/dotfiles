@@ -49,6 +49,10 @@ bindkey "^R" history-incremental-search-backward
 bindkey $terminfo[khome] vi-beginning-of-line
 bindkey $terminfo[kend] vi-end-of-line
 bindkey "^[[3~" delete-char
+bindkey -M vicmd "^k" up-history
+bindkey -M viins "^k" up-history
+bindkey -M vicmd "^j" down-history
+bindkey -M viins "^j" down-history
 
 unsetopt correct_all
 
