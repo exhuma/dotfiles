@@ -4,6 +4,7 @@
 [user]
     name = Michel Albert
     email = michel@albert.lu
+    signkey = 16FC371B
 
 ;
 ; Automatically colorize console output
@@ -32,7 +33,7 @@
     lgls = log --simplify-by-decoration --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
     ; Show abbreviated log with timestamps
-    sl = log --pretty=format:'%an - %Cgreen%ai%Cblue %h%Creset %s'
+    sl = log --pretty=format:'%an - %Cgreen%ai%Cblue %h%Creset %C(yellow)%d%Creset %s'
 
     ; no fast-forward merge
     nfm = merge --no-ff
@@ -47,7 +48,7 @@
 
 [diff]
     ; ... and vimdiff as diff tool
-    tool=vimdiff
+    tool=kdiff3
 
 
 [difftool]
@@ -57,4 +58,4 @@
 
 [push]
     ; By default, push to the tracking remote.
-    default = tracking
+    default = upstream
