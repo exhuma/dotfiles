@@ -6,21 +6,21 @@
 # ---------------------------------------------------------------------------
 
 cd
-[ -f .bashrc ] && rm -i .bashrc
-[ -f .bashrc_BBS-goon ] && rm -i .bashrc_BBS-goon
-[ -f .digrc ] && rm -i .digrc
-[ -f .gitconfig ] && rm -i .gitconfig
-[ -f .gitignore ] && rm -i .gitignore
-[ -f .inputrc ] && rm -i .inputrc
-[ -f .pylintrc ] && rm -i .pylintrc
-[ -f .pystartup ] && rm -i .pystartup
-[ -f .tmux.conf ] && rm -i .tmux.conf
-[ -f .Xdefaults ] && rm -i .Xdefaults
-[ -f .zshrc ] && rm -i .zshrc
-[ -f .zshrc_blackdragon ] && rm -i .zshrc_blackdragon
-[ -f .zshrc_lillend ] && rm -i .zshrc_lillend
-[ -d .irssi ] && rm -irf .irssi
-[ -d .oh-my-zsh ] && rm -irf .oh-my-zsh
+[ -f .bashrc ] && rm .bashrc
+[ -f .bashrc_BBS-goon ] && rm .bashrc_BBS-goon
+[ -f .digrc ] && rm .digrc
+[ -f .gitconfig ] && rm .gitconfig
+[ -f .gitignore ] && rm .gitignore
+[ -f .inputrc ] && rm .inputrc
+[ -f .pylintrc ] && rm .pylintrc
+[ -f .pystartup ] && rm .pystartup
+[ -f .tmux.conf ] && rm .tmux.conf
+[ -f .Xdefaults ] && rm .Xdefaults
+[ -f .zshrc ] && rm .zshrc
+[ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
+[ -f .zshrc_lillend ] && rm .zshrc_lillend
+[ -d .irssi ] && rm -rf .irssi
+[ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
 ln -vs dotfiles/.irssi
 ln -vs dotfiles/.bashrc
 ln -vs dotfiles/.bashrc_BBS-goon
@@ -36,4 +36,10 @@ ln -vs dotfiles/.zshrc
 ln -vs dotfiles/.zshrc_blackdragon
 ln -vs dotfiles/.zshrc_lillend
 git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
+
+read -sp "[IRSSI] FreeNode Password: " IRSSI_PASSWORD
+cat dotfiles/.irssi/config.template | \
+    sed -e "s/{{password}}/${IRSSI_PASSWORD}/" \
+    > .irssi/config
+
 echo done!
