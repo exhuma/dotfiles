@@ -1,5 +1,13 @@
 set editing-mode vi
 set keymap vi
 set convert-meta on
-Control-d: possible-completions
-Control-l: clear-screen
+$if mode=vi
+    set keymap vi-command
+    # these are for vi-command mode
+    Control-l: clear-screen
+    set keymap vi-insert
+    Control-j: next-history
+    Control-k: previous-history
+    Control-l: clear-screen
+    Control-d: possible-completions
+$endif
