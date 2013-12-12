@@ -43,6 +43,7 @@ alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
+export PYTHONWARNINGS=default
 export PSQL_EDITOR="/usr/bin/vim"
 
 bindkey "^R" history-incremental-search-backward

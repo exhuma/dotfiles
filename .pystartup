@@ -21,3 +21,4 @@ sys.ps1 = "python> "
 sys.ps2 = "   ...| "
 
 del os, atexit, readline, rlcompleter, save_history, historyPath, sys
+# vim: set ft=python :
