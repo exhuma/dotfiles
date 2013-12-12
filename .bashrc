@@ -74,6 +74,7 @@ alias l='ls -CF'
 alias less='less -S'  # No word-wrap!
 alias pyserv='python -m SimpleHTTPServer 5002' # Serve current folder on port 5002
 alias tmux='TERM=xterm-256color tmux'
+alias python='python -3 -Wd'
 
 # load host-specific configuration
 if [ -f ${HOME}/.bashrc_`hostname -s` ]; then
