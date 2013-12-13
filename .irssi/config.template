@@ -27,6 +27,7 @@ servers = (
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
+  { address = "localhost"; chatnet = "IPSW"; port = "6667"; },
   { 
     address = "irc.freenode.net";
     chatnet = "FreeNode";
@@ -43,6 +44,7 @@ chatnets = {
     max_whois = "4";
     max_query_chans = "5";
   };
+  IPSW = { type = "IRC"; max_kicks = "4"; max_msgs = "3"; max_whois = "1"; };
   EFNet = { 
     type = "IRC";
     max_kicks = "4";
