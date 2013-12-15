@@ -19,6 +19,7 @@ cd
 [ -f .zshrc ] && rm -i .zshrc
 [ -f .zshrc_blackdragon ] && rm -i .zshrc_blackdragon
 [ -f .zshrc_lillend ] && rm -i .zshrc_lillend
+[ -f .minttyrc ] && rm -i .minttyrc
 [ -d .irssi ] && rm -irf .irssi
 [ -d .oh-my-zsh ] && rm -irf .oh-my-zsh
 ln -vs dotfiles/.irssi
@@ -35,5 +36,6 @@ ln -vs dotfiles/.Xdefaults
 ln -vs dotfiles/.zshrc
 ln -vs dotfiles/.zshrc_blackdragon
 ln -vs dotfiles/.zshrc_lillend
+ln -vs dotfiles/.minttyrc
 git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
 echo done!
