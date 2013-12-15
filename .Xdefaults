@@ -36,3 +36,5 @@ XTerm*color14:                 #93a1a1
 XTerm*color15:                 #fdf6e3
 XTerm*font:                    9x15
 XTerm*saveLines:               1000
+XTerm*faceName:                Anonymous Pro
+XTerm*faceSize:                12
