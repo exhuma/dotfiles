@@ -78,8 +78,8 @@ alias tmux='TERM=xterm-256color tmux'
 alias python='python -3 -Wd'
 
 # load host-specific configuration
-if [ -f ${HOME}/.bashrc_`hostname -s` ]; then
-   source ${HOME}/.bashrc_`hostname -s`
+if [ -f ${HOME}/.bashrc_`hostname` ]; then
+   source ${HOME}/.bashrc_`hostname`
 fi
 
 # Change default sort order
