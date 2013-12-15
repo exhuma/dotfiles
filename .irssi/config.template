@@ -27,6 +27,7 @@ servers = (
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
+  { address = "localhost"; chatnet = "IPSW"; port = "6667"; },
   { 
     address = "irc.freenode.net";
     chatnet = "FreeNode";
@@ -43,6 +44,7 @@ chatnets = {
     max_whois = "4";
     max_query_chans = "5";
   };
+  IPSW = { type = "IRC"; max_kicks = "4"; max_msgs = "3"; max_whois = "1"; };
   EFNet = { 
     type = "IRC";
     max_kicks = "4";
@@ -99,7 +101,10 @@ chatnets = {
   };
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
-  FreeNode = { type = "IRC"; };
+  FreeNode = {
+    type = "IRC";
+    autosendcmd = "/^msg nickserv identify {{password}}; wait 2000";
+  };
 };
 
 channels = (
@@ -212,7 +217,6 @@ statusbar = {
       # list of items in statusbar in the display order
       items = {
         barstart = { priority = "100"; };
-        time = { };
         user = { };
         window = { };
         window_empty = { };
@@ -290,9 +294,16 @@ settings = {
 };
 logs = { };
 ignores = (
-  { level = "JOINS PARTS QUITS"; channels = ( "##linux" ); }
-  { level = "JOINS PARTS QUITS"; channels = ( "#kontact" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "##linux" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#flask" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#kontact" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#linux" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#mumble" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#pocoo" ); }
+  { level = "JOINS PARTS QUITS"; channels = ( "#pocoo" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#python" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#sqlalchemy" ); },
   { level = "JOINS PARTS QUITS"; channels = ( "#ubuntu" ); },
+  { level = "JOINS PARTS QUITS"; channels = ( "#vim" ); }
+  { mask = "pocoo"; level = "JOINS PARTS QUITS"; },
 );

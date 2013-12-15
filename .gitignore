@@ -2,3 +2,4 @@
 .ssh
 /.irssi/away.log
 /.ncmpcpp/error.log
+/.irssi/config

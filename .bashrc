@@ -43,6 +43,7 @@ fi
 [ -x /usr/bin/vim ] && export EDITOR=vim
 export PATH=~/bin:~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PYTHONSTARTUP=~/.pystartup
+export GPGKEY=1CA23E80
 
 #
 # Bash completion for fabric
@@ -67,12 +68,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     complete -o nospace -F _fab_complete fab
 fi
 
+export TERM=xterm-256color
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias less='less -S'  # No word-wrap!
 alias pyserv='python -m SimpleHTTPServer 5002' # Serve current folder on port 5002
 alias tmux='TERM=xterm-256color tmux'
+alias python='python -3 -Wd'
 
 # load host-specific configuration
 if [ -f ${HOME}/.bashrc_`hostname -s` ]; then

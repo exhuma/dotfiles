@@ -7,3 +7,5 @@
 .ropeproject
 *.class
 my__.*
+/_vimfiles
+/.idea

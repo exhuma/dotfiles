@@ -39,12 +39,25 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 #export PATH=/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export PATH=~/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
+export PYTHONWARNINGS=default
+export PSQL_EDITOR="/usr/bin/vim"
+export GPGKEY=1CA23E80
 
 bindkey "^R" history-incremental-search-backward
 bindkey $terminfo[khome] vi-beginning-of-line
 bindkey $terminfo[kend] vi-end-of-line
 bindkey "^[[3~" delete-char
+bindkey -M vicmd "^k" up-history
+bindkey -M viins "^k" up-history
+bindkey -M vicmd "^j" down-history
+bindkey -M viins "^j" down-history
+bindkey -M viins "^q" push-line
+
+unsetopt correct_all
+
+DISABLE_AUTO_TITLE=true
