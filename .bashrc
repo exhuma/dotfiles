@@ -90,3 +90,11 @@ set -o vi
 bind -m vi-insert "\C-p":dynamic-complete-history
 bind -m vi-insert "\C-n":menu-complete
 bind -m vi-insert "\C-d":possible-completions
+
+keychain ~/.ssh/id_dsa
+. ~/.keychain/$HOSTNAME-sh
+. ~/.keychain/$HOSTNAME-sh-gpg
+
+export JAVA_HOME=/usr/local/java/jdk1.7.0_09
+export JRE_HOME=/usr/local/java/jre1.7.0_09
+export PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
