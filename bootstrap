@@ -1,1 +1,5 @@
-sudo aptitude install git vim vim-gnome keepassx
+sudo apt-get install aptitude
+sudo aptitude install \
+    git \
+    vim-gnome \
+    keepassx
