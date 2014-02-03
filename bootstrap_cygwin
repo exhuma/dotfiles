@@ -1,0 +1,7 @@
+[ -z "$SETUPEXE" ] && echo "Environment variable SETUPEXE must point to the path of the cygwin setup.exe!" && exit 1
+
+
+[ ! -x "$SETUPEXE" ] && echo "$SETUPEXE must be executable!" && exit 1
+
+
+$SETUPEXE -q -P git,gitk,xinit
