@@ -44,6 +44,7 @@ fi
 export PATH=~/bin:~/dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PYTHONSTARTUP=~/.pystartup
 export GPGKEY=1CA23E80
+export LC_COLLATE=C
 
 #
 # Bash completion for fabric

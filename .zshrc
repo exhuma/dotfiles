@@ -47,6 +47,7 @@ export PYTHONSTARTUP=~/.pystartup
 export PYTHONWARNINGS=default
 export PSQL_EDITOR="/usr/bin/vim"
 export GPGKEY=1CA23E80
+export LC_COLLATE=C
 
 bindkey "^R" history-incremental-search-backward
 bindkey $terminfo[khome] vi-beginning-of-line
