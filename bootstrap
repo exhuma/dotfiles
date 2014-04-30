@@ -1,5 +1,10 @@
 sudo apt-get install aptitude
 sudo aptitude install \
     git \
+    irssi \
+    keepassx \
     vim-gnome \
-    keepassx
+    keychain \
+    zsh
+
+chsh
