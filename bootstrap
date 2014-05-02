@@ -1,3 +1,6 @@
+#!/bin/bash
+
+echo "[II] Installing APT packages..."
 sudo apt-get install aptitude
 sudo aptitude install \
     git \
@@ -5,6 +8,18 @@ sudo aptitude install \
     keepassx \
     vim-gnome \
     keychain \
-    zsh
+    zsh \
+    mplayer
 
-chsh
+if [[ ! -f "$HOME/.dropbox-dist/dropboxd" ]]; then
+    echo "[II] installing dropbox..."
+    (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -)
+else
+    echo "[II] dropbox already installed"
+fi
+
+if [[ "$SHELL" != "/usr/bin/zsh" && -e /usr/bin/zsh ]]; then
+    chsh
+else
+    echo "[II] Already on zsh, or zsh not available on this system"
+fi
