@@ -11,6 +11,15 @@ sudo aptitude install \
     zsh \
     mplayer
 
+if [[ ! -d "$HOME/.vim" ]]; then
+    echo "[II] Checking out vimfiles..."
+    git clone https://exhuma@github.com/exhuma/vimfiles $HOME/.vim
+    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall
+else
+    echo "[II] vimfiles already in place."
+fi
+
 if [[ ! -f "$HOME/.dropbox-dist/dropboxd" ]]; then
     echo "[II] installing dropbox..."
     (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -)
