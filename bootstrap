@@ -3,8 +3,17 @@ sudo aptitude install \
     git \
     irssi \
     keepassx \
-    vim-gnome \
     keychain \
+    libpq-dev \
+    python-dev \
+    python-pip \
+    tree \
+    vim-gnome \
+    vim-gtk \
     zsh
+
+sudo pip install \
+    virtualenv \
+    pip
 
 chsh
