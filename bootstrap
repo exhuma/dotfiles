@@ -6,10 +6,19 @@ sudo aptitude install \
     git \
     irssi \
     keepassx \
-    vim-gnome \
     keychain \
-    zsh \
-    mplayer
+    libpq-dev \
+    mplayer \
+    python-dev \
+    python-pip \
+    tree \
+    vim-gnome \
+    vim-gtk \
+    zsh
+
+sudo pip install \
+    virtualenv \
+    pip
 
 if [[ ! -d "$HOME/.vim" ]]; then
     echo "[II] Checking out vimfiles..."

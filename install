@@ -26,6 +26,10 @@ cd
 [ -f .zshrc ] && rm .zshrc
 [ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
 [ -f .zshrc_lillend ] && rm .zshrc_lillend
+[ -s .xinitrc ] && rm .xinitrc
+[ -s .Xmodmap ] && rm .Xmodmap
+[ -s .i3 ] && rm -rf .i3
+
 ln -vs dotfiles/.psqlrc
 ln -vs dotfiles/.irssi
 ln -vs dotfiles/.bashrc
@@ -42,6 +46,9 @@ ln -vs dotfiles/.zshrc
 ln -vs dotfiles/.zshrc_blackdragon
 ln -vs dotfiles/.zshrc_lillend
 ln -vs dotfiles/.minttyrc
+ln -vs dotfiles/.xinitrc
+ln -vs dotfiles/.Xmodmap
+ln -vs dotfiles/.i3
 git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
 
 read -sp "[IRSSI] FreeNode Password: " IRSSI_PASSWORD
