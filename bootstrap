@@ -3,22 +3,26 @@
 echo "[II] Installing APT packages..."
 sudo apt-get install aptitude
 sudo aptitude install \
+    build-essential \
     git \
     irssi \
     keepassx \
     keychain \
     libpq-dev \
     mplayer \
+    poedit \
     python-dev \
     python-pip \
+    tmux \
     tree \
     vim-gnome \
     vim-gtk \
     zsh
 
 sudo pip install \
-    virtualenv \
-    pip
+    fabric \
+    pip \
+    virtualenv
 
 if [[ ! -d "$HOME/.vim" ]]; then
     echo "[II] Checking out vimfiles..."
