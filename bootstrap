@@ -45,3 +45,11 @@ if [[ "$SHELL" != "/usr/bin/zsh" && -e /usr/bin/zsh ]]; then
 else
     echo "[II] Already on zsh, or zsh not available on this system"
 fi
+
+# Mouse setup
+echo "[II] Mouse setup..."
+xinput --list | grep pointer
+read -p "Pointer Device ID: " MOUSEDEV
+xinput list-props ${MOUSEDEV} | grep "Constant Decel"
+read -p "Decelleration ID: " DECCEL
+xinput set-prop ${MOUSEDEV} ${DECCEL} 2.0
