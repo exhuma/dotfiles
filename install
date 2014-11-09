@@ -47,7 +47,6 @@ ln -vs dotfiles/.zshrc_blackdragon
 ln -vs dotfiles/.zshrc_lillend
 ln -vs dotfiles/.minttyrc
 ln -vs dotfiles/.xinitrc
-ln -vs dotfiles/.Xmodmap
 ln -vs dotfiles/.i3
 git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
 
@@ -55,5 +54,18 @@ read -sp "[IRSSI] FreeNode Password: " IRSSI_PASSWORD
 cat dotfiles/.irssi/config.template | \
     sed -e "s/{{password}}/${IRSSI_PASSWORD}/" \
     > .irssi/config
+echo
+
+HOSTNAME=$(hostname -s)
+echo Installing overlay for $HOSTNAME
+
+if [ -d dotfiles/${HOSTNAME}/.kde/Autostart ]; then
+    rm -rf .kde/Autostart
+    ln -vs ~/dotfiles/${HOSTNAME}/.kde/Autostart ~/.kde/Autostart
+fi
+
+if [ -f dotfiles/${HOSTNAME}/.Xmodmap ]; then
+    ln -vs dotfiles/${HOSTNAME}/.Xmodmap
+fi
 
 echo done!
