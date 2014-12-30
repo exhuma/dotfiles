@@ -10,6 +10,7 @@ cd
 [ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
 [ -d .psql_history ] || mkdir .psql_history
 [ -f .Xdefaults ] && rm .Xdefaults
+[ -f .Xresources ] && rm .Xresources
 [ -f .bashrc ] && rm .bashrc
 [ -f .bashrc_BBS-goon ] && rm .bashrc_BBS-goon
 [ -f .digrc ] && rm .digrc
@@ -41,7 +42,8 @@ ln -vs dotfiles/.inputrc
 ln -vs dotfiles/.pylintrc
 ln -vs dotfiles/.pystartup
 ln -vs dotfiles/.tmux.conf
-ln -vs dotfiles/.Xdefaults
+ln -vs dotfiles/.Xresources
+ln -vs dotfiles/.Xresources .Xdefaults
 ln -vs dotfiles/.zshrc
 ln -vs dotfiles/.zshrc_blackdragon
 ln -vs dotfiles/.zshrc_lillend
