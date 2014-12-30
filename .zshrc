@@ -63,9 +63,7 @@ unsetopt correct_all
 
 DISABLE_AUTO_TITLE=true
 
-keychain ~/.ssh/MichelAlbert2012
-. ~/.keychain/$(hostname)-sh
-. ~/.keychain/$(hostname)-sh-gpg
+[ -f ~/.init_local ] && . ~/.init_local
 
 # postscript aliases
 alias xpsview='postcat -vq'
