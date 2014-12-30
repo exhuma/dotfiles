@@ -4,4 +4,6 @@
 [ ! -x "$SETUPEXE" ] && echo "$SETUPEXE must be executable!" && exit 1
 
 
-$SETUPEXE -q -P git,gitk,xinit
+$SETUPEXE -q -P git,gitk,xinit,vim
+
+. bootstrap_common
