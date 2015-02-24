@@ -10,4 +10,6 @@ $if mode=vi
     Control-k: previous-history
     Control-l: clear-screen
     Control-d: possible-completions
+    Control-RUBOUT: backward-kill-word
+    Control-Meta-x: re-read-init-file
 $endif

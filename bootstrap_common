@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ ! -d "$HOME/.vim" ]]; then
+    echo "[II] Checking out vimfiles..."
+    git clone https://exhuma@github.com/exhuma/vimfiles $HOME/.vim
+    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall
+else
+    echo "[II] vimfiles already in place."
+fi

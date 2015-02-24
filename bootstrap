@@ -24,14 +24,7 @@ sudo pip install \
     pip \
     virtualenv
 
-if [[ ! -d "$HOME/.vim" ]]; then
-    echo "[II] Checking out vimfiles..."
-    git clone https://exhuma@github.com/exhuma/vimfiles $HOME/.vim
-    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
-else
-    echo "[II] vimfiles already in place."
-fi
+. bootstrap_common
 
 if [[ ! -f "$HOME/.dropbox-dist/dropboxd" ]]; then
     echo "[II] installing dropbox..."
@@ -46,10 +39,4 @@ else
     echo "[II] Already on zsh, or zsh not available on this system"
 fi
 
-# Mouse setup
-echo "[II] Mouse setup..."
-xinput --list | grep pointer
-read -p "Pointer Device ID: " MOUSEDEV
-xinput list-props ${MOUSEDEV} | grep "Constant Decel"
-read -p "Decelleration ID: " DECCEL
-xinput set-prop ${MOUSEDEV} ${DECCEL} 2.0
+. decellerate_mouse.bash
