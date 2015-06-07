@@ -1,15 +1,20 @@
 #!/bin/bash
 
 echo "[II] Installing APT packages..."
+wget -O - https://downloads.spellchecker.lu/packages/Ubuntu/pubkey.asc | sudo apt-key add -
+sudo wget https://downloads.spellchecker.lu/packages/Ubuntu/spellchecker_lu.list -O /etc/apt/sources.list.d/spellchecker_lu.list
 sudo apt-get install aptitude
+sudo aptitude update
 sudo aptitude install \
     build-essential \
     git \
+    hunspell-lb-lu \
     irssi \
     keepassx \
     keychain \
     libpq-dev \
     mplayer \
+    mythes-lb \
     poedit \
     python-dev \
     python-pip \
@@ -39,10 +44,4 @@ else
     echo "[II] Already on zsh, or zsh not available on this system"
 fi
 
-# Mouse setup
-echo "[II] Mouse setup..."
-xinput --list | grep pointer
-read -p "Pointer Device ID: " MOUSEDEV
-xinput list-props ${MOUSEDEV} | grep "Constant Decel"
-read -p "Decelleration ID: " DECCEL
-xinput set-prop ${MOUSEDEV} ${DECCEL} 2.0
+. decellerate_mouse.bash
