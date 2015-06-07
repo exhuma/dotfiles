@@ -59,3 +59,6 @@
 [push]
     ; By default, push to the tracking remote.
     default = upstream
+
+[init]
+    templatedir = ~/dotfiles/git-template
