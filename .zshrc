@@ -42,6 +42,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH=~/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
+alias pyserve='python3 -m http.server'
+
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
 export PYTHONWARNINGS=default
