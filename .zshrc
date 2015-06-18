@@ -42,6 +42,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH=~/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
+alias pyserve='python3 -m http.server'
+
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
 export PYTHONWARNINGS=default
@@ -50,13 +52,14 @@ export GPGKEY=1CA23E80
 export LC_COLLATE=C
 
 bindkey "^R" history-incremental-search-backward
-bindkey $terminfo[khome] vi-beginning-of-line
-bindkey $terminfo[kend] vi-end-of-line
 bindkey "^[[3~" delete-char
-bindkey -M vicmd "^k" up-history
-bindkey -M viins "^k" up-history
+bindkey $terminfo[kend] vi-end-of-line
+bindkey $terminfo[khome] vi-beginning-of-line
 bindkey -M vicmd "^j" down-history
+bindkey -M vicmd "^k" up-history
+bindkey -M vicmd "v" edit-command-line
 bindkey -M viins "^j" down-history
+bindkey -M viins "^k" up-history
 bindkey -M viins "^q" push-line
 
 unsetopt correct_all

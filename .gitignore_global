@@ -3,10 +3,12 @@
 *.pyc
 *.pyo
 *~
+.*.swo
 .*.swp
 .coverage
 .directory
 .ropeproject
 /.idea
 /_vimfiles
+__pycache__
 my__.*
