@@ -83,7 +83,7 @@ if [ -f ${HOME}/.bashrc_`hostname` ]; then
    source ${HOME}/.bashrc_`hostname`
 fi
 
-[ -f .init_local ] && source .init_local
+[ -f ~/.init_local ] && source ~/.init_local
 
 # Change default sort order
 export LC_COLLATE=C
