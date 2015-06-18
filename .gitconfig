@@ -24,6 +24,7 @@
     st = status -s
     co = checkout
     ci = commit
+    br = branch -v
 
     ; Show abbreviated log with a branch graph
     lg = log --all -n20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
