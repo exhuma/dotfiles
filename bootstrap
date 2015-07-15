@@ -39,6 +39,7 @@ else
 fi
 
 if [[ "$SHELL" != "/usr/bin/zsh" && -e /usr/bin/zsh ]]; then
+    echo "[II] Changing login-shell..."
     chsh
 else
     echo "[II] Already on zsh, or zsh not available on this system"
