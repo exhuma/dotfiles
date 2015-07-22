@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "[II] Installing APT packages..."
-wget -O - https://downloads.spellchecker.lu/packages/Ubuntu/pubkey.asc | sudo apt-key add -
-sudo wget https://downloads.spellchecker.lu/packages/Ubuntu/spellchecker_lu.list -O /etc/apt/sources.list.d/spellchecker_lu.list
+wget -q -O - https://downloads.spellchecker.lu/packages/Ubuntu/pubkey.asc | sudo apt-key add -
+sudo wget -q https://downloads.spellchecker.lu/packages/Ubuntu/spellchecker_lu.list -O /etc/apt/sources.list.d/spellchecker_lu.list
 sudo apt-get install aptitude
 sudo aptitude update
 sudo aptitude install \
