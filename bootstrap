@@ -33,7 +33,7 @@ sudo pip install \
 
 if [[ ! -f "$HOME/.dropbox-dist/dropboxd" ]]; then
     echo "[II] installing dropbox..."
-    (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -)
+    (cd ~ && wget -q -O - "https://www.dropbox.com/download?plat=lnx.$(uname -m)" | tar xzf -)
 else
     echo "[II] dropbox already installed"
 fi
