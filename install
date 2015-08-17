@@ -70,4 +70,30 @@ if [ -f dotfiles/${HOSTNAME}/.Xmodmap ]; then
     ln -vs dotfiles/${HOSTNAME}/.Xmodmap
 fi
 
+# Install Konsole colour schemes
+if [ ! -f ~/.kde/share/apps/konsole/base16-atelierforest.colorscheme ]; then
+    (cd /tmp && git clone https://github.com/chriskempson/base16-builder.git)
+    (cd /tmp/base16-builder && ./base16 -t konsole)
+    mkdir -p ~/.kde/share/apps/konsole
+    mv /tmp/base16-builder/output/konsole/* ~/.kde/share/apps/konsole
+    cat <<EOF > ~/.kde/share/apps/konsole/Shell.profile
+[Appearance]
+ColorScheme=base16-atelierforest
+Font=Anonymous Pro for Powerline,18,-1,5,50,0,0,0,0,0
+
+[General]
+Name=Shell
+Parent=FALLBACK/
+
+[Scrolling]
+HistorySize=10000
+EOF
+    rm -rf /tmp/base16-builder
+    echo
+    echo ┌──────────────────────────────────────────────────────────────────────┐
+    echo │In order to get the new konsole colors, konsole needs to be restarted!│
+    echo └──────────────────────────────────────────────────────────────────────┘
+    echo
+fi
+
 echo done!
