@@ -1,39 +1,40 @@
-URxvt*transparent:false
-URxvt*tintColor:blue
-URxvt*saveLines:12000
-URxvt*foreground:white
-URxvt*background:black
-URxvt*font: xft:Anonymous Pro:pixelsize=16
-URxvt*color4:RoyalBlue
-URxvt*color12:RoyalBlue
-URxvt*scrollBar:true
-URxvt*scrollBar_right:false
-URxvt*scrollstyle:rxvt
-URxvt*geometry:93x70+0+0
+*.foreground:   #a8a19f
+*.background:   #1b1918
+*.cursorColor:  #a8a19f
 
-XTerm*Background:              #002b36
-XTerm*Foreground:              #839496
+*.color0:       #1b1918
+*.color1:       #f22c40
+*.color2:       #5ab738
+*.color3:       #d5911a
+*.color4:       #407ee7
+*.color5:       #6666ea
+*.color6:       #00ad9c
+*.color7:       #a8a19f
+
+*.color8:       #766e6b
+*.color9:       #f22c40
+*.color10:      #5ab738
+*.color11:      #d5911a
+*.color12:      #407ee7
+*.color13:      #6666ea
+*.color14:      #00ad9c
+*.color15:      #f1efee
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*.color16:      #df5320
+*.color17:      #c33ff3
+*.color18:      #2c2421
+*.color19:      #68615e
+*.color20:      #9c9491
+*.color21:      #e6e2e0
+
+
 XTerm*fading:                  40
 XTerm*fadeColor:               #002b36
 XTerm*cursorColor:             #93a1a1
 XTerm*pointerColorBackground:  #586e75
 XTerm*pointerColorForeground:  #93a1a1
-XTerm*color0:                  #073642
-XTerm*color1:                  #dc322f
-XTerm*color2:                  #859900
-XTerm*color3:                  #b58900
-XTerm*color4:                  #268bd2
-XTerm*color5:                  #d33682
-XTerm*color6:                  #2aa198
-XTerm*color7:                  #eee8d5
-XTerm*color9:                  #cb4b16
-XTerm*color8:                  #002b36
-XTerm*color10:                 #586e75
-XTerm*color11:                 #657b83
-XTerm*color12:                 #839496
-XTerm*color13:                 #6c71c4
-XTerm*color14:                 #93a1a1
-XTerm*color15:                 #fdf6e3
 XTerm*font:                    9x15
 XTerm*saveLines:               1000
 XTerm*faceName:                Anonymous Pro
