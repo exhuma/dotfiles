@@ -6,30 +6,35 @@
 # ---------------------------------------------------------------------------
 
 cd
-[ -d .irssi ] && rm -rf .irssi
-[ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
-[ -d .psql_history ] || mkdir .psql_history
-[ -f .Xdefaults ] && rm .Xdefaults
-[ -f .Xresources ] && rm .Xresources
-[ -f .bashrc ] && rm .bashrc
-[ -f .bashrc_BBS-goon ] && rm .bashrc_BBS-goon
-[ -f .digrc ] && rm .digrc
-[ -f .gitconfig ] && rm .gitconfig
-[ -f .gitignore ] && rm .gitignore
-[ -f .inputrc ] && rm .inputrc
-[ -f .minttyrc ] && rm .minttyrc
-[ -f .psql_history ] && mv -v .psql_history .psql_history.bak
-[ -f .psql_history.bak ] && mv -v .psql_history.bak .psql_history/old-single-file-history
-[ -f .psqlrc ] && rm .psqlrc
-[ -f .pylintrc ] && rm .pylintrc
-[ -f .pystartup ] && rm .pystartup
-[ -f .tmux.conf ] && rm .tmux.conf
-[ -f .zshrc ] && rm .zshrc
-[ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
-[ -f .zshrc_lillend ] && rm .zshrc_lillend
-[ -s .xinitrc ] && rm .xinitrc
-[ -s .Xmodmap ] && rm .Xmodmap
-[ -s .i3 ] && rm -rf .i3
+echo -n "Perform clean install? [y/N] "
+read RESPONSE
+
+if [[ "${RESPONSE}" == "y" ]]; then
+    [ -d .irssi ] && rm -rf .irssi
+    [ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
+    [ -d .psql_history ] || mkdir .psql_history
+    [ -f .Xdefaults ] && rm .Xdefaults
+    [ -f .Xresources ] && rm .Xresources
+    [ -f .bashrc ] && rm .bashrc
+    [ -f .bashrc_BBS-goon ] && rm .bashrc_BBS-goon
+    [ -f .digrc ] && rm .digrc
+    [ -f .gitconfig ] && rm .gitconfig
+    [ -f .gitignore ] && rm .gitignore
+    [ -f .inputrc ] && rm .inputrc
+    [ -f .minttyrc ] && rm .minttyrc
+    [ -f .psql_history ] && mv -v .psql_history .psql_history.bak
+    [ -f .psql_history.bak ] && mv -v .psql_history.bak .psql_history/old-single-file-history
+    [ -f .psqlrc ] && rm .psqlrc
+    [ -f .pylintrc ] && rm .pylintrc
+    [ -f .pystartup ] && rm .pystartup
+    [ -f .tmux.conf ] && rm .tmux.conf
+    [ -f .zshrc ] && rm .zshrc
+    [ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
+    [ -f .zshrc_lillend ] && rm .zshrc_lillend
+    [ -s .xinitrc ] && rm .xinitrc
+    [ -s .Xmodmap ] && rm .Xmodmap
+    [ -s .i3 ] && rm -rf .i3
+fi
 
 ln -vs dotfiles/.psqlrc
 ln -vs dotfiles/.irssi
