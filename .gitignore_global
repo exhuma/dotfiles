@@ -1,7 +1,4 @@
 *.bak
-*.class
-*.pyc
-*.pyo
 *~
 .*.swo
 .*.swp
@@ -14,5 +11,4 @@
 /env
 CVS
 CVSROOT
-__pycache__
 my__.*
