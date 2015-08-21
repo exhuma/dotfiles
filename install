@@ -89,6 +89,8 @@ Font=Anonymous Pro for Powerline,18,-1,5,50,0,0,0,0,0
 [General]
 Name=Shell
 Parent=FALLBACK/
+ShowMenuBar=false
+TabBarMode=1
 
 [Scrolling]
 HistorySize=10000
