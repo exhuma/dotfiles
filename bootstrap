@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo "[II] Installing APT packages..."
-wget -O - https://downloads.spellchecker.lu/packages/Ubuntu/pubkey.asc | sudo apt-key add -
-sudo wget https://downloads.spellchecker.lu/packages/Ubuntu/spellchecker_lu.list -O /etc/apt/sources.list.d/spellchecker_lu.list
+wget -q -O - https://downloads.spellchecker.lu/packages/Ubuntu/pubkey.asc | sudo apt-key add -
+sudo wget -q https://downloads.spellchecker.lu/packages/Ubuntu/spellchecker_lu.list -O /etc/apt/sources.list.d/spellchecker_lu.list
 sudo apt-get install aptitude
-sudo aptitude update
-sudo aptitude install \
+sudo aptitude -q -q update
+sudo aptitude -q -q install \
     build-essential \
     git \
     hunspell-lb-lu \
@@ -33,15 +33,23 @@ sudo pip install \
 
 if [[ ! -f "$HOME/.dropbox-dist/dropboxd" ]]; then
     echo "[II] installing dropbox..."
-    (cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -)
+    (cd ~ && wget -q -O - "https://www.dropbox.com/download?plat=lnx.$(uname -m)" | tar xzf -)
 else
     echo "[II] dropbox already installed"
 fi
 
 if [[ "$SHELL" != "/usr/bin/zsh" && -e /usr/bin/zsh ]]; then
+    echo "[II] Changing login-shell..."
     chsh
 else
     echo "[II] Already on zsh, or zsh not available on this system"
+fi
+
+if [[ ! -d "$HOME/.fonts" ]]; then
+    echo "[II] installing powerline fonts..."
+    (cd /tmp && git clone https://github.com/powerline/fonts && cd fonts && ./install.sh)
+else
+    echo "[II] fonts already installed"
 fi
 
 . decellerate_mouse.bash

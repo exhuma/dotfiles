@@ -6,30 +6,35 @@
 # ---------------------------------------------------------------------------
 
 cd
-[ -d .irssi ] && rm -rf .irssi
-[ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
-[ -d .psql_history ] || mkdir .psql_history
-[ -f .Xdefaults ] && rm .Xdefaults
-[ -f .Xresources ] && rm .Xresources
-[ -f .bashrc ] && rm .bashrc
-[ -f .bashrc_BBS-goon ] && rm .bashrc_BBS-goon
-[ -f .digrc ] && rm .digrc
-[ -f .gitconfig ] && rm .gitconfig
-[ -f .gitignore ] && rm .gitignore
-[ -f .inputrc ] && rm .inputrc
-[ -f .minttyrc ] && rm .minttyrc
-[ -f .psql_history ] && mv -v .psql_history .psql_history.bak
-[ -f .psql_history.bak ] && mv -v .psql_history.bak .psql_history/old-single-file-history
-[ -f .psqlrc ] && rm .psqlrc
-[ -f .pylintrc ] && rm .pylintrc
-[ -f .pystartup ] && rm .pystartup
-[ -f .tmux.conf ] && rm .tmux.conf
-[ -f .zshrc ] && rm .zshrc
-[ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
-[ -f .zshrc_lillend ] && rm .zshrc_lillend
-[ -s .xinitrc ] && rm .xinitrc
-[ -s .Xmodmap ] && rm .Xmodmap
-[ -s .i3 ] && rm -rf .i3
+echo -n "Perform clean install? [y/N] "
+read RESPONSE
+
+if [[ "${RESPONSE}" == "y" ]]; then
+    [ -d .irssi ] && rm -rf .irssi
+    [ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
+    [ -d .psql_history ] || mkdir .psql_history
+    [ -f .Xdefaults ] && rm .Xdefaults
+    [ -f .Xresources ] && rm .Xresources
+    [ -f .bashrc ] && rm .bashrc
+    [ -f .bashrc_BBS-goon ] && rm .bashrc_BBS-goon
+    [ -f .digrc ] && rm .digrc
+    [ -f .gitconfig ] && rm .gitconfig
+    [ -f .gitignore ] && rm .gitignore
+    [ -f .inputrc ] && rm .inputrc
+    [ -f .minttyrc ] && rm .minttyrc
+    [ -f .psql_history ] && mv -v .psql_history .psql_history.bak
+    [ -f .psql_history.bak ] && mv -v .psql_history.bak .psql_history/old-single-file-history
+    [ -f .psqlrc ] && rm .psqlrc
+    [ -f .pylintrc ] && rm .pylintrc
+    [ -f .pystartup ] && rm .pystartup
+    [ -f .tmux.conf ] && rm .tmux.conf
+    [ -f .zshrc ] && rm .zshrc
+    [ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
+    [ -f .zshrc_lillend ] && rm .zshrc_lillend
+    [ -s .xinitrc ] && rm .xinitrc
+    [ -s .Xmodmap ] && rm .Xmodmap
+    [ -s .i3 ] && rm -rf .i3
+fi
 
 ln -vs dotfiles/.psqlrc
 ln -vs dotfiles/.irssi
@@ -68,6 +73,34 @@ fi
 
 if [ -f dotfiles/${HOSTNAME}/.Xmodmap ]; then
     ln -vs dotfiles/${HOSTNAME}/.Xmodmap
+fi
+
+# Install Konsole colour schemes
+if [ ! -f ~/.kde/share/apps/konsole/base16-atelierforest.colorscheme ]; then
+    (cd /tmp && git clone https://github.com/chriskempson/base16-builder.git)
+    (cd /tmp/base16-builder && ./base16 -t konsole)
+    mkdir -p ~/.kde/share/apps/konsole
+    mv /tmp/base16-builder/output/konsole/* ~/.kde/share/apps/konsole
+    cat <<EOF > ~/.kde/share/apps/konsole/Shell.profile
+[Appearance]
+ColorScheme=base16-atelierforest
+Font=Anonymous Pro for Powerline,18,-1,5,50,0,0,0,0,0
+
+[General]
+Name=Shell
+Parent=FALLBACK/
+ShowMenuBar=false
+TabBarMode=1
+
+[Scrolling]
+HistorySize=10000
+EOF
+    rm -rf /tmp/base16-builder
+    echo
+    echo ┌──────────────────────────────────────────────────────────────────────┐
+    echo │In order to get the new konsole colors, konsole needs to be restarted!│
+    echo └──────────────────────────────────────────────────────────────────────┘
+    echo
 fi
 
 echo done!

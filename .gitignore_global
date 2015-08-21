@@ -8,7 +8,11 @@
 .coverage
 .directory
 .ropeproject
+.svn
 /.idea
 /_vimfiles
+/env
+CVS
+CVSROOT
 __pycache__
 my__.*
