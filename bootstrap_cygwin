@@ -1,3 +1,5 @@
+#!/bin/bash
+
 [ -z "$SETUPEXE" ] && echo "Environment variable SETUPEXE must point to the path of the cygwin setup.exe!" && exit 1
 
 
@@ -6,7 +8,7 @@
 
 $SETUPEXE -q -P git,gitk,xinit,vim,wget,ncurses
 
-mkdir ~/.fonts
+mkdir -p ~/.fonts
 wget -O ~/.fonts/anonymous+Pro-Powerline.ttf "https://gist.github.com/kayzh/2418116/raw/a3845071e4292f67adad755810b572e9f58ccea8/anonymous%20Pro-Powerline.ttf"
 fc-cache
 
