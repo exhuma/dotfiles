@@ -37,5 +37,5 @@ XTerm*pointerColorBackground:  #586e75
 XTerm*pointerColorForeground:  #93a1a1
 XTerm*font:                    9x15
 XTerm*saveLines:               1000
-XTerm*faceName:                Anonymous Pro
+XTerm*faceName:                Anonymice Powerline
 XTerm*faceSize:                12
