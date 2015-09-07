@@ -1,6 +1,6 @@
 BoldAsFont=no
-Font=Anonymous Pro
-FontHeight=9
+Font=Anonymice Powerline
+FontHeight=11
 FontSmoothing=none
 Term=xterm-256color
 Transparency=low
@@ -8,11 +8,9 @@ CursorType=block
 WindowShortcuts=no
 Columns=160
 Rows=50
-
-ForegroundColour=191, 191, 191
-CursorColour=150, 150, 150
-BackgroundColour=0, 0, 0
-
+ForegroundColour=191,191,191
+CursorColour=150,150,150
+BackgroundColour=0,0,0
 Black=0,0,0
 Cyan=0,191,191
 Green=0,191,0
@@ -20,9 +18,8 @@ Magenta=191,0,191
 Red=191,0,0
 White=191,191,191
 Yellow=191,191,0
-
 BoldBlack=64,64,64
-BoldBlue=100, 100, 255
+BoldBlue=100,100,255
 BoldCyan=64,255,255
 BoldGreen=64,255,64
 BoldMagenta=255,64,255
