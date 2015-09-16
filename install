@@ -20,6 +20,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -f .digrc ] && rm .digrc
     [ -f .gitconfig ] && rm .gitconfig
     [ -f .gitignore ] && rm .gitignore
+    [ -f .stignore ] && rm .stignore
     [ -f .inputrc ] && rm .inputrc
     [ -f .minttyrc ] && rm .minttyrc
     [ -f .psql_history ] && mv -v .psql_history .psql_history.bak
@@ -43,6 +44,7 @@ ln -vs dotfiles/.bashrc_BBS-goon
 ln -vs dotfiles/.digrc
 ln -vs dotfiles/.gitconfig
 ln -vs dotfiles/.gitignore_global .gitignore
+ln -vs dotfiles/.stignore .stignore
 ln -vs dotfiles/.inputrc
 ln -vs dotfiles/.pylintrc
 ln -vs dotfiles/.pystartup
