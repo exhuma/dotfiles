@@ -2,5 +2,6 @@
 *~
 .*.swp
 .git
+.vagrant
 env
 env3
