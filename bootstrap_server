@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "[II] Installing APT packages..."
+sudo apt-get install aptitude
+sudo aptitude -q -q update
+sudo aptitude -q -q install \
+    python-pip \
+    tmux \
+    tree \
+    vim-nox \
+    zsh
+
+sudo pip install \
+    fabric \
+    pip \
+    virtualenv
+
+. bootstrap_common
+
+if [[ "$SHELL" != "/usr/bin/zsh" && -e /usr/bin/zsh ]]; then
+    echo "[II] Changing login-shell..."
+    chsh
+else
+    echo "[II] Already on zsh, or zsh not available on this system"
+fi
