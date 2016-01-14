@@ -6,6 +6,6 @@
 [ ! -x "$SETUPEXE" ] && echo "$SETUPEXE must be executable!" && exit 1
 
 
-$SETUPEXE -q -P git,gitk,xinit,vim,wget,ncurses
+$SETUPEXE -q -P git,gitk,xinit,vim,wget,ncurses,tmux,keychain
 
 . bootstrap_common
