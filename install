@@ -33,7 +33,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
     [ -f .zshrc_lillend ] && rm .zshrc_lillend
     [ -s .xinitrc ] && rm .xinitrc
-    [ -s .Xmodmap ] && rm .Xmodmap
+    [ -s .xmodmaprc ] && rm .xmodmaprc
     [ -s .i3 ] && rm -rf .i3
 fi
 
@@ -74,8 +74,8 @@ if [ -d dotfiles/${HOSTNAME}/.kde/Autostart ]; then
     ln -vs ~/dotfiles/${HOSTNAME}/.kde/Autostart ~/.kde/Autostart
 fi
 
-if [ -f dotfiles/${HOSTNAME}/.Xmodmap ]; then
-    ln -vs dotfiles/${HOSTNAME}/.Xmodmap
+if [ -f dotfiles/${HOSTNAME}/.xmodmaprc ]; then
+    ln -vs dotfiles/${HOSTNAME}/.xmodmaprc
 fi
 
 # Install Konsole colour schemes
