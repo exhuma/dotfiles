@@ -2,64 +2,64 @@
 ; User identification
 ;
 [user]
-    name = Michel Albert
-    email = michel@albert.lu
-    signkey = 16FC371B
+name = Michel Albert
+email = michel@albert.lu
+signkey = 16FC371B
 
 ;
 ; Automatically colorize console output
 ;
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    branchdfh = auto
-    grep = auto
+diff = auto
+status = auto
+branch = auto
+branchdfh = auto
+grep = auto
 
 ;
 ; Aliases
 ;
 [alias]
-    ; simple shortcuts
-    st = status -s
-    co = checkout
-    ci = commit
-    br = branch -v
+; simple shortcuts
+st = status -s
+co = checkout
+ci = commit
+br = branch -v
 
-    ; Show abbreviated log with a branch graph
-    lg = log --all -n20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    lga = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    lgl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    lgas = log --all --simplify-by-decoration --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    lgls = log --simplify-by-decoration --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+; Show abbreviated log with a branch graph
+lg = log --all -n20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+lga = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+lgl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+lgas = log --all --simplify-by-decoration --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+lgls = log --simplify-by-decoration --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-    ; Show abbreviated log with timestamps
-    sl = log --pretty=format:'%an - %Cgreen%ai%Cblue %h%Creset %C(yellow)%d%Creset %s'
+; Show abbreviated log with timestamps
+sl = log --pretty=format:'%an - %Cgreen%ai%Cblue %h%Creset %C(yellow)%d%Creset %s'
 
-    ; no fast-forward merge
-    nfm = merge -e --no-ff
+; no fast-forward merge
+nfm = merge -e --no-ff
 
 [core]
-    ; my global ignores file
-    excludesfile = ~/.gitignore
+; my global ignores file
+excludesfile = ~/.gitignore
 
-    ; Let's use vim as the default editor
-    editor=vim
+; Let's use vim as the default editor
+editor=vim
 
 
 [diff]
-    ; ... and vimdiff as diff tool
-    tool=kdiff3
+; ... and vimdiff as diff tool
+tool=kdiff3
 
 
 [difftool]
-    ; don't always ask for confirmation to open the diff tool
-    prompt = false
+; don't always ask for confirmation to open the diff tool
+prompt = false
 
 
 [push]
-    ; By default, push to the tracking remote.
-    default = upstream
+; By default, push to the tracking remote.
+default = upstream
 
 [init]
-    templatedir = ~/dotfiles/git-template
+templatedir = ~/dotfiles/git-template
