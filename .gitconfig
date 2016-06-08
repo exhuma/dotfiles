@@ -13,7 +13,6 @@ signkey = 16FC371B
 diff = auto
 status = auto
 branch = auto
-branchdfh = auto
 grep = auto
 
 ;
