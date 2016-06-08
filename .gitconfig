@@ -47,7 +47,7 @@ editor=vim
 
 
 [diff]
-; ... and vimdiff as diff tool
+; ... and kdiff3 as diff tool
 tool=kdiff3
 
 
