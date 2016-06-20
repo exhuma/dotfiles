@@ -39,3 +39,6 @@ XTerm*font:                    9x15
 XTerm*saveLines:               1000
 XTerm*faceName:                Anonymice Powerline
 XTerm*faceSize:                12
+XTerm*on2Clicks:               regex [^/@ \n]+
+XTerm*on3Clicks:               regex [^ \n]+
+XTerm*on4Clicks:               line
