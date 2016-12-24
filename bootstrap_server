@@ -4,16 +4,10 @@ echo "[II] Installing APT packages..."
 sudo apt-get install aptitude
 sudo aptitude -q -q update
 sudo aptitude -q -q install \
-    python-pip \
     tmux \
     tree \
     vim-nox \
     zsh
-
-sudo pip install \
-    fabric \
-    pip \
-    virtualenv
 
 . bootstrap_common
 
