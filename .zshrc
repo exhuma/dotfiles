@@ -63,6 +63,7 @@ bindkey -M viins "^k" up-history
 bindkey -M viins "^q" push-line
 
 unsetopt correct_all
+setopt nobeep
 
 DISABLE_AUTO_TITLE=true
 
