@@ -1,6 +1,6 @@
 BoldAsFont=no
 Font=Anonymice Powerline
-FontHeight=11
+FontHeight=12
 FontSmoothing=none
 Term=xterm-256color
 Transparency=low
