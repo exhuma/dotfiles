@@ -11,29 +11,25 @@
 
 set $mod Mod4
 
-set $ws_left   "[1] VGA-1"
-set $ws_center "[2] HDMI2"
-set $ws_right  "[3] DVI-I-1"
-
-workspace $ws_left   output VGA-1
-workspace $ws_center output HDMI2
-workspace $ws_right  output DVI-I-1
+set $ws_work "Work"
+set $ws_vis "Visual"
+set $ws_web "Web"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# XXX font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
+font pango:Droid Sans Mono 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier Mod1
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec keychain ~/.ssh/id_dsa && . ~/.keychain/PC12-331-sh &&  .  ~/.keychain/PC12-331-sh-gpg &&  ssh -fTX -A bbs-nexus.ipsw.dt.ept.lu konsole
+bindsym $mod+Return exec xterm
 
 # Lock
 bindsym Control+Mod1+L exec i3lock
@@ -101,9 +97,9 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace $ws_left
-bindsym $mod+2 workspace $ws_center
-bindsym $mod+3 workspace $ws_right
+bindsym $mod+1 workspace $ws_work
+bindsym $mod+2 workspace $ws_vis
+bindsym $mod+3 workspace $ws_web
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -113,9 +109,9 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws_left
-bindsym $mod+Shift+2 move container to workspace $ws_center
-bindsym $mod+Shift+3 move container to workspace $ws_right
+bindsym $mod+Shift+1 move container to workspace $ws_work
+bindsym $mod+Shift+2 move container to workspace $ws_vis
+bindsym $mod+Shift+3 move container to workspace $ws_web
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -131,10 +127,6 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-assign [class="Kmail"] $ws_right
-assign [instance="crx_nckgahadagoaacjanaoiihapd"] $ws_left
-
-for_window [instance="crx_nckgahadagoaacjanaoiihapd"]   $ws_left
 for_window [instance="Google-chrome"]                   border none
 for_window [window_role="pop-up"]                       floating enable
 # TODO for_window [class="X-terminal-emulator"]                border 1
@@ -142,9 +134,8 @@ for_window [class="synapse"]                            border none
 
 # Autostart
 exec --no-startup-id feh --bg-fill ~/Dropbox/customisation/wallpapers/4@3/1249736829996.jpg
-exec --no-startup-id kmail
-exec --no-startup-id google-chrome
-exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id chromium
+exec --no-startup-id xterm
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
