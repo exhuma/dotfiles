@@ -1,4 +1,15 @@
 #!/bin/bash
+#
+# Bootstrap a new Python project
+#
+# SYNOPSIS
+# ========
+#
+#    gitbranch <projectname>
+#
+# projectname - The name of the project. Will create a folder with that name.
+#
+# ---------------------------------------------------------------------------
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <projectname>"

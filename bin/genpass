@@ -1,4 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
+"""
+Generate a long string of random characters.
+
+Pass a number as argument to limit the password length.
+"""
 
 import os, random, re, sys
 
