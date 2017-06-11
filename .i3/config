@@ -31,6 +31,10 @@ floating_modifier Mod1
 # start a terminal
 bindsym $mod+Return exec xterm
 
+# Brightness Control
+bindcode 233 exec xbacklight -inc 10
+bindcode 232 exec xbacklight -dec 10
+
 # Lock
 bindsym Control+Mod1+L exec i3lock
 
