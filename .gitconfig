@@ -51,6 +51,10 @@ editor=vim
 tool=kdiff3
 
 
+[tag]
+sort = v:refname
+
+
 [difftool]
 ; don't always ask for confirmation to open the diff tool
 prompt = false
