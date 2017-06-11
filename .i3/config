@@ -38,6 +38,9 @@ bindcode 232 exec xbacklight -dec 10
 # Lock
 bindsym Control+Mod1+L exec i3lock
 
+# Log Off / Switch User
+bindsym $mod+Shift+s exec dm-tool switch-to-greeter
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
