@@ -134,15 +134,14 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-for_window [instance="Google-chrome"]                   border none
+for_window [class="Google-chrome"]                      border none
+for_window [class="Chromium"]                           border none
 for_window [window_role="pop-up"]                       floating enable
 # TODO for_window [class="X-terminal-emulator"]                border 1
 for_window [class="synapse"]                            border none
 
 # Autostart
-exec --no-startup-id feh --bg-fill ~/Dropbox/customisation/wallpapers/4@3/1249736829996.jpg
-exec --no-startup-id chromium
-exec --no-startup-id xterm
+exec --no-startup-id variety
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
