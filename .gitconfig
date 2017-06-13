@@ -59,6 +59,12 @@ sort = v:refname
 prompt = false
 
 
+[merge]
+tool = vimdiff
+conflictstyle = diff3
+prompt = false
+
+
 [push]
 ; By default, push to the tracking remote.
 default = upstream
