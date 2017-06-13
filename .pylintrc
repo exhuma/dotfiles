@@ -1,97 +1,28 @@
-# lint Python modules using external checkers.
-# 
-# This is the main checker controling the other ones and the reports
-# generation. It is itself both a raw checker and an astng checker in order
-# to:
-# * handle message activation / deactivation at the module level
-# * handle some basic but necessary stats'data (number of classes, methods...)
-# 
 [MASTER]
 
-# Specify a configuration file.
-#rcfile=
-
-# Profiled execution.
-profile=no
-
-# Add <file or directory> to the black list. It should be a base name, not a
-# path. You may set this option multiple times.
 ignore=CVS .svn .git env env2 env3
 
 # Pickle collected data for later comparisons.
 persistent=yes
 
-# Set the cache size for astng objects.
-cache-size=500
-
-# List of plugins (as comma separated values of python modules names) to load,
-# usually to register additional checkers.
-load-plugins=
-
-
-[COMMANDS]
-
-# Display a help message for the given message id and exit. The value may be a
-# comma separated list of message ids.
-#help-msg=
-
-
 [MESSAGES CONTROL]
-
-# Enable only checker(s) with the given id(s). This option conflict with the
-# disable-checker option
-#enable-checker=
-
-# Enable all checker(s) except those with the given id(s). This option conflict
-# with the disable-checker option
-#disable-checker=
-
-# Enable all messages in the listed categories.
-#enable-msg-cat=
-
-# Disable all messages in the listed categories.
-#disable-msg-cat=
-
-# Enable the message(s) with the given id(s).
-#enable-msg=
-
-# Disable the message(s) with the given id(s).
-#disable-msg=
-
 
 [REPORTS]
 
-# set the output format. Available formats are text, parseable, colorized and
-# html
+# Set the output format. Available formats are text, parseable, colorized, msvs
+# (visual studio) and html. You can also give a reporter class, eg
+# mypackage.mymodule.MyReporterClass.
 output-format=colorized
 
-# Include message's id in output
-include-ids=yes
-
-# Put messages in a separate file for each module / package specified on the
-# command line instead of printing them on stdout. Reports (if any) will be
-# written in a file name "pylint_global.[txt|html]".
-files-output=no
-
-# Tells wether to display a full report or only the messages
+# Tells whether to display a full report or only the messages
 reports=no
 
 # Python expression which should return a note less than 10 (10 is the highest
-# note).You have access to the variables errors warning, statement which
-# respectivly contain the number of errors / warnings messages and the total
+# note). You have access to the variables errors warning, statement which
+# respectively contain the number of errors / warnings messages and the total
 # number of statements analyzed. This is used by the global evaluation report
-# (R0004).
+# (RP0004).
 evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
-
-# Add a comment according to your evaluation note. This is used by the global
-# evaluation report (R0004).
-comment=no
-
-# Enable the report(s) with the given id(s).
-#enable-report=
-
-# Disable the report(s) with the given id(s).
-#disable-report=
 
 
 # try to find bugs in the code using type inference
