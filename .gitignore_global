@@ -3,6 +3,7 @@
 .*.swo
 .*.swp
 .coverage
+.ctags
 .directory
 .ropeproject
 .svn
@@ -12,3 +13,4 @@
 CVS
 CVSROOT
 my__.*
+tags
