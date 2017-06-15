@@ -11,9 +11,9 @@
 
 set $mod Mod4
 
-set $ws_work "Work"
-set $ws_vis "Visual"
-set $ws_web "Web"
+set $ws_work "[1] Work"
+set $ws_vis "[2] Visual"
+set $ws_web "[3] Web"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
