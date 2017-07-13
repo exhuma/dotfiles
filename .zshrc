@@ -40,6 +40,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 #export PATH=/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/home/users/michel//bin:/home/users/michel//dotfiles/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export PATH=~/bin:${PATH}
+export PATH=~/.local/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 alias pyserve='python3 -m http.server'
@@ -48,6 +49,7 @@ export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
 export PYTHONWARNINGS=default
 export PSQL_EDITOR="/usr/bin/vim"
+export EDITOR="/usr/bin/vim"
 export GPGKEY=1CA23E80
 export LC_COLLATE=C
 

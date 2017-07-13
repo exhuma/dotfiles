@@ -47,12 +47,21 @@ editor=vim
 
 
 [diff]
-; ... and kdiff3 as diff tool
-tool=kdiff3
+tool = vimdiff
+
+
+[tag]
+sort = v:refname
 
 
 [difftool]
 ; don't always ask for confirmation to open the diff tool
+prompt = false
+
+
+[merge]
+tool = vimdiff
+conflictstyle = diff3
 prompt = false
 
 
