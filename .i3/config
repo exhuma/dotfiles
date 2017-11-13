@@ -143,6 +143,7 @@ for_window [class="synapse"]                            border none
 
 # Autostart
 exec --no-startup-id variety
+exec --no-startup-id syncthing-gtk
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
