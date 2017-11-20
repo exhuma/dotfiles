@@ -1,6 +1,6 @@
 BoldAsFont=no
 BoldAsColour=yes
-Font=Anonymice Powerline
+Font=AnonymicePowerline Nerd Font
 FontHeight=12
 FontSmoothing=partial
 Term=xterm-256color
