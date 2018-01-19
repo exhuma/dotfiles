@@ -1,0 +1,117 @@
+#!/usr/bin/python3
+import sys
+import termios
+import tty
+from datetime import timedelta
+from threading import Thread
+from time import sleep
+
+TIMERS = {}
+
+
+def getch():
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
+
+
+class Timer(Thread):
+
+    def __init__(self, name):
+        super().__init__(name=name)
+        self.seconds = 0
+        self.paused = False
+        self.daemon = True
+        self.stopped = False
+
+    def run(self):
+        while not self.stopped:
+            if not self.paused:
+                self.seconds += 1
+            sleep(1)
+
+    def pause(self):
+        self.paused = True
+
+    def resume(self):
+        self.paused = False
+
+    def stop(self):
+        self.stopped = True
+
+
+class Monitor(Thread):
+
+    def __init__(self):
+        super().__init__()
+        self.daemon = True
+        self.keep_running = True
+
+    def run(self):
+        while self.keep_running:
+            data = [(timer.name, timedelta(seconds=timer.seconds))
+                    for timer in TIMERS.values()]
+            itemformat = '%s: %8s'
+            items = [itemformat % row for row in sorted(data)]
+            print('\r', ' | '.join(items))
+            sleep(1)
+
+    def stop(self):
+        self.keep_running = False
+
+
+def main():
+
+    print('Press "q" to quit, "p" to pause/resume the active counter')
+    print('Press any other button to start a timer with that name')
+    print('\nAll keys (except "p" and "q") are case *sensitive*!')
+    print('... so you can have a timer "T" and "t"')
+
+    monitor = Monitor()
+    monitor.start()
+
+    last_active = None
+    paused = False
+    while True:
+        char = getch()
+        if char.lower() == 'q':
+            break
+        if char.lower() == 'p':
+            if paused and last_active:
+                TIMERS[last_active].resume()
+                paused = False
+            elif not paused:
+                for timer in TIMERS.values():
+                    timer.pause()
+                paused = True
+            else:
+                raise Exception('Something went wrong')
+            continue
+
+        last_active = char
+
+        if char not in TIMERS:
+            TIMERS[char] = Timer(char)
+            TIMERS[char].start()
+        for k, v in TIMERS.items():
+            if k == char:
+                v.resume()
+            else:
+                v.pause()
+
+    for timer in TIMERS.values():
+        timer.stop()
+
+    for timer in TIMERS.values():
+        timer.join()
+
+    monitor.stop()
+    monitor.join()
+
+if __name__ == "__main__":
+    main()
