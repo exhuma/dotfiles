@@ -95,10 +95,12 @@ def main():
             if paused and last_active:
                 TIMERS[last_active].resume()
                 paused = False
+                GLOBALS['current_key'] = last_active
             elif not paused:
                 for timer in TIMERS.values():
                     timer.pause()
                 paused = True
+                GLOBALS['current_key'] = None
             else:
                 raise Exception('Something went wrong')
             continue
