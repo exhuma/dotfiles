@@ -16,8 +16,9 @@ All numeric color codes in this file use the 256-color codes for terminals. See
 https://gist.github.com/mgedmin/2762225
 '''
 
+from argparse import ArgumentParser
 from collections import namedtuple
-from subprocess import call, PIPE
+from subprocess import call as call_, PIPE
 from time import sleep
 import logging
 import sys
@@ -41,6 +42,18 @@ COLORS = {
         highlight=Color(16, 196),
     )
 }
+
+
+def call(cmd, *args, **kwargs):
+    LOG.debug("Calling '%s'", ' '.join(cmd))
+    return call_(cmd, *args, **kwargs)
+
+
+def parse_args():
+    parser = ArgumentParser()
+    parser.add_argument('-d', '--debug', action='store_true', default=False,
+                        help='Print some debug output')
+    return parser.parse_args()
 
 
 def colored(text: str, color: Color, reverse: bool = False) -> str:
@@ -116,10 +129,18 @@ def set_satus_line(items: StatusLine) -> None:
     call(['tmux', 'set-option', '-g', 'window-status-current-format', ''.join(items.current)])
 
 
+def enable_logging():
+    logging.basicConfig(level=logging.DEBUG)
+
+
 def main() -> None:
     '''
     The main entry-point
     '''
+
+    args = parse_args()
+    if args.debug:
+        enable_logging()
 
     last_theme = None
     while True:
