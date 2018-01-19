@@ -58,7 +58,8 @@ class Monitor(Thread):
                     for timer in TIMERS.values()]
             itemformat = '%s: %8s'
             items = [itemformat % row for row in sorted(data)]
-            print('\r', ' | '.join(items))
+            if items:
+                print('\r', ' | '.join(items))
             sleep(1)
 
     def stop(self):
