@@ -14,7 +14,7 @@ import logging
 
 Color = namedtuple('Color', 'foreground background')
 Theme = namedtuple('Theme', 'default accent highlight')
-StatusLine = namedtuple('StatusLine', 'left main current')
+StatusLine = namedtuple('StatusLine', 'left right main current')
 
 LOG = logging.getLogger(__name__)
 COLORS = {
@@ -75,6 +75,12 @@ def get_status_items(theme: Theme) -> StatusLine:
             transition_symbol('', theme.highlight.background, theme.default.background),
             ' ',
         ],
+        right=[
+            transition_symbol('', theme.highlight.background, theme.default.background),
+            colored(' #(date +"%d. %b %Y  %H:%M")', theme.highlight),
+            colored('  ', theme.highlight),
+            colored('#{host_short}', theme.highlight),
+        ],
         main=[
             transition_symbol('', theme.default.background, theme.accent.background),
             colored(' #W ', theme.accent),
@@ -93,6 +99,7 @@ def set_satus_line(items: StatusLine) -> None:
     Sets the status-line in tmux
     '''
     call(['tmux', 'set-option', '-g', 'status-left', ''.join(items.left)])
+    call(['tmux', 'set-option', '-g', 'status-right', ''.join(items.right)])
     call(['tmux', 'set-option', '-g', 'window-status-format', ''.join(items.main)])
     call(['tmux', 'set-option', '-g', 'window-status-current-format', ''.join(items.current)])
 
