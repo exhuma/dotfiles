@@ -11,6 +11,7 @@ from collections import namedtuple
 from subprocess import call, PIPE
 from time import sleep
 import logging
+import sys
 
 Color = namedtuple('Color', 'foreground background')
 Theme = namedtuple('Theme', 'default session accent highlight')
@@ -130,4 +131,7 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(0)
