@@ -13,18 +13,20 @@ from time import sleep
 import logging
 
 Color = namedtuple('Color', 'foreground background')
-Theme = namedtuple('Theme', 'default accent highlight')
+Theme = namedtuple('Theme', 'default session accent highlight')
 StatusLine = namedtuple('StatusLine', 'left right main current')
 
 LOG = logging.getLogger(__name__)
 COLORS = {
     'online': Theme(
         default=Color(154, 22),
+        session=Color(0, 184),
         accent=Color(120, 58),
         highlight=Color(0, 2),
     ),
     'offline': Theme(
         default=Color(226, 52),
+        session=Color(0, 172),
         accent=Color(196, 88),
         highlight=Color(16, 196),
     )
@@ -71,15 +73,15 @@ def get_status_items(theme: Theme) -> StatusLine:
     '''
     return StatusLine(
         left=[
-            colored(' #S ', theme.highlight),
-            transition_symbol('', theme.highlight.background, theme.default.background),
+            colored(' #S ', theme.session),
+            transition_symbol('', theme.session.background, theme.default.background),
             ' ',
         ],
         right=[
-            transition_symbol('', theme.highlight.background, theme.default.background),
-            colored(' #(date +"%d. %b %Y  %H:%M")', theme.highlight),
-            colored('  ', theme.highlight),
-            colored('#{host_short}', theme.highlight),
+            transition_symbol('', theme.session.background, theme.default.background),
+            colored(' #(date +"%d. %b %Y  %H:%M")', theme.session),
+            colored('  ', theme.session),
+            colored('#{host_short}', theme.session),
         ],
         main=[
             transition_symbol('', theme.default.background, theme.accent.background),
