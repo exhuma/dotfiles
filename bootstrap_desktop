@@ -1,33 +1,29 @@
 #!/bin/bash
 
 echo "[II] Installing APT packages..."
-wget -q -O - https://downloads.spellchecker.lu/packages/Ubuntu/pubkey.asc | sudo apt-key add -
-sudo wget -q https://downloads.spellchecker.lu/packages/Ubuntu/spellchecker_lu.list -O /etc/apt/sources.list.d/spellchecker_lu.list
+sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt-get install aptitude
 sudo aptitude -q -q update
 sudo aptitude -q -q install \
     build-essential \
     git \
-    hunspell-lb-lu \
     irssi \
     keepassx \
     keychain \
     libpq-dev \
     mplayer \
-    mythes-lb \
+    oracle-java7-installer \
     poedit \
     python-dev \
     python-pip \
     tmux \
     tree \
-    vim-gnome \
-    vim-gtk \
+    vim-nox \
     zsh
 
-sudo pip install \
-    fabric \
+pip install --user \
     pip \
-    virtualenv
+    fabric
 
 . bootstrap_common
 

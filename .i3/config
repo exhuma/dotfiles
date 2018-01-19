@@ -11,9 +11,9 @@
 
 set $mod Mod4
 
-set $ws_work "Work"
-set $ws_vis "Visual"
-set $ws_web "Web"
+set $ws_work "[1] Work"
+set $ws_vis "[2] Visual"
+set $ws_web "[3] Web"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -46,7 +46,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-bindsym $mod+r exec synapse
+# bindsym $mod+r exec synapse
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -87,9 +87,8 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+x layout toggle
+bindsym $mod+r layout tabbed
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -104,6 +103,8 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
+bindsym $mod+q workspace prevnooutput
+bindsym $mod+w workspace nextnooutput
 bindsym $mod+1 workspace $ws_work
 bindsym $mod+2 workspace $ws_vis
 bindsym $mod+3 workspace $ws_web
@@ -142,6 +143,7 @@ for_window [class="synapse"]                            border none
 
 # Autostart
 exec --no-startup-id variety
+exec --no-startup-id syncthing-gtk
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
