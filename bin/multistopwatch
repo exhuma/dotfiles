@@ -7,6 +7,9 @@ from threading import Thread
 from time import sleep
 
 TIMERS = {}
+GLOBALS = {
+    'current_key': None
+}
 
 
 def getch():
@@ -53,11 +56,17 @@ class Monitor(Thread):
         self.keep_running = True
 
     def run(self):
+        def colorise(key, value):
+            if key == GLOBALS['current_key']:
+                itemformat = '\033[1;32m%s: %8s\033[0;0m'
+            else:
+                itemformat = '%s: %8s'
+            return itemformat % (key, value)
+
         while self.keep_running:
             data = [(timer.name, timedelta(seconds=timer.seconds))
                     for timer in TIMERS.values()]
-            itemformat = '%s: %8s'
-            items = [itemformat % row for row in sorted(data)]
+            items = [colorise(*row) for row in sorted(data)]
             if items:
                 print('\r', ' | '.join(items))
             sleep(1)
@@ -95,6 +104,7 @@ def main():
             continue
 
         last_active = char
+        GLOBALS['current_key'] = char
 
         if char not in TIMERS:
             TIMERS[char] = Timer(char)
