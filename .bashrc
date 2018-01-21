@@ -29,7 +29,7 @@ if [ $(whoami) = "root" ]; then
 else
     UCL="34;1"
 fi
-export PS1="${XTERM_TITLE}\[\e[${UCL}m\]\u@\h \w\[\e[0m\] ${NUM_JOBS}>\[\e[0m\] "
+export PS1="\[\e[${UCL}m\]\u@\h \w\[\e[0m\] ${NUM_JOBS}>\[\e[0m\] "
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
