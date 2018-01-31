@@ -3,8 +3,10 @@ import sys
 import termios
 import tty
 from argparse import ArgumentParser
+from collections import namedtuple
 from contextlib import contextmanager
-from datetime import timedelta
+from datetime import datetime, timedelta
+from itertools import zip_longest
 from subprocess import call
 from threading import Thread
 from time import sleep
@@ -13,6 +15,38 @@ TIMERS = {}
 GLOBALS = {
     'current_key': None
 }
+
+class SimpleTimer:
+
+    def __init__(self, name):
+        self.name = name
+        self.state_switches = []
+
+    def resume(self):
+        if len(self.state_switches) % 2 == 0:
+            self.state_switches.append(datetime.now())
+
+    def stop(self):
+        if len(self.state_switches) % 2 == 1:
+            self.state_switches.append(datetime.now())
+    pause = stop
+
+    def start(self):
+        pass  # compatibility with thread objects
+
+    def join(self):
+        pass  # compatibility with thread objects
+
+    @property
+    def seconds(self):
+        pairs = zip_longest(self.state_switches[0::2],
+                            self.state_switches[1::2])
+        total_seconds = 0
+        for start, end in pairs:
+            real_end = end or datetime.now()
+            delta = real_end - start
+            total_seconds += delta.total_seconds()
+        return total_seconds
 
 
 @contextmanager
@@ -148,6 +182,7 @@ def main():
         if char not in TIMERS:
             TIMERS[char] = Timer(char)
             TIMERS[char].start()
+
         for k, v in TIMERS.items():
             if k == char:
                 v.resume()
