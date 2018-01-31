@@ -162,6 +162,10 @@ def main():
         if char.lower() == 'q':
             GLOBALS['current_key'] = None
             break
+        if char.lower() == '*':  # Remote the last active timer
+            TIMERS.pop(last_active, None)
+            print('\033[2K\r', end='')
+            continue
         if char.lower() == 'p':
             if paused and last_active:
                 TIMERS[last_active].resume()
