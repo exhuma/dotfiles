@@ -88,7 +88,7 @@ class Monitor(Thread):
                 self.print_single()
             else:
                 self.print_multiple()
-            sleep(1)
+            sleep(0.1)
 
     def print_multiple(self):
         data = [(timer.name, timedelta(seconds=timer.seconds))
