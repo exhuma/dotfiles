@@ -95,7 +95,7 @@ class Monitor(Thread):
                 for timer in TIMERS.values()]
         items = [colorise(*row) for row in sorted(data)]
         if items:
-            print('\r', ' | '.join(items))
+            print('\r', ' | '.join(items), end='')
 
     def print_single(self):
         timer = TIMERS.get(GLOBALS['current_key'], None)
