@@ -164,20 +164,20 @@ def main():
             break
         if char.lower() == '*':  # Remote the last active timer
             TIMERS.pop(last_active, None)
+            last_active = None
             print('\033[2K\r', end='')
             continue
         if char.lower() == 'p':
-            if paused and last_active:
-                TIMERS[last_active].resume()
-                paused = False
-                GLOBALS['current_key'] = last_active
-            elif not paused:
-                for timer in TIMERS.values():
-                    timer.pause()
-                paused = True
-                GLOBALS['current_key'] = None
-            else:
-                raise Exception('Something went wrong')
+            if last_active:
+                if paused:
+                    TIMERS[last_active].resume()
+                    paused = False
+                    GLOBALS['current_key'] = last_active
+                else:
+                    for timer in TIMERS.values():
+                        timer.pause()
+                    paused = True
+                    GLOBALS['current_key'] = None
             continue
 
         last_active = char
