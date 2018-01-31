@@ -46,7 +46,7 @@ class SimpleTimer:
             real_end = end or datetime.now()
             delta = real_end - start
             total_seconds += delta.total_seconds()
-        return total_seconds
+        return int(total_seconds)
 
 
 @contextmanager
