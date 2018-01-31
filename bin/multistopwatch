@@ -180,7 +180,7 @@ def main():
         GLOBALS['current_key'] = char
 
         if char not in TIMERS:
-            TIMERS[char] = Timer(char)
+            TIMERS[char] = SimpleTimer(char)
             TIMERS[char].start()
 
         for k, v in TIMERS.items():
