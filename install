@@ -57,6 +57,9 @@ ln -vs dotfiles/.zshrc_lillend
 ln -vs dotfiles/.minttyrc
 ln -vs dotfiles/.xinitrc
 ln -vs dotfiles/.i3
+
+pip install --user cstop
+
 mkdir -p ~/.config/i3status && ln -vs ~/dotfiles/i3status.config ~/.config/i3status/config
 git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
 (cd .oh-my-zsh && git remote add upstream ssh://git@github.com/robbyrussell/oh-my-zsh)
