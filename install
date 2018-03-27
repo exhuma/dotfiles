@@ -35,6 +35,8 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -s .xinitrc ] && rm .xinitrc
     [ -s .xmodmaprc ] && rm .xmodmaprc
     [ -s .i3 ] && rm -rf .i3
+    [ -d .config/sxhkcd ] && rm -rf .config/sxhkcd
+    [ -d .config/bspwm ] && rm -rf .config/bspwm
 fi
 
 ln -vs dotfiles/.psqlrc
@@ -57,6 +59,8 @@ ln -vs dotfiles/.zshrc_lillend
 ln -vs dotfiles/.minttyrc
 ln -vs dotfiles/.xinitrc
 ln -vs dotfiles/.i3
+ln -vs dotfiles/bspwm .config/bspwm
+ln -vs dotfiles/sxhkcd .config/sxhkcd
 
 pip install --user cstop
 
