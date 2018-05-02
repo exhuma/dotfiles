@@ -20,7 +20,7 @@ super + y
 super + Escape
 	pkill -USR1 -x sxhkd
 
-
+# Backlight Shortcuts
 XF86MonBrightnessDown
     xbacklight -dec 10
 
