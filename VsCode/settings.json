@@ -1,0 +1,29 @@
+{
+    "vim.foldfix": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    "vim.statusBarColorControl": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+    "editor.rulers": [80, 120],
+    "scrolloff.scrolloff": 3,
+    "editor.cursorBlinking": "smooth",
+    "editor.minimap.enabled": false,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.tree.indent": 25,
+    "workbench.tree.renderIndentGuides": "always",
+    "terminal.integrated.copyOnSelection": true,
+    "python.linting.mypyEnabled": true,
+    "python.pythonPath": "C:\\Users\\malbert\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "workbench.colorTheme": "Monokai"
+}
