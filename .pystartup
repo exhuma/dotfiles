@@ -1,24 +1,47 @@
+"""
+This file is meant to be loaded on startup of the Python REPL, and as such is
+meant to be referenced by the ``PYTHONSTARTUP`` environment variable.
+"""
 import atexit
 import os
 import readline
 import rlcompleter
 import sys
 
+# The filename where we will save our Python history
 historyPath = os.path.expanduser("~/.pyhistory")
 
 def save_history(historyPath=historyPath):
+    '''
+    This is a simple function which can be called to save the current
+    "readline" history.
+    '''
     import readline
     readline.write_history_file(historyPath)
 
+# When starting up, load any existing history data in our readline instance.
 if os.path.exists(historyPath):
     readline.read_history_file(historyPath)
 
+# We want TAB completion, so we will bind this using readline. This should
+# also be doable via the default readline ".inputrc"
 readline.parse_and_bind('tab: complete')
 
+# We register our "save_history" function to be called when the process (that
+# is, the Python REPL) exits.
 atexit.register(save_history)
 
+# Instead of using the default ">>>" prompt we set it to something else.
+# This is mainly an indication that our customized startup file was
+# successfully processed.
 sys.ps1 = "python> "
 sys.ps2 = "   ...| "
 
+# After all this is done, we delete the references/names we created in this
+# script. This avoids pollution of the namespace of the REPL. This is not
+# strictly necessary. If we don't do this, these names will be available in
+# every REPL (which may actually be useful).
 del os, atexit, readline, rlcompleter, save_history, historyPath, sys
+
+
 # vim: set ft=python :
