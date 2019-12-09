@@ -32,6 +32,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -f .zshrc ] && rm .zshrc
     [ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
     [ -f .zshrc_lillend ] && rm .zshrc_lillend
+    [ -f ${USERPROFILE}/AppData/Roaming/Code/User/settings.json ] && rm ${USERPROFILE}/AppData/Roaming/Code/User/settings.json
     [ -s .xinitrc ] && rm .xinitrc
     [ -s .xmodmaprc ] && rm .xmodmaprc
     [ -s .i3 ] && rm -rf .i3
@@ -61,6 +62,12 @@ ln -vs dotfiles/.xinitrc
 ln -vs dotfiles/.i3
 ln -vs dotfiles/bspwm .config/bspwm
 ln -vs dotfiles/sxhkd .config/sxhkd
+
+
+if [[ $(uname -s) == CYGWIN* ]]; then
+    mkdir -p ${USERPROFILE}/AppData/Roaming/Code/User
+    cp VsCode/settings.json ${USERPROFILE}/AppData/Roaming/Code/User/settings.json
+fi
 
 pip install --user cstop
 
@@ -117,6 +124,6 @@ EOF
 fi
 
 # tmux theme pack
-git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
+git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack || (cd ~/.tmux-themepack && git pull)
 
 echo done!

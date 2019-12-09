@@ -75,3 +75,4 @@ DISABLE_AUTO_TITLE=true
 # postscript aliases
 alias xpsview='postcat -vq'
 alias xpsrm='postsuper -d'
+eval $(keychain --eval id_rsa)
