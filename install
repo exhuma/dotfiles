@@ -116,4 +116,7 @@ EOF
     fi
 fi
 
+# tmux theme pack
+git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
+
 echo done!
