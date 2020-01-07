@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+
+"""
+This script shows a summary of CPU & memory usage per user on the system.
+
+Currently one execution shows a simple snapshot of the current state. Running
+it wrapped by ``watch`` makes this a bit more useful.
+"""
+
+
+import os
+import sys
+from functools import reduce
+from itertools import groupby
+from subprocess import check_output
+from typing import Generator, NamedTuple
+
+ProcStat = NamedTuple("ProcStat", [
+    ("pid", int),
+    ("user", str),
+    ("percent_cpu", float),
+    ("percent_mem", float),
+])
+
+StatAgg = NamedTuple("StatAgg", [
+    ("percent_cpu", float),
+    ("percent_mem", float),
+])
+
+UserStats = NamedTuple("UserStats", [
+    ("user", str),
+    ("stats", StatAgg),
+])
+
+
+def progress_bar(percentage: float, size: int = 10) -> str:
+    """
+    Creates a progress bar from a percentage value. The percentage value is a
+    value ranging from 0.0 to 100.0
+    """
+    fill = '░'
+    chars = round(percentage / 100.0 * size)
+    remainder = size - chars
+    return ('█'* chars) + (remainder * fill)
+
+
+def get_processes() -> Generator[ProcStat, None, None]:
+    """
+    Retrieves process information as user/memory/cpu tuples
+    """
+    output = check_output([
+        "/bin/ps", "ah",
+        "--sort=euser",
+        "-o", "pid,euser,%cpu,%mem"])
+    for line in output.splitlines():
+        if not line.strip():
+            continue
+        pid, user, cpu, mem = line.split()
+        yield ProcStat(int(pid), user.decode('utf8'), float(cpu), float(mem))
+
+
+def add_stat(aggregate: StatAgg, procstat: ProcStat) -> StatAgg:
+    """
+    Adds the value of a single process stat to an aggregate value.
+    """
+    sum_mem = aggregate.percent_mem + procstat.percent_mem
+    sum_cpu = aggregate.percent_cpu + procstat.percent_cpu
+    return StatAgg(sum_cpu, sum_mem)
+
+
+def get_user_stats() -> Generator[UserStats, None, None]:
+    procs = get_processes()
+    for key, group in groupby(procs, key=lambda x: x.user):
+        agg_stat = reduce(add_stat, group, StatAgg(0.0, 0.0))
+        yield UserStats(key, agg_stat)
+
+
+def main() -> int:
+    stats = sorted(
+        get_user_stats(),
+        key=lambda x: x.stats.percent_cpu,
+        reverse=True
+    )
+    sum_cpu = 0.0
+    sum_mem = 0.0
+    cpu_count = os.cpu_count()
+    print(100*'─')
+    print('%20s %20s (%7s) %20s (%7s)' % (
+        'User', 'CPU/cores', 'CPU', 'Memory', 'Mem'
+    ))
+    print(100*'─')
+    for row in stats:
+        print('%20s %s (%6.2f%%) %s (%6.2f%%)' % (
+            row.user,
+            progress_bar(row.stats.percent_cpu / cpu_count, 20),
+            row.stats.percent_cpu,
+            progress_bar(row.stats.percent_mem, 20),
+            row.stats.percent_mem,
+        ))
+        sum_cpu += row.stats.percent_cpu
+        sum_mem += row.stats.percent_mem
+    print(100*'─')
+
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
