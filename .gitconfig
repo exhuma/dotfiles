@@ -71,3 +71,7 @@ default = upstream
 
 [init]
 templatedir = ~/dotfiles/git-template
+
+
+[tig "color"]
+    cursor = yellow 22 bold
