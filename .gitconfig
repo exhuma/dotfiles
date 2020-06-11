@@ -4,7 +4,7 @@
 [user]
 name = Michel Albert
 email = michel@albert.lu
-signkey = 16FC371B
+signingkey = B594F110
 
 ;
 ; Automatically colorize console output
@@ -75,3 +75,9 @@ templatedir = ~/dotfiles/git-template
 
 [tig "color"]
     cursor = yellow 22 bold
+
+[commit]
+    gpgsign = true
+
+[gpg]
+    program = gpg2
