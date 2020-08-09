@@ -15,7 +15,6 @@
         "statusBar.debuggingBackground": "#005f5f"
     },
     "editor.rulers": [80, 120],
-    "scrolloff.scrolloff": 3,
     "editor.cursorBlinking": "smooth",
     "editor.minimap.enabled": false,
     "files.insertFinalNewline": true,
@@ -24,6 +23,10 @@
     "workbench.tree.renderIndentGuides": "always",
     "terminal.integrated.copyOnSelection": true,
     "python.linting.mypyEnabled": true,
-    "python.pythonPath": "C:\\Users\\malbert\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
-    "workbench.colorTheme": "Monokai"
+    "workbench.colorTheme": "Monokai",
+    "files.watcherExclude": {
+        "**/.venv/**": true,
+        "**/env/**": true
+    },
+    "editor.cursorSurroundingLines": 3
 }

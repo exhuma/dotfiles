@@ -38,6 +38,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -s .i3 ] && rm -rf .i3
     [ -d .config/sxhkd ] && rm -rf .config/sxhkd
     [ -d .config/bspwm ] && rm -rf .config/bspwm
+    [ -f ~/.config/Code/User/settings.json ] && rm ~/.config/Code/User/settings.json
 fi
 
 ln -vs dotfiles/.psqlrc
@@ -62,6 +63,7 @@ ln -vs dotfiles/.xinitrc
 ln -vs dotfiles/.i3
 ln -vs dotfiles/bspwm .config/bspwm
 ln -vs dotfiles/sxhkd .config/sxhkd
+ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
 
 
 if [[ $(uname -s) == CYGWIN* ]]; then
