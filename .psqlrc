@@ -23,7 +23,7 @@
 \set uptime 'select now() - pg_postmaster_start_time() AS uptime;'
 
 
--- Display NULL values as <nil>
-\pset null '<nil>'
+-- Display NULL values as <null>
+\pset null '<null>'
 \pset linestyle unicode
 \pset border 2
