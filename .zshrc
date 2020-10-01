@@ -49,7 +49,7 @@ alias pyserve='python3 -m http.server'
 
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
-export PYTHONWARNINGS=default
+export PYTHONWARNINGS=
 export PSQL_EDITOR="/usr/bin/vim"
 export EDITOR="/usr/bin/vim"
 export GPGKEY=1CA23E80
