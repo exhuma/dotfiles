@@ -81,3 +81,6 @@ templatedir = ~/dotfiles/git-template
 
 [gpg]
     program = gpg2
+
+[rebase]
+    autostash = true
