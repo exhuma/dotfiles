@@ -78,3 +78,6 @@ alias xpsview='postcat -vq'
 alias xpsrm='postsuper -d'
 
 export PATH=~/.local/opt/node-modules/bin:${PATH}
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

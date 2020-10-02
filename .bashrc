@@ -96,3 +96,5 @@ export JAVA_HOME=/usr/local/java/jdk1.7.0_09
 export JRE_HOME=/usr/local/java/jre1.7.0_09
 export PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
 export PATH=~/.local/bin:${PATH}
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
