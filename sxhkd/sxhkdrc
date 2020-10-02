@@ -4,14 +4,14 @@
 
 # terminal emulator
 super + Return
-	xterm
+	urxvt
 
 # program launcher
 super + @space
 	dmenu_run
 
 super + w
-    chromium
+    firefox
 
 super + y
     killall yabar; sleep 1s && yabar

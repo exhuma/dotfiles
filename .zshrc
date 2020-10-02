@@ -42,13 +42,14 @@ source $ZSH/oh-my-zsh.sh
 export PATH=~/bin:${PATH}
 export PATH=~/.local/bin:${PATH}
 export PATH=~/dotfiles/bin:${PATH}
+export PATH=~/.local/opt/node-modules/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 alias pyserve='python3 -m http.server'
 
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
-export PYTHONWARNINGS=default
+export PYTHONWARNINGS=
 export PSQL_EDITOR="/usr/bin/vim"
 export EDITOR="/usr/bin/vim"
 export GPGKEY=1CA23E80
@@ -75,3 +76,5 @@ DISABLE_AUTO_TITLE=true
 # postscript aliases
 alias xpsview='postcat -vq'
 alias xpsrm='postsuper -d'
+
+export PATH=~/.local/opt/node-modules/bin:${PATH}
