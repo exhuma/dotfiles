@@ -5,6 +5,8 @@
 .coverage
 .ctags
 .directory
+.mypy_cache
+.pytest_cache
 .ropeproject
 .svn
 /.idea
@@ -14,4 +16,3 @@ CVS
 CVSROOT
 my__.*
 tags
-.mypy_cache
