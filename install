@@ -13,6 +13,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -d .gnupg ] && rm -rf .gnupg
     [ -d .irssi ] && rm -rf .irssi
     [ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
+    [ -d .zsh/perhost ] && rm -rf .zsh/perhost
     [ -d .psql_history ] || mkdir .psql_history
     [ -f .Xdefaults ] && rm .Xdefaults
     [ -f .Xresources ] && rm .Xresources
@@ -42,6 +43,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -f ~/.config/Code/User/settings.json ] && rm ~/.config/Code/User/settings.json
 fi
 
+mkdir -p ~/.zsh/perhost
 ln -vs dotfiles/.gnupg
 ln -vs dotfiles/.psqlrc
 ln -vs dotfiles/.irssi
@@ -66,6 +68,8 @@ ln -vs dotfiles/.i3
 ln -vs dotfiles/bspwm .config/bspwm
 ln -vs dotfiles/sxhkd .config/sxhkd
 ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
+ln -vs ~/dotfiles/zsh-perhost/DESKTOP-P1NEHUQ.zsh ~/.zsh/perhost/DESKTOP-P1NEHUQ.zsh
+
 
 
 if [[ $(uname -s) == CYGWIN* ]]; then
