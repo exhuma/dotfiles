@@ -69,6 +69,7 @@ ln -vs dotfiles/bspwm .config/bspwm
 ln -vs dotfiles/sxhkd .config/sxhkd
 ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
 ln -vs ~/dotfiles/zsh-perhost/DESKTOP-P1NEHUQ.zsh ~/.zsh/perhost/DESKTOP-P1NEHUQ.zsh
+ln -vs ~/dotfiles/zsh-perhost/basilisk.zsh ~/.zsh/perhost/basilisk.zsh
 
 
 
