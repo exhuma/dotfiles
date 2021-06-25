@@ -5,10 +5,18 @@
 # WARNING: This *will* overwrite existing files!
 # ---------------------------------------------------------------------------
 
-cd
-echo -n "Perform clean install? [y/N] "
-read RESPONSE
+DO_CLEAN=${1:-n}
 
+set -e
+
+if [[ "${DO_CLEAN}" == "-c" ]]; then
+    RESPONSE="y"
+else
+    echo -n "Perform clean install? [y/N] "
+    read RESPONSE
+fi
+
+cd
 if [[ "${RESPONSE}" == "y" ]]; then
     [ -d .gnupg ] && rm -rf .gnupg
     [ -d .irssi ] && rm -rf .irssi
@@ -84,11 +92,15 @@ mkdir -p ~/.config/i3status && ln -vs ~/dotfiles/i3status.config ~/.config/i3sta
 git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
 (cd .oh-my-zsh && git remote add upstream ssh://git@github.com/robbyrussell/oh-my-zsh)
 
-read -sp "[IRSSI] FreeNode Password: " IRSSI_PASSWORD
-cat dotfiles/.irssi/config.template | \
-    sed -e "s/{{password}}/${IRSSI_PASSWORD}/" \
-    > .irssi/config
-echo
+if which irssi; then
+    read -sp "[IRSSI] FreeNode Password: " IRSSI_PASSWORD
+    cat dotfiles/.irssi/config.template | \
+        sed -e "s/{{password}}/${IRSSI_PASSWORD}/" \
+        > .irssi/config
+    echo
+else
+    echo "irssi not installed"
+fi
 
 HOSTNAME=$(hostname -s)
 echo Installing overlay for $HOSTNAME
