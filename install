@@ -7,8 +7,6 @@
 
 DO_CLEAN=${1:-n}
 
-set -e
-
 if [[ "${DO_CLEAN}" == "-c" ]]; then
     RESPONSE="y"
 else
