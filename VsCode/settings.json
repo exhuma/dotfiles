@@ -1,4 +1,9 @@
 {
+    "workbench.colorTheme": "Monokai",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "terminal.integrated.allowChords": false,
     "vim.foldfix": true,
     "vim.hlsearch": true,
     "vim.leader": "<space>",
@@ -10,11 +15,11 @@
         }
     ],
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+        "statusBar.background": "#5f00af",
+        "statusBar.noFolderBackground": "#5f00af",
+        "statusBar.debuggingBackground": "#5f00af"
     },
-    "editor.rulers": [80, 120],
+    "editor.rulers": [80, 88, 120],
     "editor.cursorBlinking": "smooth",
     "editor.minimap.enabled": false,
     "files.insertFinalNewline": true,
@@ -22,11 +27,5 @@
     "workbench.tree.indent": 25,
     "workbench.tree.renderIndentGuides": "always",
     "terminal.integrated.copyOnSelection": true,
-    "python.linting.mypyEnabled": true,
-    "workbench.colorTheme": "Monokai",
-    "files.watcherExclude": {
-        "**/.venv/**": true,
-        "**/env/**": true
-    },
     "editor.cursorSurroundingLines": 3
 }
