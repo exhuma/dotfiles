@@ -73,10 +73,11 @@ ln -vs dotfiles/.xinitrc
 ln -vs dotfiles/.i3
 ln -vs dotfiles/bspwm .config/bspwm
 ln -vs dotfiles/sxhkd .config/sxhkd
-ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
 ln -vs ~/dotfiles/zsh-perhost/DESKTOP-P1NEHUQ.zsh ~/.zsh/perhost/DESKTOP-P1NEHUQ.zsh
 ln -vs ~/dotfiles/zsh-perhost/basilisk.zsh ~/.zsh/perhost/basilisk.zsh
 ln -vs ~/dotfiles/zsh-perhost/displacer2.zsh ~/.zsh/perhost/displacer2.zsh
+mkdir -p ~/.config/Code/User
+ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
 
 
 
