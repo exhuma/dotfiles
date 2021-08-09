@@ -66,9 +66,8 @@ prompt = false
 
 
 [push]
-; By default, push to the tracking remote.
-default = upstream
-    recurseSubmodules = check
+recurseSubmodules = check
+default = simple
 
 [init]
 templatedir = ~/dotfiles/git-template
