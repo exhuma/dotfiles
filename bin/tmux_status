@@ -143,6 +143,7 @@ def main() -> None:
         enable_logging()
 
     last_theme = None
+    print('tmux online monitor running...')
     while True:
         theme_name = 'online' if we_are_online() else 'offline'
         theme = COLORS[theme_name]
