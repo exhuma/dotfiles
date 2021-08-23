@@ -1,5 +1,6 @@
-.vim*
+.gnupg/random_seed
 .ssh
+.vim*
 /.irssi/away.log
-/.ncmpcpp/error.log
 /.irssi/config
+/.ncmpcpp/error.log
