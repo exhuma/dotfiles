@@ -11,6 +11,7 @@
             "after": ["<Esc>"]
         }
     ],
+    "git.autofetch": true,
     "workbench.colorCustomizations": {
         "statusBar.background": "#5f00af",
         "statusBar.noFolderBackground": "#5f00af",
