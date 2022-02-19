@@ -35,6 +35,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -f .psql_history.bak ] && mv -v .psql_history.bak .psql_history/old-single-file-history
     [ -f .psqlrc ] && rm .psqlrc
     [ -f .pylintrc ] && rm .pylintrc
+    [ -f .Xmodmap ] && rm .Xmodmap
     [ -f .pystartup ] && rm .pystartup
     [ -f .tmux.conf ] && rm .tmux.conf
     [ -f .zshrc ] && rm .zshrc
@@ -62,6 +63,7 @@ ln -vs dotfiles/.gitignore_global .gitignore
 ln -vs dotfiles/.stignore .stignore
 ln -vs dotfiles/.inputrc
 ln -vs dotfiles/.pylintrc
+ln -vs dotfiles/.Xmodmap
 ln -vs dotfiles/.pystartup
 ln -vs dotfiles/.tmux.conf
 ln -vs dotfiles/.Xresources
