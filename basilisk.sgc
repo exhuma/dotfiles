@@ -7,7 +7,7 @@ section: screens
 		preserveFocus = false
 		switchCorners = none 
 		switchCornerSize = 0
-	DESKTOP-BHQ0QLD:
+	DESKTOP-RB68I4B:
 		halfDuplexCapsLock = false
 		halfDuplexNumLock = false
 		halfDuplexScrollLock = false
@@ -37,16 +37,16 @@ section: aliases
 end
 
 section: links
-	DESKTOP-BHQ0QLD:
+	DESKTOP-RB68I4B:
 		right(40, 100) = displacer
 		down(10, 38) = displacer2
 		down(60, 90) = TABLET-DIICBUIN
 	displacer:
-		left = DESKTOP-BHQ0QLD(40, 100)
+		left = DESKTOP-RB68I4B(40, 100)
 	displacer2:
-		up = DESKTOP-BHQ0QLD(10, 38)
+		up = DESKTOP-RB68I4B(10, 38)
 	TABLET-DIICBUIN:
-		up = DESKTOP-BHQ0QLD(60, 90)
+		up = DESKTOP-RB68I4B(60, 90)
 end
 
 section: options
