@@ -1,0 +1,59 @@
+section: screens
+	displacer2:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		preserveFocus = false
+		switchCorners = none 
+		switchCornerSize = 0
+	basilisk:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		preserveFocus = false
+		switchCorners = none +top-right 
+		switchCornerSize = 0
+	displacer:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		preserveFocus = false
+		switchCorners = none 
+		switchCornerSize = 0
+	TABLET-DIICBUIN:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		preserveFocus = false
+		switchCorners = none 
+		switchCornerSize = 0
+end
+
+section: aliases
+end
+
+section: links
+	basilisk:
+		right(40, 100) = displacer
+		down(10, 38) = displacer2
+		down(60, 90) = TABLET-DIICBUIN
+	displacer:
+		left = basilisk(40, 100)
+	displacer2:
+		up = basilisk(10, 38)
+	TABLET-DIICBUIN:
+		up = basilisk(60, 90)
+end
+
+section: options
+	relativeMouseMoves = false
+	screenSaverSync = true
+	win32KeepForeground = false
+	clipboardSharing = true
+	switchCorners = none +top-right 
+	switchCornerSize = 0
+end
