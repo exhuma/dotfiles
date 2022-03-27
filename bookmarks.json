@@ -1,0 +1,11 @@
+[
+  {
+    "href": "https://www.google.com",
+    "tags": ["search", "google"],
+    "title": "Google Search"
+  },
+  {
+    "href": "https://news.ycombinator.com",
+    "tags": ["news", "it"]
+  }
+]
