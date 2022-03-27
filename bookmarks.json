@@ -11,5 +11,9 @@
   {
     "href": "https://duckduckgo.com",
     "tags": ["search"]
+  },
+  {
+    "href": "https://bbc.com",
+    "tags": ["news", "worl"]
   }
 ]
