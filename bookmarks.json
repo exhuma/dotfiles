@@ -7,5 +7,9 @@
   {
     "href": "https://news.ycombinator.com",
     "tags": ["news", "it"]
+  },
+  {
+    "href": "https://duckduckgo.com",
+    "tags": ["search"]
   }
 ]
