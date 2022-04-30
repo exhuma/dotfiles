@@ -1,9 +1,8 @@
 #!/bin/bash
 
 echo "[II] Installing APT packages..."
-sudo apt-get install aptitude
-sudo aptitude -q -q update
-sudo aptitude -q -q install \
+sudo apt update
+sudo apt install -y \
     tmux \
     tree \
     vim-nox \
