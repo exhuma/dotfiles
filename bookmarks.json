@@ -11,7 +11,8 @@
   },
   {
     "href": "https://news.ycombinator.com",
-    "tags": ["news", "it"]
+    "tags": ["news", "it"],
+    "title": "Hacker News"
   },
   {
     "href": "https://duckduckgo.com",
@@ -20,5 +21,39 @@
   {
     "href": "https://bbc.com",
     "tags": ["news", "world"]
+  },
+  {
+    "tags": ["webcomic", "programming"],
+    "href": "https://www.commitstrip.com/en/?"
+  },
+  { "tags": ["webcomic", "it"], "href": "https://xkcd.com/" },
+  {
+    "tags": ["YouTube Channel", "Programming", "Python"],
+    "href": "https://www.arjancodes.com/"
+  },
+  {
+    "tags": ["YouTube Channel", "Programming", "Python"],
+    "href": "https://www.youtube.com/channel/UCaiL2GDNpLYH6Wokkk1VNcg",
+    "title": "MCoding"
+  },
+  {
+    "tags": ["Programming", "Python", "Articles"],
+    "href": "https://realpython.com/",
+    "title": "Real Python"
+  },
+  {
+    "tags": ["Programming", "Python", "Podcast"],
+    "href": "https://pythonbytes.fm/",
+    "title": "Python Bytes"
+  },
+  {
+    "tags": ["Programming", "Python", "Podcast"],
+    "href": "https://talkpython.fm/",
+    "title": "Talk Python To Me"
+  },
+  {
+    "tags": ["Programming", "Python", "Podcast"],
+    "href": "https://testandcode.com/",
+    "title": "Test & Code"
   }
 ]
