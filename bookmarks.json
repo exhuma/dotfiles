@@ -1,5 +1,13 @@
 [
   {
+    "href": "https://www.wedely.com/find?address=6637",
+    "tags": ["food", "home-delivery"]
+  },
+  {
+    "href": "https://www.miammiam.lu/livraison/?q=326",
+    "tags": ["food", "home-delivery"]
+  },
+  {
     "href": "https://backstage.io/docs/getting-started/running-backstage-locally",
     "tags": ["api", "development", "maintenance", "documentation", "dashboard"],
     "title": "Backstage API management"
