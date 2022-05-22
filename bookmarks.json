@@ -1,5 +1,10 @@
 [
   {
+    "href": "https://backstage.io/docs/getting-started/running-backstage-locally",
+    "tags": ["api", "development", "maintenance", "documentation", "dashboard"],
+    "title": "Backstage API management"
+  },
+  {
     "href": "https://www.nngroup.com/articles/ten-usability-heuristics/",
     "tags": ["programming", "ux", "design"],
     "title": "Nielsen's 10 Rules of UI Design"
