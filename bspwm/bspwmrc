@@ -20,4 +20,4 @@ setxkbmap -option compose:caps
 sxhkd &
 variety &
 compton &
-yabar &
+polybar example &
