@@ -16,6 +16,7 @@ bspc rule -a Gimp desktop='^8' state=floating follow=on
 # bspc rule -a mplayer2 state=floating
 
 # --- Autostart --------------------------------------------------
+setxkbmap -option compose:caps
 sxhkd &
 variety &
 compton &
