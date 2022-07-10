@@ -8,6 +8,13 @@ sudo apt update && sudo apt install -y \
     vim-nox \
     zsh
 
-(cd && git clone https://github.com/exhuma/dotfiles)
-exec ~/dotfiles/bootstrap_common
+OLDPWD=$(pwd)
+cd
+if [ -d dotfiles ]; then
+    (cd dotfiles && git pull)
+else
+    git clone https://github.com/exhuma/dotfiles
+fi
+~/dotfiles/bootstrap_common
 ~/dotfiles/install -c
+cd ${OLDPWD}
