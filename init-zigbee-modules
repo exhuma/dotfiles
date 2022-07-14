@@ -1,0 +1,4 @@
+#!/bin/bash
+modprobe usbserial
+modprobe ftdi_sio
+modprobe cdc-acm
