@@ -13,14 +13,16 @@
     ],
     "git.autofetch": true,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#5f00af",
-        "statusBar.noFolderBackground": "#5f00af",
-        "statusBar.debuggingBackground": "#5f00af"
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
     },
     "editor.cursorBlinking": "smooth",
     "editor.minimap.enabled": false,
     "workbench.tree.indent": 25,
     "workbench.tree.renderIndentGuides": "always",
     "terminal.integrated.copyOnSelection": true,
-    "editor.cursorSurroundingLines": 3
+    "editor.cursorSurroundingLines": 3,
+    "editor.fontFamily": "'FiraCode NF', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": true
 }
