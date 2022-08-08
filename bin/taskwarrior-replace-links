@@ -1,0 +1,80 @@
+#!/usr/bin/python3
+"""
+Converts [<template-id>:#<issue-id>] into a full URL.
+
+For example:
+
+    INPUT: [my-project:#14]
+    OUTPUT: https://path.to.issue-tracker/issues/14
+
+The file ~/.task/issue-url-templates.json is used as URL templates, replacing
+"{id}" with the issue-id:
+
+    {
+      "my-project": "https://path.to.issue-tracker/issues/{id}",
+      "another-url": "https://another-tracker/{id}/foo/bar"
+    }
+
+If the URL templates file does not exist, or the file does not contain a
+mapping for a template-id, an appropriate error is logged but the process still
+returns in success. It will simply not replace the URL.
+"""
+# pylint: disable=invalid-name
+
+import json
+import logging
+import re
+import sys
+from os.path import expanduser
+
+P_ISSUE = re.compile(r"\[([^:]+):#(\d+)\]")
+LOG = logging.getLogger(__name__)
+
+
+def load_templates():
+    filename = expanduser("~/.task/issue-url-templates.json")
+    data = {}
+    try:
+        with open(filename, encoding="utf8") as fptr:
+            data = json.load(fptr)
+    except Exception as exc:
+        LOG.error("Unable to open URL templates from %r (%s)", filename,
+                exc)
+    return data
+
+
+def make_replacer(mapping, user_messages):
+    def replacer(match):
+        project_key, issue_id = match.groups()
+        template = mapping.get(project_key.strip(), "")
+        original_string = match.string[slice(*match.span())]
+        if template == "":
+            user_messages.append(
+                f"No mapping for project {project_key!r} found. "
+                f"Available project-keys: {sorted(mapping.keys())}"
+            )
+            return original_string
+        replacement = template.replace("{id}", issue_id)
+        user_messages.append(f"Link replaced: {original_string} -> {replacement}")
+        return replacement
+
+    return replacer
+
+
+def main():
+    urls = load_templates()
+    added_task = json.loads(sys.stdin.read())
+    original = added_task["description"]
+    user_messages = []
+    added_task["description"] = P_ISSUE.sub(
+        make_replacer(urls, user_messages), added_task["description"]
+    )
+    print(json.dumps(added_task))
+    if original != added_task["description"]:
+        for message in user_messages:
+            print(message)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
