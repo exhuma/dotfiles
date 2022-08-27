@@ -5,6 +5,26 @@
     "title": "/r/programminghorror"
   },
   {
+    "href": "https://fermatslibrary.com/journal_club",
+    "tags": ["programming", "news", "research"]
+  },
+  {
+    "href": "https://github.com/papers-we-love/papers-we-love",
+    "tags": ["programming", "news", "research"]
+  },
+  {
+    "href": "https://blog.twitter.com/engineering/en_us",
+    "tags": ["programming", "news", "research"]
+  },
+  {
+    "href": "https://engineering.fb.com/",
+    "tags": ["programming", "news", "research"]
+  },
+  {
+    "href": "https://netflixtechblog.com/",
+    "tags": ["programming", "news", "research"]
+  },
+  {
     "href": "https://thedailywtf.com/",
     "tags": ["humor", "programming", "funny"]
   },
