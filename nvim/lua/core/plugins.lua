@@ -23,6 +23,11 @@ return require('packer').startup(function(use)
       tag = '0.1.0',
       requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use {
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig',
+  }
 
 
   -- Automatically set up your configuration after cloning packer.nvim
