@@ -40,5 +40,5 @@ vim.keymap.set('i', '<F6>', '<C-R>=strftime("%Y%m%d")<CR>', {remap=true})
 -- Behave somewhat like 'less' for toggling word-wrap
 vim.keymap.set('n', '-S', ':set nowrap!<CR>')
 
--- Run ALEFix
-vim.keymap.set('n', '<C-i>', ':ALEFix<CR>')
+-- Run code-formatter
+vim.keymap.set('n', '<C-i>', ':Format<CR>')

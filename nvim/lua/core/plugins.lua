@@ -28,6 +28,7 @@ return require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig',
   }
+  use 'mhartington/formatter.nvim'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-nvim-lsp'
