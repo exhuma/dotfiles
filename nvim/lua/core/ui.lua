@@ -1,4 +1,5 @@
 vim.opt.list = true
+vim.opt.mouse = ""
 vim.opt.listchars = table.concat(
     {
         'tab:├─',
