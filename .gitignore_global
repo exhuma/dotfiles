@@ -2,16 +2,10 @@
 *~
 .*.swo
 .*.swp
-.coverage
 .ctags
 .directory
-.mypy_cache
-.pytest_cache
-.ropeproject
-.svn
 /.idea
 /_vimfiles
-/env
 CVS
 CVSROOT
 my__.*
