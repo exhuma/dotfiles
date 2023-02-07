@@ -33,7 +33,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git cp debian lol vi-mode perhost fabric tmux)
+plugins=(git cp debian lol vi-mode perhost fabric tmux colored-man-pages colorize direnv fzf isodate oc)
 
 source $ZSH/oh-my-zsh.sh
 
