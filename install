@@ -47,6 +47,7 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -d .config/sxhkd ] && rm -rf .config/sxhkd
     [ -d .config/nvim ] && rm -rf .config/nvim
     [ -d .config/bspwm ] && rm -rf .config/bspwm
+    [ -d .config/rofi ] && rm -rf .config/rofi
     [ -f ~/.config/Code/User/settings.json ] && rm ~/.config/Code/User/settings.json
     [ -f ~/.config/fontconfig/conf.d/99-emoji.conf ] && rm ~/.config/fontconfig/conf.d/99-emoji.conf
 fi
@@ -77,6 +78,7 @@ ln -vs dotfiles/.minttyrc
 ln -vs dotfiles/.xinitrc
 ln -vs dotfiles/.i3
 ln -vs dotfiles/bspwm .config/bspwm
+ln -vs dotfiles/rofi .config/rofi
 ln -vs dotfiles/sxhkd .config/sxhkd
 ln -vs dotfiles/nvim .config/nvim
 ln -vs ~/dotfiles/zsh-perhost/DESKTOP-BHQ0QLD.zsh ~/.zsh/perhost/DESKTOP-BHQ0QLD.zsh
