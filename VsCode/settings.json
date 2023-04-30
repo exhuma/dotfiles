@@ -24,5 +24,6 @@
     "terminal.integrated.copyOnSelection": true,
     "editor.cursorSurroundingLines": 3,
     "editor.fontFamily": "'FiraCode NF', 'Droid Sans Mono', 'monospace', monospace",
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "terminal.integrated.defaultProfile.linux": "zsh"
 }
