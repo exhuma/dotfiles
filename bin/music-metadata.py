@@ -40,7 +40,7 @@ def call():
     try:
         output = check_output(["playerctl", "metadata"])
     except:
-        LOG.exception("Unable to fetch metadata")
+        LOG.error("Unable to fetch metadata (playerctrl metadata failed)")
         return ""
     return output.decode("utf8")
 
@@ -69,7 +69,11 @@ def parse(data: str) -> Meta:
         try:
             _, field, value = line.split(maxsplit=2)
         except:
-            LOG.exception("Unable to parse data: %r", line)
+            LOG.warning(
+                "Unable to parse data: did not get the expected 3 fields in "
+                "line %r",
+                line,
+            )
             field = ""
         dictified[field.strip()] = value.strip()
     cover_url = dictified.get("mpris:artUrl", "")
@@ -85,12 +89,12 @@ def parse(data: str) -> Meta:
 
 def write_output(target_folder: str, meta: Meta) -> None:
     makedirs(target_folder, exist_ok=True)
-    if meta.cover:
+    if meta.cover and meta.cover.extension:
         cover_fn = join(target_folder, f"music-cover{meta.cover.extension}")
         with open(cover_fn, "wb") as fptr:
             fptr.write(meta.cover.data)
     else:
-        shutil.copy("generic-album.png", cover_fn)
+        shutil.copy("obs-resources/generic-album.png", "music-cover.png")
     with open(join(target_folder, "artist.txt"), "w") as fptr:
         fptr.write(meta.artist)
     with open(join(target_folder, "album.txt"), "w") as fptr:
@@ -104,7 +108,7 @@ def write_output(target_folder: str, meta: Meta) -> None:
 def write_unknown(target_folder: str) -> None:
     makedirs(target_folder, exist_ok=True)
     cover_fn = join(target_folder, f"music-cover.png")
-    shutil.copy("generic-album.png", cover_fn)
+    shutil.copy("obs-resources/generic-album.png", cover_fn)
     with open(join(target_folder, "artist.txt"), "w") as fptr:
         fptr.write("unknown artist")
     with open(join(target_folder, "album.txt"), "w") as fptr:
