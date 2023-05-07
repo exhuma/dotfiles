@@ -1,5 +1,10 @@
 [
   {
+    "href": "https://haxtec.com",
+    "tags": ["dice", "shop", "boardgames", "social", "hobbies"],
+    "title": "Haxtec Dice"]
+  },
+  {
     "href": "https://old.reddit.com/r/programminghorror/",
     "tags": ["reddit", "humor", "programming", "funny"],
     "title": "/r/programminghorror"
