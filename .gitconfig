@@ -20,7 +20,7 @@ grep = auto
 ;
 [alias]
 ; simple shortcuts
-st = status -s
+st = status -sb
 co = checkout
 ci = commit
 br = branch -v
