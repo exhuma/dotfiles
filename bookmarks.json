@@ -1,8 +1,18 @@
 [
   {
+    "href": "https://frogcoffee.de",
+    "tags": ["food", "shop"],
+    "title": "Frog Coffee"
+  },
+  {
     "href": "https://www.17track.net",
     "tags": ["tracking", "shop"],
     "title": "17 Track"
+  },
+  {
+    "href": "https://rosemary-co.de",
+    "tags": ["food", "shop"],
+    "title": "Rosemary Co. (spice shop)"
   },
   {
     "href": "https://www.titospeck.it/",
