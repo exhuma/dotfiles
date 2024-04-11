@@ -1,7 +1,7 @@
 require('mason').setup()
 require('mason-lspconfig').setup(
     {
-        ensure_installed = {'sumneko_lua', 'pyright'}
+        ensure_installed = {'lua_ls', 'pyright'}
     }
 )
 
@@ -16,10 +16,6 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('lspconfig').sumneko_lua.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-})
 require('lspconfig').pyright.setup({
     on_attach = on_attach,
     capabilities = capabilities

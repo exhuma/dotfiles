@@ -33,7 +33,7 @@ vim.opt.wildignore = table.concat(
 )
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.shada = "%,'50,<100,n~/.local/state/nvim/shada-local"
-vim.opt.pastetoggle = "<F3>"
+-- TODO vim.opt.pastetoggle = "<F3>"
 vim.opt.modeline = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
