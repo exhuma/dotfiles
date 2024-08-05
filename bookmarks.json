@@ -1,5 +1,20 @@
 [
   {
+    "href": "https://en.akkogear.com",
+    "tags": ["shop", "keyboard"],
+    "title": "Akko Gear"
+  },
+  {
+    "href": "https://kbdfans.com/",
+    "tags": ["shop", "keyboard"],
+    "title": "KBD Fans"
+  },
+  {
+    "href": "https://www.keychron.com/",
+    "tags": ["shop", "keyboard"],
+    "title": "Keychron"
+  },
+  {
     "href": "https://www.packari.com",
     "tags": ["packaging", "shop"],
     "title": "Packari"
