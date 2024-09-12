@@ -33,4 +33,6 @@
         "statusBar.foreground": "#ffffff",
         "statusBar.debuggingForeground": "#ffffff"
     },
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
 }
