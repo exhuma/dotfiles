@@ -1,29 +1,36 @@
 {
-  "workbench.colorTheme": "Monokai",
-  "terminal.integrated.allowChords": false,
-  "vim.foldfix": true,
-  "vim.hlsearch": true,
-  "vim.leader": "<space>",
-  "vim.statusBarColorControl": true,
-  "vim.insertModeKeyBindings": [
-    {
-      "before": ["j", "j"],
-      "after": ["<Esc>"]
-    }
-  ],
-  "git.autofetch": true,
-  "workbench.colorCustomizations": {
-    "statusBar.background": "#005f5f",
-    "statusBar.noFolderBackground": "#005f5f",
-    "statusBar.debuggingBackground": "#005f5f"
-  },
-  "editor.cursorBlinking": "smooth",
-  "editor.minimap.enabled": false,
-  "workbench.tree.indent": 25,
-  "workbench.tree.renderIndentGuides": "always",
-  "terminal.integrated.copyOnSelection": true,
-  "editor.cursorSurroundingLines": 3,
-  "editor.fontFamily": "'FiraCode NF', 'Droid Sans Mono', 'monospace', monospace",
-  "editor.fontLigatures": true,
-  "terminal.integrated.defaultProfile.linux": "zsh"
+    // cspell: disable
+    "terminal.integrated.allowChords": false,
+    "vim.foldfix": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    "vim.statusBarColorControl": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "git.autofetch": true,
+    "editor.cursorBlinking": "smooth",
+    "editor.minimap.enabled": false,
+    "workbench.tree.indent": 25,
+    "workbench.tree.renderIndentGuides": "always",
+    "terminal.integrated.copyOnSelection": true,
+    "editor.cursorSurroundingLines": 3,
+    "editor.fontFamily": "'FiraCode NF', 'Droid Sans Mono', 'Consolas', 'monospace', monospace",
+    "editor.fontLigatures": true,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f87",
+        "statusBar.noFolderBackground": "#005f87",
+        "statusBar.debuggingBackground": "#005f87",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
+    },
 }
