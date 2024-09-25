@@ -1,5 +1,15 @@
 [
   {
+    "href": "https://www.nonasties.in",
+    "tags": ["shop", "clothing"],
+    "title": "No Nasties Clothing"
+  },
+  {
+    "href": "https://www.moschino.com",
+    "tags": ["shop", "clothing"],
+    "title": "Moschino Clothing"
+  },
+  {
     "href": "https://worklouder.cc",
     "tags": ["shop", "keyboard", "macros"],
     "title": "Work Louder"
