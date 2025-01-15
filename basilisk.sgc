@@ -31,6 +31,14 @@ section: screens
 		preserveFocus = false
 		switchCorners = none 
 		switchCornerSize = 0
+	turian:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		preserveFocus = false
+		switchCorners = none 
+		switchCornerSize = 0
 end
 
 section: aliases
@@ -38,11 +46,11 @@ end
 
 section: links
 	DESKTOP-RB68I4B:
-		right(40, 100) = displacer
+		left(10, 75) = turian
 		down(10, 38) = displacer2
 		down(60, 90) = TABLET-DIICBUIN
-	displacer:
-		left = DESKTOP-RB68I4B(40, 100)
+	turian:
+		right = DESKTOP-RB68I4B(10, 75)
 	displacer2:
 		up = DESKTOP-RB68I4B(10, 38)
 	TABLET-DIICBUIN:
