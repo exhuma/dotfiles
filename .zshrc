@@ -14,6 +14,8 @@ ZSH_THEME="exhuma"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias dps='docker ps --format '\''table {{.Names}}\t{{.Status}}\t{{.Ports}}'\'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
