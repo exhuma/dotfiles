@@ -59,6 +59,8 @@ export PSQL_EDITOR="/usr/bin/vim"
 export EDITOR="/usr/bin/vim"
 export GPGKEY=1CA23E80
 export LC_COLLATE=C
+export GOPATH=~/work/go
+export PATH=${GOPATH}/bin:${PATH}
 export PIPENV_VENV_IN_PROJECT="enabled"
 
 
