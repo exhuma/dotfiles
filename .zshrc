@@ -50,6 +50,7 @@ export PATH=~/.local/opt/pytools/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 alias pyserve='python3 -m http.server'
+alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
 
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
