@@ -46,6 +46,7 @@ export PATH=~/bin:${PATH}
 export PATH=~/.local/bin:${PATH}
 export PATH=~/dotfiles/bin:${PATH}
 export PATH=~/.local/opt/node-modules/bin:${PATH}
+export PATH=~/.local/opt/pytools/bin:${PATH}
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 alias pyserve='python3 -m http.server'
@@ -57,6 +58,8 @@ export PSQL_EDITOR="/usr/bin/vim"
 export EDITOR="/usr/bin/vim"
 export GPGKEY=1CA23E80
 export LC_COLLATE=C
+export PIPENV_VENV_IN_PROJECT="enabled"
+
 
 bindkey "^R" history-incremental-search-backward
 bindkey "^[[3~" delete-char
