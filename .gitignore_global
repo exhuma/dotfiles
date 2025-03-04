@@ -4,8 +4,11 @@
 .*.swp
 .ctags
 .directory
+.envrc
+.nfs*
 /.idea
 /_vimfiles
+/env
 CVS
 CVSROOT
 my__.*
