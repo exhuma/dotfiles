@@ -1,8 +1,7 @@
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  if fn.empty(fn.glob(install_path)) > 0 then fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -34,7 +33,30 @@ return require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
-
+  use 'lepture/vim-jinja'
+  use {
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      }
+    end
+  }
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  })
+  use 'tpope/vim-unimpaired'
+  use 'tpope/vim-fugitive'
+  use 'mfussenegger/nvim-lint'
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

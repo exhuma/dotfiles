@@ -4,7 +4,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
     mapping = cmp.mapping.preset.insert({
-        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -26,6 +26,24 @@ cmp.setup({
             fallback()
           end
         end, { "i", "s" }),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<C-k>"] = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+      ['<C-j>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
     }),
     snippet = {
         expand = function(args)
