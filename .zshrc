@@ -14,8 +14,6 @@ ZSH_THEME="exhuma"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias dps='docker ps --format '\''table {{.Names}}\t{{.Status}}\t{{.Ports}}'\'
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -51,6 +49,14 @@ alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 alias pyserve='python3 -m http.server'
 alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
+alias pybump='git commit -m "Bump version to $(tomlq -r .project.version pyproject.toml)"'
+alias jsbump='git commit -m "Bump version to $(jq -r .version package.json)"'
+alias pytag='git tag -sm release v$(tomlq -r .project.version pyproject.toml)'
+alias jstag='git tag -sm release v$(jq -r .version package.json)'
+alias dps='docker ps --format '\''table {{.Names}}\t{{.Status}}\t{{.Ports}}'\'
+alias xpsview='postcat -vq'
+alias xpsrm='postsuper -d'
+
 
 export BROWSER=/usr/bin/firefox
 export PYTHONSTARTUP=~/.pystartup
@@ -81,12 +87,6 @@ setopt nobeep
 DISABLE_AUTO_TITLE=true
 
 [ -f ~/.init_local ] && . ~/.init_local
-
-# postscript aliases
-alias xpsview='postcat -vq'
-alias xpsrm='postsuper -d'
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=~/.local/opt/node-modules/bin:${PATH}
