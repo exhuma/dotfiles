@@ -124,36 +124,6 @@ if [ -f dotfiles/${HOSTNAME}/.xmodmaprc ]; then
     ln -vs dotfiles/${HOSTNAME}/.xmodmaprc
 fi
 
-# Install Konsole colour schemes
-if [ -f /usr/bin/konsole ]; then
-    if [ ! -f ~/.kde/share/apps/konsole/base16-atelierforest.colorscheme ]; then
-        (cd /tmp && git clone https://github.com/chriskempson/base16-builder.git)
-        (cd /tmp/base16-builder && ./base16 -t konsole)
-        mkdir -p ~/.kde/share/apps/konsole
-        mv /tmp/base16-builder/output/konsole/* ~/.kde/share/apps/konsole
-        cat <<EOF > ~/.kde/share/apps/konsole/Shell.profile
-[Appearance]
-ColorScheme=base16-atelierforest
-Font=Anonymous Pro for Powerline,18,-1,5,50,0,0,0,0,0
-
-[General]
-Name=Shell
-Parent=FALLBACK/
-ShowMenuBar=false
-TabBarMode=1
-
-[Scrolling]
-HistorySize=10000
-EOF
-        rm -rf /tmp/base16-builder
-        echo
-        echo ┌──────────────────────────────────────────────────────────────────────┐
-        echo │In order to get the new konsole colors, konsole needs to be restarted!│
-        echo └──────────────────────────────────────────────────────────────────────┘
-        echo
-    fi
-fi
-
 # tmux theme pack
 git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack || (cd ~/.tmux-themepack && git pull)
 
