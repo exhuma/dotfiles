@@ -1,5 +1,25 @@
 [
   {
+    "href": "https://makerworld.com/en",
+    "tags": ["hobbies", "diy", "models", "3D-printing"],
+    "title": "Makerworld"
+  },
+  {
+    "href": "https://www.printables.com/",
+    "tags": ["hobbies", "diy", "models", "3D-printing"],
+    "title": "Printables"
+  },
+  {
+    "href": "https://www.thingiverse.com/",
+    "tags": ["hobbies", "diy", "models", "3D-printing"],
+    "title": "Thingieverse"
+  },
+  {
+    "href": "https://cults3d.com",
+    "tags": ["hobbies", "diy", "models", "3D-printing"],
+    "title": "Cults 3D"
+  },
+  {
     "href": "https://polyestershoppen.com/",
     "tags": ["shop", "hobbies", "diy", "materials"],
     "title": "Polyester Shoppen"
