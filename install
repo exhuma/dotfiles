@@ -86,6 +86,8 @@ ln -vs dotfiles/nvim .config/nvim
 ln -vs ~/dotfiles/zsh-perhost/DESKTOP-BHQ0QLD.zsh ~/.zsh/perhost/DESKTOP-BHQ0QLD.zsh
 ln -vs ~/dotfiles/zsh-perhost/basilisk.zsh ~/.zsh/perhost/basilisk.zsh
 ln -vs ~/dotfiles/zsh-perhost/displacer2.zsh ~/.zsh/perhost/displacer2.zsh
+ln -vs ~/dotfiles/zsh-perhost/turian.zsh ~/.zsh/perhost/turian.zsh
+ln -vs ~/dotfiles/zsh-perhost/legion.zsh ~/.zsh/perhost/legion.zsh
 mkdir -p ~/.config/Code/User
 ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
 mkdir -p ~/.config/fontconfig/conf.d
