@@ -1,6 +1,5 @@
 {
     // cspell: disable
-    "terminal.integrated.allowChords": false,
     "vim.foldfix": true,
     "vim.hlsearch": true,
     "vim.leader": "<space>",
@@ -21,11 +20,9 @@
     "editor.minimap.enabled": false,
     "workbench.tree.indent": 25,
     "workbench.tree.renderIndentGuides": "always",
-    "terminal.integrated.copyOnSelection": true,
     "editor.cursorSurroundingLines": 3,
     "editor.fontFamily": "'FiraCode NF', 'Droid Sans Mono', 'Consolas', 'monospace', monospace",
     "editor.fontLigatures": true,
-    "terminal.integrated.defaultProfile.linux": "zsh",
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f87",
         "statusBar.noFolderBackground": "#005f87",
@@ -37,11 +34,14 @@
     "editor.autoClosingQuotes": "never",
     "editor.stickyScroll.enabled": false,
     "workbench.tree.enableStickyScroll": false,
-    "terminal.integrated.stickyScroll.enabled": false,
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorWidth": 3,
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.enableVisualBell": true,
     "terminal.integrated.scrollback": 2000,
-    "terminal.integrated.suggest.enabled": false,
+    "terminal.integrated.stickyScroll.enabled": false,
+    "terminal.integrated.suggest.enabled": false
 }
