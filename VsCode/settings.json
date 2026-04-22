@@ -1,47 +1,65 @@
+// cSpell: disable
 {
-    // cspell: disable
-    "vim.foldfix": true,
-    "vim.hlsearch": true,
-    "vim.leader": "<space>",
-    "vim.statusBarColorControl": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "j",
-                "j"
-            ],
-            "after": [
-                "<Esc>"
-            ]
-        }
-    ],
-    "git.autofetch": true,
-    "editor.cursorBlinking": "smooth",
-    "editor.minimap.enabled": false,
-    "workbench.tree.indent": 25,
-    "workbench.tree.renderIndentGuides": "always",
-    "editor.cursorSurroundingLines": 3,
-    "editor.fontFamily": "'FiraCode NF', 'Droid Sans Mono', 'Consolas', 'monospace', monospace",
-    "editor.fontLigatures": true,
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#005f87",
-        "statusBar.noFolderBackground": "#005f87",
-        "statusBar.debuggingBackground": "#005f87",
-        "statusBar.foreground": "#ffffff",
-        "statusBar.debuggingForeground": "#ffffff"
-    },
-    "editor.autoClosingBrackets": "never",
-    "editor.autoClosingQuotes": "never",
-    "editor.stickyScroll.enabled": false,
-    "workbench.tree.enableStickyScroll": false,
-    "terminal.integrated.allowChords": false,
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.cursorWidth": 3,
-    "terminal.integrated.defaultProfile.linux": "zsh",
-    "terminal.integrated.enableVisualBell": true,
-    "terminal.integrated.scrollback": 2000,
-    "terminal.integrated.stickyScroll.enabled": false,
-    "terminal.integrated.suggest.enabled": false
+  "terminal.integrated.allowChords": false,
+  "vim.foldfix": true,
+  "vim.hlsearch": true,
+  "vim.leader": "<space>",
+  "vim.statusBarColorControl": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+  ],
+  "editor.rulers": [
+    80,
+    88,
+    120
+  ],
+  "editor.cursorBlinking": "smooth",
+  "editor.minimap.enabled": false,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "workbench.tree.indent": 25,
+  "workbench.tree.renderIndentGuides": "always",
+  "terminal.integrated.copyOnSelection": true,
+  "editor.cursorSurroundingLines": 3,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "redhat.telemetry.enabled": false,
+  "editor.fontFamily": "'FiraCode NF', 'Droid Sans Mono', 'Consolas', 'monospace', monospace",
+  "editor.fontLigatures": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "terminal.integrated.persistentSessionScrollback": 1000,
+  "editor.stickyScroll.enabled": false,
+  "workbench.iconTheme": "Monokai Pro Icons",
+  "workbench.tree.enableStickyScroll": false,
+  "errorLens.enabledDiagnosticLevels": [
+    "error",
+    "warning",
+    "info",
+    "hint"
+  ],
+  "terminal.integrated.fontSize": 11,
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+  "python.terminal.activateEnvironment": false,
+  "vscord.app.name": "Visual Studio Code",
+  "terminal.integrated.stickyScroll.enabled": false,
+  "chat.viewSessions.orientation": "stacked",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorWidth": 3,
+  "terminal.integrated.enableVisualBell": true,
+  "terminal.integrated.scrollback": 2000,
+  "terminal.integrated.suggest.enabled": false,
 }
+
