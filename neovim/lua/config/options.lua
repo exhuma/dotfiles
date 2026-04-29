@@ -9,10 +9,10 @@ opt.cursorline     = true
 opt.termguicolors  = true
 opt.showmode       = false          -- mode shown in statusline instead
 opt.laststatus     = 3              -- global statusline
-opt.cmdheight      = 1
+opt.cmdheight      = 2
 opt.pumheight      = 10
-opt.scrolloff      = 8
-opt.sidescrolloff  = 8
+opt.scrolloff      = 5
+opt.sidescrolloff  = 5
 
 -- Indentation (overridden per-language by treesitter/LSP)
 opt.expandtab   = true
@@ -30,8 +30,8 @@ opt.incsearch  = true
 -- Files
 opt.swapfile  = false
 opt.backup    = false
-opt.undofile  = true
-opt.undodir   = vim.fn.stdpath("data") .. "/undo"
+-- opt.undofile  = true
+-- opt.undodir   = vim.fn.stdpath("data") .. "/undo"
 
 -- Splits
 opt.splitright = true

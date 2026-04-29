@@ -6,7 +6,7 @@ vim.g.mapleader      = " "
 vim.g.maplocalleader = "\\"
 
 -- Easier escape
-map("i", "jk", "<Esc>", { desc = "Escape insert mode" })
+map("i", "jj", "<Esc>", { desc = "Escape insert mode" })
 
 -- Window navigation
 map("n", "<C-h>", "<C-w>h")
