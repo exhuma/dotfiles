@@ -37,6 +37,25 @@ map("v", ">", ">gv")
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<cr>")
 
+-- Center screen after jumping between search results
+map("n", "n", "nzz")
+map("n", "N", "Nzz")
+map("n", "*", "*zz")
+map("n", "#", "#zz")
+map("n", "g*", "g*zz")
+map("n", "g#", "g#zz")
+
+-- Insert date/time (mirrors legacy F4/F5/F6)
+map("n", "<F4>", function() vim.api.nvim_put({ os.date("%Y-%m-%d") }, "c", true, true) end, { desc = "Insert date" })
+map("i", "<F4>", function() return os.date("%Y-%m-%d") end, { expr = true, desc = "Insert date" })
+map("n", "<F5>", function() vim.api.nvim_put({ os.date("%Y-%m-%d %H:%M:%S") }, "c", true, true) end, { desc = "Insert datetime" })
+map("i", "<F5>", function() return os.date("%Y-%m-%d %H:%M:%S") end, { expr = true, desc = "Insert datetime" })
+map("n", "<F6>", function() vim.api.nvim_put({ os.date("%Y%m%d") }, "c", true, true) end, { desc = "Insert compact date" })
+map("i", "<F6>", function() return os.date("%Y%m%d") end, { expr = true, desc = "Insert compact date" })
+
+-- "dts" expands to a live timestamp, insert mode
+vim.cmd([[iabbrev <expr> dts strftime("%Y-%m-%d %H:%M:%S")]])
+
 -- Save
 map({ "n", "i" }, "<C-s>", "<cmd>w<cr><Esc>", { desc = "Save file" })
 

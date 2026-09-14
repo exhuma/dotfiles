@@ -3,52 +3,46 @@ return {
   -- ─── conform.nvim: formatting ────────────────────────────────────────────
   {
     "stevearc/conform.nvim",
-    -- event = { "BufWritePre" },
-    -- cmd   = { "ConformInfo" },
-    opts = {
-      -- formatters_by_ft = {
-      --   python     = { "ruff_format", "ruff_organize_imports" },
-      --   typescript = { "prettier" },
-      --   javascript = { "prettier" },
-      --   typescriptreact = { "prettier" },
-      --   javascriptreact = { "prettier" },
-      --   json       = { "prettier" },
-      --   yaml       = { "prettier" },
-      --   markdown   = { "prettier" },
-      --   html       = { "prettier" },
-      --   css        = { "prettier" },
-      --   lua        = { "stylua" },
-      --   -- Fallback: try LSP format for anything else
-      --   ["_"]      = { "trim_whitespace" },
-      -- },
-      -- format_on_save = {
-      --   timeout_ms   = 1500,
-      --   lsp_fallback = true,
-      -- },
-      -- formatters = {
-      --   ruff_format = {
-      --     -- Use project-local ruff via uv tool run if available
-      --     command = function()
-      --       local uv_ruff = vim.fn.findfile("pyproject.toml", ".;")
-      --       if uv_ruff ~= "" then
-      --         return "ruff"
-      --       end
-      --       return "ruff"
-      --     end,
-      --   },
-      --   prettier = {
-      --     -- Use project-local prettier when available
-      --     require_cwd = false,
-      --     cwd = require("conform.util").root_file({
-      --       ".prettierrc",
-      --       ".prettierrc.js",
-      --       ".prettierrc.json",
-      --       "prettier.config.js",
-      --       "package.json",
-      --     }),
-      --   },
-      -- },
-    },
+    event = { "BufWritePre" },
+    cmd   = { "ConformInfo" },
+    -- opts as a function so `require("conform.util")` below only runs once
+    -- conform.nvim is actually loaded (it's lazy-loaded on BufWritePre).
+    opts = function()
+      return {
+        formatters_by_ft = {
+          python     = { "ruff_format", "ruff_organize_imports" },
+          typescript = { "prettier" },
+          javascript = { "prettier" },
+          typescriptreact = { "prettier" },
+          javascriptreact = { "prettier" },
+          json       = { "prettier" },
+          yaml       = { "prettier" },
+          markdown   = { "prettier" },
+          html       = { "prettier" },
+          css        = { "prettier" },
+          lua        = { "stylua" },
+          -- Fallback: try LSP format for anything else
+          ["_"]      = { "trim_whitespace" },
+        },
+        format_on_save = {
+          timeout_ms   = 1500,
+          lsp_fallback = true,
+        },
+        formatters = {
+          prettier = {
+            -- Use project-local prettier when available
+            require_cwd = false,
+            cwd = require("conform.util").root_file({
+              ".prettierrc",
+              ".prettierrc.js",
+              ".prettierrc.json",
+              "prettier.config.js",
+              "package.json",
+            }),
+          },
+        },
+      }
+    end,
   },
 
   -- ─── nvim-lint: async linting ────────────────────────────────────────────

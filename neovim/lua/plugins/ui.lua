@@ -74,6 +74,7 @@ return {
         { "<leader>f", group = "find" },
         { "<leader>l", group = "lsp" },
         { "<leader>h", group = "git hunks" },
+        { "<leader>g", group = "git" },
         { "<leader>b", group = "buffers" },
       },
     },

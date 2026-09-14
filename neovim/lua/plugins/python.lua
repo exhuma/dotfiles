@@ -7,7 +7,6 @@ return {
   {
     -- venv-selector: finds and activates uv/virtualenv/pyenv venvs
     "linux-cultist/venv-selector.nvim",
-    branch       = "regexp",   -- v2 branch with regexp-based discovery
     ft           = "python",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     keys = {

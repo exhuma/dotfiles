@@ -10,15 +10,22 @@ return {
     },
     opts = {
       keymap = {
-        preset = "default",
-        -- Tab/S-Tab to select; Enter to confirm
+        preset = "none",
+        -- Tab/S-Tab only ever navigate the menu or jump snippet tabstops;
+        -- they never accept, so a stray Tab/Enter never eats your typing.
         ["<Tab>"]   = { "select_next", "snippet_forward", "fallback" },
         ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-        ["<CR>"]    = { "accept", "fallback" },
+        -- Enter always just inserts a newline.
+        ["<CR>"]    = { "fallback" },
+        -- Accepting a suggestion requires this dedicated key.
+        ["<C-l>"]   = { "accept" },
         ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
         ["<C-e>"]   = { "hide" },
         ["<C-b>"]   = { "scroll_documentation_up" },
         ["<C-f>"]   = { "scroll_documentation_down" },
+        ["<Up>"]    = { "select_prev", "fallback" },
+        ["<Down>"]  = { "select_next", "fallback" },
+        ["<C-k>"]   = { "show_signature", "hide_signature", "fallback" },
       },
       appearance = {
         use_nvim_cmp_as_default = false,
