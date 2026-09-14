@@ -1,0 +1,20 @@
+snippet wclog "window.console.log" b
+window['console']['log'](${1:message});  // TODO: DEBUG LOG!!
+endsnippet
+
+
+snippet dp "Debug Print" b
+window.console.log(${1}) // XXX debug statement
+endsnippet
+
+
+snippet pw "Promise Wrapper" b
+let output = new Promise((resolve, reject) => {
+	${1}.then(${2} => {
+		${3}
+	}).catch(e => {
+			reject(e)
+	})
+})
+return output
+endsnippet

@@ -1,0 +1,48 @@
+{
+  "[closure] goog.provide": {
+    "prefix": "prov",
+    "body": "goog.provide('${1}');",
+    "description": "[closure] goog.provide"
+  },
+  "[closure] goog.require": {
+    "prefix": "req",
+    "body": "goog.require('${1:package_name}');",
+    "description": "[closure] goog.require"
+  },
+  "[closure] goog.dom": {
+    "prefix": "gd",
+    "body": "goog.dom.${0};",
+    "description": "[closure] goog.dom"
+  },
+  "[closure] goog.events.listen": {
+    "prefix": "listen",
+    "body": [
+      "goog.events.listen(${1:component}, ${2:event}, function(evt) {",
+      "\t${5:// body}",
+      "});"
+    ],
+    "description": "[closure] goog.events.listen"
+  },
+  "[closure] goog.exportSymbol": {
+    "prefix": "esym",
+    "body": [
+      "goog.exportSymbol('${1:symbol}',",
+      "\t$1);"
+    ],
+    "description": "[closure] goog.exportSymbol"
+  },
+  "[closure] xhr": {
+    "prefix": "xhr",
+    "body": [
+      "goog.net.XhrIo.send(${0:url}, function(evt) {",
+      "\tvar xhr = evt.target;",
+      "\tif (xhr.isSuccess()) {",
+      "\t\t${1}",
+      "\t} else {",
+      "\t\t// TODO: show error",
+      "\t}",
+      "});"
+    ],
+    "description": "[closure] xhr"
+  }
+}

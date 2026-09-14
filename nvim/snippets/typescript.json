@@ -1,0 +1,7 @@
+{
+  "Debug Print": {
+    "prefix": "dp",
+    "body": "console.log(${1}); // XXX",
+    "description": "Debug Print"
+  }
+}
