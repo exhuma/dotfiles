@@ -1,0 +1,39 @@
+name: Neovim Cheat Sheet
+
+on:
+  push:
+    paths:
+      - "nvim/lua/**"
+      - "nvim/docs/cheatsheet.typ"
+      - ".github/workflows/nvim-cheatsheet.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TYPST_VERSION: "0.15.1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install fonts used by the cheat sheet
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-dejavu-core
+
+      - name: Install typst
+        run: |
+          curl -sL "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" \
+            -o typst.tar.xz
+          tar xf typst.tar.xz
+          sudo mv "typst-x86_64-unknown-linux-musl/typst" /usr/local/bin/typst
+          typst --version
+
+      - name: Compile cheat sheet
+        run: typst compile nvim/docs/cheatsheet.typ nvim-cheatsheet.pdf
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nvim-cheatsheet
+          path: nvim-cheatsheet.pdf
+          retention-days: 90
