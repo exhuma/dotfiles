@@ -71,6 +71,7 @@
     ("dts", [Abbrev #sym.arrow.r live timestamp (insert)]),
   ))
   #cat("Find (Telescope)", (
+    ("C-p", "Find files (same as <lead>ff)"),
     ("<lead>ff", "Find files"),
     ("<lead>fg", "Live grep"),
     ("<lead>fb", "Buffers"),
