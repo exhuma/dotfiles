@@ -1,0 +1,8 @@
+{{ $summary := strings.TrimSpace (replace .Params.summary "\n" " ") }}
+<li class="icon solid {{ .Params.icon }}">
+  <h3>{{ .Title }}</h3>
+  <p>{{ $summary }}</p>
+  {{ with .Params.link }}
+  <p><a href="{{ . | relURL }}">{{ $.Params.linktext | default "Learn more" }}</a></p>
+  {{ end }}
+</li>

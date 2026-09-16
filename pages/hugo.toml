@@ -1,0 +1,15 @@
+baseURL = "https://exhuma.github.io/dotfiles/"
+locale = "en-us"
+title = "exhuma/dotfiles"
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[params]
+  tagline = "Personal Config Files"
+  githubURL = "https://github.com/exhuma/dotfiles"
+  cheatsheetURL = "nvim-cheatsheet.pdf"
+
+[build]
+  writeStats = false
+
+[minify]
+  disableXML = true

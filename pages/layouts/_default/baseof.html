@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<!--
+  Theme: Spectral by HTML5 UP (html5up.net/spectral, CCA 3.0 license)
+  Adapted for Hugo.
+-->
+<html lang="en">
+<head>
+  <title>{{ if not .IsHome }}{{ .Title }} &middot; {{ end }}{{ site.Title }}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  {{ if .Description }}<meta name="description" content="{{ .Description }}" />{{ end }}
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}" />
+  <noscript><link rel="stylesheet" href="{{ "css/noscript.css" | relURL }}" /></noscript>
+</head>
+<body class="landing is-preload">
+
+  <div id="page-wrapper">
+
+    {{ partial "header.html" . }}
+
+    {{ block "main" . }}{{ end }}
+
+    {{ partial "footer.html" . }}
+
+  </div>
+
+  <script src="{{ "js/jquery.min.js" | relURL }}"></script>
+  <script src="{{ "js/jquery.scrollex.min.js" | relURL }}"></script>
+  <script src="{{ "js/jquery.scrolly.min.js" | relURL }}"></script>
+  <script src="{{ "js/browser.min.js" | relURL }}"></script>
+  <script src="{{ "js/breakpoints.min.js" | relURL }}"></script>
+  <script src="{{ "js/util.js" | relURL }}"></script>
+  <script src="{{ "js/main.js" | relURL }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+{{ define "main" }}
+
+<!-- Banner -->
+<section id="banner">
+  <div class="inner">
+    <h2>{{ .Title }}</h2>
+    <p>{{ .Params.intro | markdownify }}</p>
+    <ul class="actions special">
+      <li><a href="{{ site.Params.cheatsheetURL | relURL }}" class="button primary">Neovim cheat sheet</a></li>
+    </ul>
+  </div>
+  <a href="#one" class="more scrolly">Learn More</a>
+</section>
+
+<!-- One -->
+<section id="one" class="wrapper style1 special">
+  <div class="inner">
+    <header class="major">
+      <h2>Stable, portable, documented</h2>
+      <p>Most of this has been in daily use, unchanged, for years.</p>
+    </header>
+    <ul class="icons major">
+      <li><span class="icon solid fa-anchor major style1"><span class="label">Stable</span></span></li>
+      <li><span class="icon solid fa-laptop-code major style2"><span class="label">Portable</span></span></li>
+      <li><span class="icon solid fa-book major style3"><span class="label">Documented</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Sections -->
+<section id="three" class="wrapper style3 special">
+  <div class="inner">
+    <header class="major">
+      <h2>What's in here</h2>
+      <p>A tour of what's tracked, from the actively-evolving to the quietly stable.</p>
+    </header>
+    <ul class="features">
+      {{ range (.Site.GetPage "sections").Pages }}
+      {{ partial "card.html" . }}
+      {{ end }}
+    </ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="wrapper style4">
+  <div class="inner">
+    <header>
+      <h2>Get the dotfiles</h2>
+      <p>Clone the repo and run <code>./install</code>, or browse the source on GitHub.</p>
+    </header>
+    <ul class="actions stacked">
+      <li><a href="{{ site.Params.githubURL }}" class="button fit primary">View on GitHub</a></li>
+      <li><a href="{{ site.Params.cheatsheetURL | relURL }}" class="button fit">Download cheat sheet (PDF)</a></li>
+    </ul>
+  </div>
+</section>
+
+{{ end }}
