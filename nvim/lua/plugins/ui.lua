@@ -131,6 +131,7 @@ return {
   -- ─── oil.nvim: file explorer ─────────────────────────────────────────────
   {
     "stevearc/oil.nvim",
+    lazy = false,
     keys = { { "-", "<cmd>Oil<cr>", desc = "Open parent dir" } },
     opts = {
       default_file_explorer = true,
