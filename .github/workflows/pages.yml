@@ -1,11 +1,12 @@
-name: Neovim Cheat Sheet
+name: GitHub Pages
 
 on:
   push:
     paths:
       - "nvim/lua/**"
       - "nvim/docs/cheatsheet.typ"
-      - ".github/workflows/nvim-cheatsheet.yml"
+      - "pages/**"
+      - ".github/workflows/pages.yml"
   workflow_dispatch: {}
 
 permissions:
@@ -22,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TYPST_VERSION: "0.15.1"
+      HUGO_VERSION: "0.166.0"
     steps:
       - uses: actions/checkout@v4
 
@@ -37,6 +39,20 @@ jobs:
           tar xf typst.tar.xz
           sudo mv "typst-x86_64-unknown-linux-musl/typst" /usr/local/bin/typst
           typst --version
+
+      - name: Install Hugo
+        run: |
+          curl -sL "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz" \
+            -o hugo.tar.gz
+          mkdir hugo-extract
+          tar xf hugo.tar.gz -C hugo-extract
+          sudo mv hugo-extract/hugo /usr/local/bin/hugo
+          hugo version
+
+      - name: Build landing page
+        run: |
+          mkdir -p site
+          hugo --source pages --destination "$GITHUB_WORKSPACE/site"
 
       - name: Compile cheat sheet
         run: |
