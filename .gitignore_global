@@ -13,3 +13,14 @@ CVS
 CVSROOT
 my__.*
 tags
+
+**/.claude/settings.local.json
+
+*.pem
+*.key
+.env
+.netrc
+.pgpass
+id_rsa*
+id_ed25519*
+known_hosts
