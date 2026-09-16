@@ -6,6 +6,7 @@ on:
       - "nvim/lua/**"
       - "nvim/docs/cheatsheet.typ"
       - ".github/workflows/nvim-cheatsheet.yml"
+  workflow_dispatch: {}
 
 permissions:
   contents: read
