@@ -7,6 +7,15 @@ on:
       - "nvim/docs/cheatsheet.typ"
       - ".github/workflows/nvim-cheatsheet.yml"
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,11 +38,31 @@ jobs:
           typst --version
 
       - name: Compile cheat sheet
-        run: typst compile nvim/docs/cheatsheet.typ nvim-cheatsheet.pdf
+        run: |
+          mkdir -p site
+          typst compile nvim/docs/cheatsheet.typ site/nvim-cheatsheet.pdf
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: nvim-cheatsheet
-          path: nvim-cheatsheet.pdf
+          path: site/nvim-cheatsheet.pdf
           retention-days: 90
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
