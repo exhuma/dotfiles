@@ -6,5 +6,6 @@
 /.ncmpcpp/error.log
 nvim/plugin/packer_compiled.lua
 .mypy_cache
+__pycache__
 /site
 pages/.hugo_build.lock

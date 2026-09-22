@@ -45,6 +45,7 @@ export PATH=~/.local/bin:${PATH}
 export PATH=~/dotfiles/bin:${PATH}
 export PATH=~/.local/opt/node-modules/bin:${PATH}
 export PATH=~/.local/opt/pytools/bin:${PATH}
+[ -f ~/dotfiles/.env ] && source ~/dotfiles/.env
 alias tmux='TERM=xterm-256color tmux'
 alias less='less -S'  # No word-wrap!
 alias pyserve='python3 -m http.server'

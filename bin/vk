@@ -1,0 +1,432 @@
+#!/usr/bin/python3
+"""
+Command-line client for a Vikunja task manager instance.
+
+This is a thin, policy-free wrapper around the Vikunja REST API: it knows how
+to list/show/comment/assign/move/label/complete tasks, and nothing about *when*
+you should do any of that. See the "vikunja" Claude Code skill for the
+working-agreement and ranking policy that sits on top of this tool.
+
+Configuration comes entirely from the environment, never from this file:
+
+    VIKUNJA_URL    Base URL of the Vikunja instance, e.g. https://example.com
+    VIKUNJA_TOKEN  A personal API token (Vikunja -> Settings -> API Tokens)
+    VIKUNJA_OWNER  Username treated as "me" for `candidates` filtering
+                   (default: exhuma). Unrelated to `assign --me`, which always
+                   targets whichever identity VIKUNJA_TOKEN authenticates as.
+"""
+import argparse
+import json
+import os
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+
+DEFAULT_OWNER = "exhuma"
+IMPACT_COST_WEIGHT = {"low": 1, "medium": 2, "high": 3}
+
+
+def _env(name):
+    value = os.environ.get(name)
+    if not value:
+        sys.exit(f"{name} is not set. Export it before running vk.")
+    return value
+
+
+def api_base():
+    return _env("VIKUNJA_URL").rstrip("/") + "/api/v1"
+
+
+def owner_username():
+    return os.environ.get("VIKUNJA_OWNER", DEFAULT_OWNER)
+
+
+def _error_message(raw):
+    try:
+        return json.loads(raw).get("message", raw.decode(errors="replace"))
+    except (json.JSONDecodeError, AttributeError, UnicodeDecodeError):
+        return raw.decode(errors="replace")
+
+
+def request(method, path, params=None, body=None):
+    url = api_base() + path
+    if params:
+        url += "?" + urllib.parse.urlencode(params)
+    data = json.dumps(body).encode() if body is not None else None
+    req = urllib.request.Request(url, data=data, method=method)
+    req.add_header("Authorization", f"Bearer {_env('VIKUNJA_TOKEN')}")
+    if data is not None:
+        req.add_header("Content-Type", "application/json")
+    try:
+        with urllib.request.urlopen(req) as resp:
+            raw = resp.read()
+    except urllib.error.HTTPError as exc:
+        sys.exit(f"Vikunja API error {exc.code} on {method} {path}: "
+                  f"{_error_message(exc.read())}")
+    except urllib.error.URLError as exc:
+        sys.exit(f"Could not reach {api_base()}: {exc.reason}")
+    return json.loads(raw) if raw else None
+
+
+def get_all_pages(path, params=None):
+    params = dict(params or {})
+    page = 1
+    items = []
+    while True:
+        params["page"] = page
+        url = api_base() + path + "?" + urllib.parse.urlencode(params)
+        req = urllib.request.Request(url)
+        req.add_header("Authorization", f"Bearer {_env('VIKUNJA_TOKEN')}")
+        try:
+            with urllib.request.urlopen(req) as resp:
+                raw = resp.read()
+                total_pages = resp.headers.get("x-pagination-total-pages")
+        except urllib.error.HTTPError as exc:
+            sys.exit(f"Vikunja API error {exc.code} on GET {path}: "
+                      f"{_error_message(exc.read())}")
+        except urllib.error.URLError as exc:
+            sys.exit(f"Could not reach {api_base()}: {exc.reason}")
+        chunk = json.loads(raw) if raw else []
+        if not isinstance(chunk, list):
+            return chunk
+        items.extend(chunk)
+        if not chunk or not total_pages or page >= int(total_pages):
+            break
+        page += 1
+    return items
+
+
+# --------------------------------------------------------------------------
+# Shared helpers
+# --------------------------------------------------------------------------
+
+def list_projects(include_archived=False):
+    projects = get_all_pages("/projects")
+    if not include_archived:
+        projects = [p for p in projects if not p.get("is_archived")]
+    return projects
+
+
+def kanban_view_id(project):
+    for view in project.get("views") or []:
+        if view.get("view_kind") == "kanban":
+            return view["id"]
+    return None
+
+
+def bucket_titles_by_task(project_id, view_id):
+    """Map task id -> bucket title for tasks actually placed on the kanban
+    board. A task's own top-level `bucket_id` field is not reliable in this
+    Vikunja version (buckets are tracked per-view in a separate join table);
+    the per-view "tasks" endpoint (which nests tasks under each bucket) is
+    the source of truth. Tasks never dragged onto the board don't appear
+    here at all.
+    """
+    if view_id is None:
+        return {}
+    buckets = request("GET", f"/projects/{project_id}/views/{view_id}/tasks")
+    mapping = {}
+    if isinstance(buckets, list):
+        for bucket in buckets:
+            for task in bucket.get("tasks") or []:
+                mapping[task["id"]] = bucket.get("title")
+    return mapping
+
+
+def impact_cost_score(labels):
+    impact = cost = None
+    for label in labels or []:
+        title = label.get("title", "")
+        if title.startswith("impact:"):
+            impact = IMPACT_COST_WEIGHT.get(title.split(":", 1)[1])
+        elif title.startswith("cost:"):
+            cost = IMPACT_COST_WEIGHT.get(title.split(":", 1)[1])
+    if impact is None or cost is None:
+        return 0
+    return impact - cost
+
+
+def due_sort_key(task):
+    due = task.get("due_date") or ""
+    if not due or due.startswith("0001-01-01"):
+        return (1, "")
+    return (0, due)
+
+
+def candidate_sort_key(task):
+    return (-task.get("priority", 0), -impact_cost_score(task.get("labels")),
+            due_sort_key(task))
+
+
+def format_assignees(task):
+    return ", ".join(a["username"] for a in task.get("assignees") or []) or "(unassigned)"
+
+
+def format_labels(task):
+    return ", ".join(label["title"] for label in task.get("labels") or []) or "-"
+
+
+def current_identity():
+    return request("GET", "/user")
+
+
+def resolve_label_id(name):
+    for label in get_all_pages("/labels"):
+        if label["title"] == name:
+            return label["id"]
+    sys.exit(f"No label named {name!r}. Run 'vk labels' to see available ones.")
+
+
+# --------------------------------------------------------------------------
+# Subcommands
+# --------------------------------------------------------------------------
+
+def cmd_projects(args):
+    projects = list_projects()
+    if args.json:
+        print(json.dumps(projects, indent=2))
+        return
+    by_id = {p["id"]: p for p in projects}
+
+    def depth(project):
+        d = 0
+        parent = project.get("parent_project_id")
+        seen = set()
+        while parent and parent in by_id and parent not in seen:
+            seen.add(parent)
+            d += 1
+            parent = by_id[parent].get("parent_project_id")
+        return d
+
+    for project in sorted(projects, key=lambda p: (depth(p), p["title"])):
+        print(f"{'  ' * depth(project)}#{project['id']:<4} {project['title']}")
+
+
+def cmd_project(args):
+    project = request("GET", f"/projects/{args.project_id}")
+    if args.json:
+        print(json.dumps(project, indent=2))
+        return
+    print(f"#{project['id']} {project['title']}")
+    view_id = kanban_view_id(project)
+    if view_id is not None:
+        buckets = request("GET", f"/projects/{project['id']}/views/{view_id}/buckets") or []
+        print("buckets: " + " -> ".join(b["title"] for b in buckets))
+    print()
+    print(project.get("description") or "(no description)")
+
+
+def cmd_candidates(args):
+    owner = owner_username()
+    projects = list_projects()
+    if args.project is not None:
+        projects = [p for p in projects if p["id"] == args.project]
+        if not projects:
+            sys.exit(f"No such non-archived project id {args.project}")
+
+    results = []
+    for project in projects:
+        tasks = get_all_pages(f"/projects/{project['id']}/tasks",
+                               {"filter": "done = false"})
+        if not isinstance(tasks, list):
+            continue
+        task_buckets = bucket_titles_by_task(project["id"], kanban_view_id(project))
+        for task in tasks:
+            assignees = task.get("assignees") or []
+            if assignees and not any(a.get("username") == owner for a in assignees):
+                continue
+            task["_project_title"] = project["title"]
+            task["_bucket_title"] = task_buckets.get(task["id"], "(not on board)")
+            results.append(task)
+
+    results.sort(key=candidate_sort_key)
+
+    if args.json:
+        print(json.dumps(results, indent=2))
+        return
+    if not results:
+        print("No candidate tasks.")
+        return
+    for task in results:
+        print(f"#{task['id']:<5} P{task.get('priority', 0)}  "
+              f"[{task['_project_title']} / {task['_bucket_title']}]  {task['title']}")
+        print(f"       assignee: {format_assignees(task)}   labels: {format_labels(task)}")
+
+
+def cmd_show(args):
+    task = request("GET", f"/tasks/{args.task_id}")
+    comments = request("GET", f"/tasks/{args.task_id}/comments") or []
+    project = request("GET", f"/projects/{task['project_id']}")
+    task_buckets = bucket_titles_by_task(project["id"], kanban_view_id(project))
+    bucket_title = task_buckets.get(task["id"], "(not on board)")
+    if args.json:
+        payload = dict(task)
+        payload["bucket_title"] = bucket_title
+        print(json.dumps({"task": payload, "comments": comments}, indent=2))
+        return
+    print(f"#{task['id']} {task['title']}")
+    print(f"project: {project['title']} (#{project['id']})   done: {task['done']}   "
+          f"priority: {task.get('priority', 0)}   bucket: {bucket_title}")
+    print(f"updated: {task['updated']}")
+    print(f"assignees: {format_assignees(task)}")
+    print(f"labels: {format_labels(task)}")
+    print()
+    print(task.get("description") or "(no description)")
+    if comments:
+        print("\n--- comments ---")
+        for comment in comments:
+            author = (comment.get("author") or {}).get("username", "?")
+            print(f"[{comment['created']}] {author}: {comment['comment']}")
+
+
+def cmd_comment(args):
+    result = request("PUT", f"/tasks/{args.task_id}/comments",
+                      body={"comment": args.text})
+    print(f"Comment added to task #{args.task_id} (comment id {result.get('id')}).")
+
+
+def cmd_assign(args):
+    me = current_identity()
+    if args.unassign:
+        request("DELETE", f"/tasks/{args.task_id}/assignees/{me['id']}")
+        print(f"Unassigned {me['username']!r} from task #{args.task_id}.")
+    else:
+        request("PUT", f"/tasks/{args.task_id}/assignees",
+                 body={"user_id": me["id"]})
+        print(f"Assigned {me['username']!r} to task #{args.task_id}.")
+
+
+def cmd_move(args):
+    task = request("GET", f"/tasks/{args.task_id}")
+    project = request("GET", f"/projects/{task['project_id']}")
+    view_id = kanban_view_id(project)
+    if view_id is None:
+        sys.exit(f"Project {project['title']!r} has no kanban view.")
+    buckets = request("GET", f"/projects/{project['id']}/views/{view_id}/buckets") or []
+    match = next((b for b in buckets if b["title"] == args.bucket_name), None)
+    if match is None:
+        available = ", ".join(b["title"] for b in buckets)
+        sys.exit(f"No bucket named {args.bucket_name!r} in project "
+                  f"{project['title']!r}. Available: {available}")
+    request("POST",
+             f"/projects/{project['id']}/views/{view_id}/buckets/{match['id']}/tasks",
+             body={"task_id": task["id"]})
+    print(f"Moved task #{task['id']} to bucket {args.bucket_name!r} "
+          f"in {project['title']!r}.")
+
+
+def cmd_done(args):
+    task = request("GET", f"/tasks/{args.task_id}")
+    task["done"] = True
+    request("POST", f"/tasks/{args.task_id}", body=task)
+    print(f"Task #{args.task_id} marked done.")
+
+
+def cmd_labels(args):
+    labels = get_all_pages("/labels")
+    if args.json:
+        print(json.dumps(labels, indent=2))
+        return
+    for label in sorted(labels, key=lambda label: label["title"]):
+        print(f"#{label['id']:<4} {label['title']}")
+
+
+def cmd_label(args):
+    label_id = resolve_label_id(args.label_name)
+    if args.remove:
+        request("DELETE", f"/tasks/{args.task_id}/labels/{label_id}")
+        print(f"Removed label {args.label_name!r} from task #{args.task_id}.")
+    else:
+        request("PUT", f"/tasks/{args.task_id}/labels", body={"label_id": label_id})
+        print(f"Added label {args.label_name!r} to task #{args.task_id}.")
+
+
+def cmd_whoami(args):
+    me = current_identity()
+    if args.json:
+        print(json.dumps(me, indent=2))
+        return
+    print(f"id={me['id']} username={me['username']} name={me.get('name')}")
+
+
+# --------------------------------------------------------------------------
+# CLI wiring
+# --------------------------------------------------------------------------
+
+def build_parser():
+    parser = argparse.ArgumentParser(
+        description="Thin CLI wrapper around the Vikunja REST API.")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p = sub.add_parser("projects", help="List non-archived projects")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_projects)
+
+    p = sub.add_parser("project", help="Show one project's description and kanban buckets")
+    p.add_argument("project_id", type=int)
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_project)
+
+    p = sub.add_parser(
+        "candidates",
+        help="List not-done tasks that are unassigned or assigned to VIKUNJA_OWNER, ranked")
+    p.add_argument("--project", type=int, help="Restrict to a single project id")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_candidates)
+
+    p = sub.add_parser("show", help="Show a task's full detail and comments")
+    p.add_argument("task_id", type=int)
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_show)
+
+    p = sub.add_parser("comment", help="Add a comment to a task")
+    p.add_argument("task_id", type=int)
+    p.add_argument("text")
+    p.set_defaults(func=cmd_comment)
+
+    p = sub.add_parser("assign", help="Assign/unassign the current identity to a task")
+    p.add_argument("task_id", type=int)
+    group = p.add_mutually_exclusive_group(required=True)
+    group.add_argument("--me", action="store_true", help="Assign to the current identity")
+    group.add_argument("--unassign", action="store_true",
+                        help="Remove the current identity's assignment")
+    p.set_defaults(func=cmd_assign)
+
+    p = sub.add_parser("move", help="Move a task into a named kanban bucket")
+    p.add_argument("task_id", type=int)
+    p.add_argument("bucket_name")
+    p.set_defaults(func=cmd_move)
+
+    p = sub.add_parser("done", help="Mark a task done")
+    p.add_argument("task_id", type=int)
+    p.set_defaults(func=cmd_done)
+
+    p = sub.add_parser("labels", help="List all labels")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_labels)
+
+    p = sub.add_parser("label", help="Add/remove a label on a task")
+    p.add_argument("task_id", type=int)
+    p.add_argument("label_name")
+    p.add_argument("--remove", action="store_true")
+    p.set_defaults(func=cmd_label)
+
+    p = sub.add_parser("whoami", help="Show the identity VIKUNJA_TOKEN authenticates as")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_whoami)
+
+    return parser
+
+
+def main():
+    args = build_parser().parse_args()
+    args.func(args)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except BrokenPipeError:
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(1)

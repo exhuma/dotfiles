@@ -83,6 +83,8 @@ ln -vs dotfiles/rofi .config/rofi
 ln -vs dotfiles/fish .config/fish
 ln -vs dotfiles/sxhkd .config/sxhkd
 ln -vs dotfiles/nvim .config/nvim
+mkdir -p ~/.claude/skills
+ln -vs ~/dotfiles/claude-skills/vikunja ~/.claude/skills/vikunja
 ln -vs ~/dotfiles/zsh-perhost/DESKTOP-BHQ0QLD.zsh ~/.zsh/perhost/DESKTOP-BHQ0QLD.zsh
 ln -vs ~/dotfiles/zsh-perhost/basilisk.zsh ~/.zsh/perhost/basilisk.zsh
 ln -vs ~/dotfiles/zsh-perhost/displacer2.zsh ~/.zsh/perhost/displacer2.zsh
