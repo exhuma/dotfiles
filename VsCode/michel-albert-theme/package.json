@@ -23,5 +23,6 @@
         "path": "./themes/michel-albert-light-color-theme.json"
       }
     ]
-  }
+  },
+  "license": "MIT"
 }
