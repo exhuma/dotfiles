@@ -92,6 +92,8 @@ ln -vs ~/dotfiles/zsh-perhost/turian.zsh ~/.zsh/perhost/turian.zsh
 ln -vs ~/dotfiles/zsh-perhost/legion.zsh ~/.zsh/perhost/legion.zsh
 mkdir -p ~/.config/Code/User
 ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
+mkdir -p ~/.vscode/extensions
+ln -vs ~/dotfiles/VsCode/michel-albert-theme ~/.vscode/extensions/michel-albert-theme
 mkdir -p ~/.config/fontconfig/conf.d
 ln -vs ~/dotfiles/.config/fontconfig/conf.d/99-emoji.conf ~/.config/fontconfig/conf.d/99-emoji.conf
 
@@ -100,6 +102,8 @@ ln -vs ~/dotfiles/.config/fontconfig/conf.d/99-emoji.conf ~/.config/fontconfig/c
 if [[ $(uname -s) == CYGWIN* ]]; then
     mkdir -p ${USERPROFILE}/AppData/Roaming/Code/User
     cp VsCode/settings.json ${USERPROFILE}/AppData/Roaming/Code/User/settings.json
+    mkdir -p ${USERPROFILE}/.vscode/extensions
+    cp -r VsCode/michel-albert-theme ${USERPROFILE}/.vscode/extensions/michel-albert-theme
 fi
 
 pip install --user cstop
