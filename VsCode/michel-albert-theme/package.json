@@ -1,0 +1,28 @@
+{
+  "name": "michel-albert-theme",
+  "displayName": "Michel Albert",
+  "description": "Calm, precise, plain. Teal accent on warm neutrals.",
+  "version": "0.1.0",
+  "publisher": "exhuma",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Michel Albert Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/michel-albert-dark-color-theme.json"
+      },
+      {
+        "label": "Michel Albert Light",
+        "uiTheme": "vs",
+        "path": "./themes/michel-albert-light-color-theme.json"
+      }
+    ]
+  },
+  "license": "MIT"
+}
