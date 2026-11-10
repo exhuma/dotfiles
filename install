@@ -1,140 +1,304 @@
 #!/bin/bash
 # ---------------------------------------------------------------------------
-# Script to install these dotfiles into the current user's home.
+# Install these dotfiles into the current user's home.
 #
-# WARNING: This *will* overwrite existing files!
+# Safe to run repeatedly: links that are already correct are left alone,
+# stale or dangling links are replaced, and real files that are in the way
+# are moved aside to "<name>.bak.<timestamp>" instead of being overwritten.
+#
+# Usage: install [-c] [-n] [-h]   (see usage below)
 # ---------------------------------------------------------------------------
 
-DO_CLEAN=${1:-n}
+set -uo pipefail
 
-if [[ "${DO_CLEAN}" == "-c" ]]; then
-    RESPONSE="y"
-else
-    echo -n "Perform clean install? [y/N] "
-    read RESPONSE
-fi
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+readonly DOTFILES
+BACKUP_SUFFIX=".bak.$(date +%Y%m%d%H%M%S)"
+readonly BACKUP_SUFFIX
+readonly OH_MY_ZSH_URL="https://github.com/exhuma/oh-my-zsh.git"
+readonly OH_MY_ZSH_UPSTREAM="ssh://git@github.com/robbyrussell/oh-my-zsh"
+readonly TMUX_THEMEPACK_URL="https://github.com/jimeh/tmux-themepack.git"
+readonly CLEANUP_TIMER="systemd-tmpfiles-clean.timer"
 
-cd
-if [[ "${RESPONSE}" == "y" ]]; then
-    [ -d .irssi ] && rm -rf .irssi
-    [ -d .oh-my-zsh ] && rm -rf .oh-my-zsh
-    [ -d .zsh/perhost ] && rm -rf .zsh/perhost
-    [ -d .psql_history ] || mkdir .psql_history
-    [ -f .Xdefaults ] && rm .Xdefaults
-    [ -f .Xresources ] && rm .Xresources
-    [ -f .bashrc ] && rm .bashrc
-    [ -f .bashrc_BBS-goon ] && rm .bashrc_BBS-goon
-    [ -f .digrc ] && rm .digrc
-    [ -f .gitconfig ] && rm .gitconfig
-    [ -f .gitignore ] && rm .gitignore
-    [ -f .stignore ] && rm .stignore
-    [ -f .inputrc ] && rm .inputrc
-    [ -f .minttyrc ] && rm .minttyrc
-    [ -f .psql_history ] && mv -v .psql_history .psql_history.bak
-    [ -f .psql_history.bak ] && mv -v .psql_history.bak .psql_history/old-single-file-history
-    [ -f .psqlrc ] && rm .psqlrc
-    [ -f .pylintrc ] && rm .pylintrc
-    [ -f .Xmodmap ] && rm .Xmodmap
-    [ -f .pystartup ] && rm .pystartup
-    [ -f .tmux.conf ] && rm .tmux.conf
-    [ -f .zshrc ] && rm .zshrc
-    [ -f .zshrc_blackdragon ] && rm .zshrc_blackdragon
-    [ -f .zshrc_lillend ] && rm .zshrc_lillend
-    [ -f ${USERPROFILE}/AppData/Roaming/Code/User/settings.json ] && rm ${USERPROFILE}/AppData/Roaming/Code/User/settings.json
-    [ -s .xinitrc ] && rm .xinitrc
-    [ -s .xmodmaprc ] && rm .xmodmaprc
-    [ -s .i3 ] && rm -rf .i3
-    [ -d .config/sxhkd ] && rm -rf .config/sxhkd
-    [ -d .config/nvim ] && rm -rf .config/nvim
-    [ -d .config/bspwm ] && rm -rf .config/bspwm
-    [ -d .config/rofi ] && rm -rf .config/rofi
-    [ -d .config/fish ] && rm -rf .config/fish
-    [ -f ~/.config/Code/User/settings.json ] && rm ~/.config/Code/User/settings.json
-    [ -f ~/.config/fontconfig/conf.d/99-emoji.conf ] && rm ~/.config/fontconfig/conf.d/99-emoji.conf
-fi
+DRY_RUN=0
+FAILURES=0
 
-mkdir -p ~/.zsh/perhost
-mkdir -p ~/.gnupg
-chmod 700 ~/.gnupg
-cp -vs dotfiles/.gnupg/* ~/.gnupg
-ln -vs dotfiles/.psqlrc
-ln -vs dotfiles/.irssi
-ln -vs dotfiles/.bashrc
-ln -vs dotfiles/.bashrc_BBS-goon
-ln -vs dotfiles/.digrc
-ln -vs dotfiles/.gitconfig
-ln -vs dotfiles/.gitignore_global .gitignore
-ln -vs dotfiles/.stignore .stignore
-ln -vs dotfiles/.inputrc
-ln -vs dotfiles/.pylintrc
-ln -vs dotfiles/.Xmodmap
-ln -vs dotfiles/.pystartup
-ln -vs dotfiles/.tmux.conf
-ln -vs dotfiles/.Xresources
-ln -vs dotfiles/.Xresources .Xdefaults
-ln -vs dotfiles/.zshrc
-ln -vs dotfiles/.zshrc_blackdragon
-ln -vs dotfiles/.zshrc_lillend
-ln -vs dotfiles/.minttyrc
-ln -vs dotfiles/.xinitrc
-ln -vs dotfiles/.i3
-ln -vs dotfiles/bspwm .config/bspwm
-ln -vs dotfiles/rofi .config/rofi
-ln -vs dotfiles/fish .config/fish
-ln -vs dotfiles/sxhkd .config/sxhkd
-ln -vs dotfiles/nvim .config/nvim
-mkdir -p ~/.claude/skills
-ln -vs ~/dotfiles/claude-skills/vikunja ~/.claude/skills/vikunja
-ln -vs ~/dotfiles/zsh-perhost/DESKTOP-BHQ0QLD.zsh ~/.zsh/perhost/DESKTOP-BHQ0QLD.zsh
-ln -vs ~/dotfiles/zsh-perhost/basilisk.zsh ~/.zsh/perhost/basilisk.zsh
-ln -vs ~/dotfiles/zsh-perhost/displacer2.zsh ~/.zsh/perhost/displacer2.zsh
-ln -vs ~/dotfiles/zsh-perhost/turian.zsh ~/.zsh/perhost/turian.zsh
-ln -vs ~/dotfiles/zsh-perhost/legion.zsh ~/.zsh/perhost/legion.zsh
-mkdir -p ~/.config/Code/User
-ln -vs ~/dotfiles/VsCode/settings.json ~/.config/Code/User/settings.json
-mkdir -p ~/.vscode/extensions
-ln -vs ~/dotfiles/VsCode/michel-albert-theme ~/.vscode/extensions/exhuma.michel-albert-theme-0.1.0
-mkdir -p ~/.config/fontconfig/conf.d
-ln -vs ~/dotfiles/.config/fontconfig/conf.d/99-emoji.conf ~/.config/fontconfig/conf.d/99-emoji.conf
+# --- output ----------------------------------------------------------------
 
+info() { printf '%s\n' "$*"; }
+warn() { printf '[warn] %s\n' "$*" >&2; }
 
+# Report an error and remember it for the exit status.
+error() {
+    printf '[error] %s\n' "$*" >&2
+    FAILURES=$((FAILURES + 1))
+}
 
-if [[ $(uname -s) == CYGWIN* ]]; then
-    mkdir -p ${USERPROFILE}/AppData/Roaming/Code/User
-    cp VsCode/settings.json ${USERPROFILE}/AppData/Roaming/Code/User/settings.json
-    mkdir -p ${USERPROFILE}/.vscode/extensions
-    cp -r VsCode/michel-albert-theme ${USERPROFILE}/.vscode/extensions/exhuma.michel-albert-theme-0.1.0
-fi
+# Run a command that changes the system; only print it in dry-run mode.
+# Returns the command's exit status and records failures.
+run() {
+    if ((DRY_RUN)); then
+        info "[dry] $*"
+        return 0
+    fi
+    "$@" || {
+        local status=$?
+        error "command failed (${status}): $*"
+        return "${status}"
+    }
+}
 
-pip install --user cstop
+# --- helpers ---------------------------------------------------------------
 
-mkdir -p ~/.config/i3status && ln -vs ~/dotfiles/i3status.config ~/.config/i3status/config
-git clone https://github.com/exhuma/oh-my-zsh.git .oh-my-zsh
-(cd .oh-my-zsh && git remote add upstream ssh://git@github.com/robbyrussell/oh-my-zsh)
+# Make DST a symlink to SRC (a path relative to the dotfiles repo).
+# Arguments:
+#   $1 - source, relative to DOTFILES
+#   $2 - destination (absolute path)
+link() {
+    local src="${DOTFILES}/$1"
+    local dst="$2"
+    local current
 
-if which irssi; then
-    read -sp "[IRSSI] FreeNode Password: " IRSSI_PASSWORD
-    cat dotfiles/.irssi/config.template | \
-        sed -e "s/{{password}}/${IRSSI_PASSWORD}/" \
-        > .irssi/config
-    echo
-else
-    echo "irssi not installed"
-fi
+    if [[ ! -e "${src}" ]]; then
+        warn "missing source, not linking: ${src}"
+        return 0
+    fi
+    if [[ -L "${dst}" ]]; then
+        current="$(readlink -f -- "${dst}")"
+        if [[ "${current}" == "$(readlink -f -- "${src}")" ]]; then
+            info "[ok] ${dst}"
+            return 0
+        fi
+        run rm -- "${dst}" || return
+    elif [[ -e "${dst}" ]]; then
+        info "[backup] ${dst} -> ${dst}${BACKUP_SUFFIX}"
+        run mv -- "${dst}" "${dst}${BACKUP_SUFFIX}" || return
+    fi
+    if [[ ! -d "$(dirname -- "${dst}")" ]]; then
+        run mkdir -p -- "$(dirname -- "${dst}")" || return
+    fi
+    info "[link] ${dst} -> ${src}"
+    run ln -s -- "${src}" "${dst}"
+}
 
-HOSTNAME=$(hostname -s)
-echo Installing overlay for $HOSTNAME
+# --- steps -----------------------------------------------------------------
 
-if [ -d dotfiles/${HOSTNAME}/.kde/Autostart ]; then
-    rm -rf .kde/Autostart
-    ln -vs ~/dotfiles/${HOSTNAME}/.kde/Autostart ~/.kde/Autostart
-fi
+link_dotfiles() {
+    local f
+    for f in .psqlrc .irssi .bashrc .bashrc_BBS-goon .digrc .gitconfig \
+        .inputrc .pylintrc .Xmodmap .pystartup .tmux.conf .Xresources \
+        .zshrc .zshrc_blackdragon .zshrc_lillend .minttyrc .xinitrc .i3; do
+        link "${f}" "${HOME}/${f}"
+    done
+    link .gitignore_global "${HOME}/.gitignore"
+    link .stignore "${HOME}/.stignore"
+    link .Xresources "${HOME}/.Xdefaults"
 
-if [ -f dotfiles/${HOSTNAME}/.xmodmaprc ]; then
-    ln -vs dotfiles/${HOSTNAME}/.xmodmaprc
-fi
+    for f in bspwm rofi fish sxhkd nvim; do
+        link "${f}" "${HOME}/.config/${f}"
+    done
+    link i3status.config "${HOME}/.config/i3status/config"
+    link .config/fontconfig/conf.d/99-emoji.conf \
+        "${HOME}/.config/fontconfig/conf.d/99-emoji.conf"
+    link .config/user-tmpfiles.d/prune.conf \
+        "${HOME}/.config/user-tmpfiles.d/prune.conf"
+    link .config/systemd/user/${CLEANUP_TIMER}.d/persistent.conf \
+        "${HOME}/.config/systemd/user/${CLEANUP_TIMER}.d/persistent.conf"
 
-# tmux theme pack
-git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack || (cd ~/.tmux-themepack && git pull)
+    for f in DESKTOP-BHQ0QLD basilisk displacer2 turian legion; do
+        link "zsh-perhost/${f}.zsh" "${HOME}/.zsh/perhost/${f}.zsh"
+    done
 
-echo done!
+    link claude-skills/vikunja "${HOME}/.claude/skills/vikunja"
+    link VsCode/settings.json "${HOME}/.config/Code/User/settings.json"
+    link VsCode/michel-albert-theme \
+        "${HOME}/.vscode/extensions/exhuma.michel-albert-theme-0.1.0"
+}
+
+# ~/.gnupg may be a link to the whole repo folder (which then also holds the
+# untracked keys); leave that alone. Otherwise link only tracked config.
+setup_gnupg() {
+    if [[ -L "${HOME}/.gnupg" ]]; then
+        info "[skip] ${HOME}/.gnupg is a symlink, leaving it alone"
+        return 0
+    fi
+    if [[ ! -d "${HOME}/.gnupg" ]]; then
+        run mkdir -p -- "${HOME}/.gnupg" || return
+    fi
+    run chmod 700 -- "${HOME}/.gnupg" || return
+    link .gnupg/gpg-agent.conf "${HOME}/.gnupg/gpg-agent.conf"
+}
+
+# ~/.psql_history used to be a single file; it is now a folder (see .psqlrc).
+setup_psql_history() {
+    local dir="${HOME}/.psql_history"
+    if [[ -f "${dir}" ]]; then
+        info "[migrate] ${dir} file -> ${dir}/old-single-file-history"
+        run mv -- "${dir}" "${dir}${BACKUP_SUFFIX}" || return
+        run mkdir -p -- "${dir}" || return
+        run mv -- "${dir}${BACKUP_SUFFIX}" "${dir}/old-single-file-history"
+        return
+    fi
+    if [[ -d "${dir}" ]]; then
+        info "[ok] ${dir}"
+        return 0
+    fi
+    run mkdir -p -- "${dir}"
+}
+
+install_tools() {
+    if command -v cstop >/dev/null; then
+        info "[ok] cstop"
+    elif command -v pipx >/dev/null; then
+        run pipx install cstop
+    else
+        warn "pipx not found, skipping cstop"
+    fi
+}
+
+setup_oh_my_zsh() {
+    local dir="${HOME}/.oh-my-zsh"
+    if [[ -d "${dir}/.git" ]]; then
+        info "[ok] ${dir}"
+    else
+        run git clone -q "${OH_MY_ZSH_URL}" "${dir}" || return
+    fi
+    if ((DRY_RUN)) && [[ ! -d "${dir}/.git" ]]; then
+        return 0
+    fi
+    if git -C "${dir}" remote get-url upstream >/dev/null 2>&1; then
+        info "[ok] ${dir} remote upstream"
+    else
+        run git -C "${dir}" remote add upstream "${OH_MY_ZSH_UPSTREAM}"
+    fi
+}
+
+setup_tmux_themepack() {
+    local dir="${HOME}/.tmux-themepack"
+    if [[ -d "${dir}/.git" ]]; then
+        info "[update] ${dir}"
+        run git -C "${dir}" pull -q --ff-only
+    else
+        run git clone -q "${TMUX_THEMEPACK_URL}" "${dir}"
+    fi
+}
+
+# Render the irssi config from its template. Needs a terminal for the
+# password prompt and never overwrites an existing config.
+setup_irssi() {
+    local config="${HOME}/.irssi/config"
+    local password
+    if ! command -v irssi >/dev/null; then
+        info "[skip] irssi not installed"
+    elif [[ -e "${config}" ]]; then
+        info "[ok] ${config}"
+    elif [[ ! -t 0 ]]; then
+        warn "no terminal for the irssi password prompt, skipping ${config}"
+    elif ((DRY_RUN)); then
+        info "[dry] render ${config} from template"
+    else
+        read -rsp "[IRSSI] FreeNode Password: " password
+        echo
+        sed -e "s/{{password}}/${password}/" \
+            "${DOTFILES}/.irssi/config.template" >"${config}" ||
+            error "could not write ${config}"
+    fi
+}
+
+setup_host_overlay() {
+    local host
+    host="$(hostname -s)"
+    if [[ -d "${DOTFILES}/${host}/.kde/Autostart" ]]; then
+        link "${host}/.kde/Autostart" "${HOME}/.kde/Autostart"
+    fi
+    if [[ -f "${DOTFILES}/${host}/.xmodmaprc" ]]; then
+        link "${host}/.xmodmaprc" "${HOME}/.xmodmaprc"
+    fi
+}
+
+# Daily age-based cleanup of ~/Downloads and ~/tmp (systemd-tmpfiles --user).
+setup_cleanup_timer() {
+    if ! command -v systemctl >/dev/null ||
+        ! systemctl --user show-environment >/dev/null 2>&1; then
+        warn "no systemd user manager, skipping ${CLEANUP_TIMER}"
+        return 0
+    fi
+    run systemctl --user daemon-reload || return
+    if systemctl --user is-enabled -q "${CLEANUP_TIMER}" 2>/dev/null; then
+        info "[ok] ${CLEANUP_TIMER} enabled"
+    else
+        run systemctl --user enable --now "${CLEANUP_TIMER}"
+    fi
+}
+
+# Windows VS Code does not follow Cygwin symlinks, so copy instead.
+setup_cygwin() {
+    [[ "$(uname -s)" == CYGWIN* ]] || return 0
+    local userprofile="${USERPROFILE:?USERPROFILE not set}"
+    local ext="${userprofile}/.vscode/extensions"
+    run mkdir -p -- "${userprofile}/AppData/Roaming/Code/User" "${ext}" ||
+        return
+    run cp -- "${DOTFILES}/VsCode/settings.json" \
+        "${userprofile}/AppData/Roaming/Code/User/settings.json"
+    run cp -r -- "${DOTFILES}/VsCode/michel-albert-theme" \
+        "${ext}/exhuma.michel-albert-theme-0.1.0"
+}
+
+# Remove state that a fresh clone/link should replace. Links themselves need
+# no cleaning: link() repairs them.
+clean_install() {
+    info "[clean] removing ${HOME}/.oh-my-zsh"
+    run rm -rf -- "${HOME}/.oh-my-zsh"
+}
+
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") [-c] [-n] [-h]
+
+Install the dotfiles from ${DOTFILES} into ${HOME}.
+
+  -c            clean install: re-clone oh-my-zsh (no prompt)
+  -n, --dry-run show what would change without changing anything
+  -h, --help    show this help
+
+Without -c, asks whether to do a clean install if run from a terminal.
+EOF
+}
+
+main() {
+    local clean=""
+    local answer
+    while (($#)); do
+        case "$1" in
+            -c) clean=y ;;
+            -n | --dry-run) DRY_RUN=1 ;;
+            -h | --help) usage; return 0 ;;
+            *) usage >&2; return 2 ;;
+        esac
+        shift
+    done
+    if [[ -z "${clean}" && -t 0 ]]; then
+        read -rp "Perform clean install? [y/N] " answer
+        [[ "${answer}" == [yY] ]] && clean=y
+    fi
+
+    [[ "${clean}" == y ]] && clean_install
+    link_dotfiles
+    setup_gnupg
+    setup_psql_history
+    setup_host_overlay
+    setup_cleanup_timer
+    setup_cygwin
+    install_tools
+    setup_oh_my_zsh
+    setup_tmux_themepack
+    setup_irssi
+
+    if ((FAILURES)); then
+        error "finished with ${FAILURES} failure(s)"
+        return 1
+    fi
+    info "done!"
+}
+
+main "$@"
