@@ -51,6 +51,8 @@ if [[ "${RESPONSE}" == "y" ]]; then
     [ -d .config/fish ] && rm -rf .config/fish
     [ -f ~/.config/Code/User/settings.json ] && rm ~/.config/Code/User/settings.json
     [ -f ~/.config/fontconfig/conf.d/99-emoji.conf ] && rm ~/.config/fontconfig/conf.d/99-emoji.conf
+    [ -L ~/.config/user-tmpfiles.d/prune.conf ] && rm ~/.config/user-tmpfiles.d/prune.conf
+    [ -L ~/.config/systemd/user/systemd-tmpfiles-clean.timer.d/persistent.conf ] && rm ~/.config/systemd/user/systemd-tmpfiles-clean.timer.d/persistent.conf
 fi
 
 mkdir -p ~/.zsh/perhost
@@ -96,6 +98,13 @@ mkdir -p ~/.vscode/extensions
 ln -vs ~/dotfiles/VsCode/michel-albert-theme ~/.vscode/extensions/exhuma.michel-albert-theme-0.1.0
 mkdir -p ~/.config/fontconfig/conf.d
 ln -vs ~/dotfiles/.config/fontconfig/conf.d/99-emoji.conf ~/.config/fontconfig/conf.d/99-emoji.conf
+# Daily age-based cleanup of ~/Downloads, ~/tmp (systemd-tmpfiles --user)
+mkdir -p ~/.config/user-tmpfiles.d ~/.config/systemd/user/systemd-tmpfiles-clean.timer.d
+ln -vs ~/dotfiles/.config/user-tmpfiles.d/prune.conf ~/.config/user-tmpfiles.d/prune.conf
+ln -vs ~/dotfiles/.config/systemd/user/systemd-tmpfiles-clean.timer.d/persistent.conf ~/.config/systemd/user/systemd-tmpfiles-clean.timer.d/persistent.conf
+if command -v systemctl >/dev/null; then
+    systemctl --user daemon-reload && systemctl --user enable --now systemd-tmpfiles-clean.timer || true
+fi
 
 
 
